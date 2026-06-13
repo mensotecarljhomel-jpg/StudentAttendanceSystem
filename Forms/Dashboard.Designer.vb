@@ -22,29 +22,16 @@ Partial Class Dashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        btnTestConnection = New Button()
         SuspendLayout()
-        ' 
-        ' btnTestConnection
-        ' 
-        btnTestConnection.Location = New Point(414, 202)
-        btnTestConnection.Name = "btnTestConnection"
-        btnTestConnection.Size = New Size(75, 23)
-        btnTestConnection.TabIndex = 0
-        btnTestConnection.Text = "Button1"
-        btnTestConnection.UseVisualStyleBackColor = True
         ' 
         ' Dashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(btnTestConnection)
         Name = "Dashboard"
         Text = "Form1"
         ResumeLayout(False)
     End Sub
-
-    Friend WithEvents btnTestConnection As Button
 
 End Class
