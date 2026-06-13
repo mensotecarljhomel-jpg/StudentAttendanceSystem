@@ -44,4 +44,24 @@
     Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
 
     End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label3_Click_1(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub PictureBox2_Click_1(sender As Object, e As EventArgs) Handles PictureBox2.Click
+
+    End Sub
+
+    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+
+    End Sub
 End Class
