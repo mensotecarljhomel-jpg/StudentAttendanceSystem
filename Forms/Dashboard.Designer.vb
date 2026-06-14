@@ -133,6 +133,7 @@ Partial Class Dashboard
         pnlPrintMenu.Controls.Add(lblPrint)
         pnlPrintMenu.Controls.Add(picPrint)
         pnlPrintMenu.Controls.Add(pnlPrintIndicator)
+        pnlPrintMenu.Cursor = Cursors.Hand
         pnlPrintMenu.Location = New Point(-2, 594)
         pnlPrintMenu.Name = "pnlPrintMenu"
         pnlPrintMenu.Size = New Size(180, 43)
@@ -187,6 +188,7 @@ Partial Class Dashboard
         pnlAbsencesMenu.Controls.Add(pnlAbsencesIndicator)
         pnlAbsencesMenu.Controls.Add(lbAbsences)
         pnlAbsencesMenu.Controls.Add(picAbsences)
+        pnlAbsencesMenu.Cursor = Cursors.Hand
         pnlAbsencesMenu.Location = New Point(-2, 439)
         pnlAbsencesMenu.Name = "pnlAbsencesMenu"
         pnlAbsencesMenu.Size = New Size(180, 43)
@@ -243,6 +245,7 @@ Partial Class Dashboard
         pnlSubjectsMenu.Controls.Add(pnlSubjectsIndicator)
         pnlSubjectsMenu.Controls.Add(lblSubjects)
         pnlSubjectsMenu.Controls.Add(picSubjects)
+        pnlSubjectsMenu.Cursor = Cursors.Hand
         pnlSubjectsMenu.Location = New Point(-1, 347)
         pnlSubjectsMenu.Name = "pnlSubjectsMenu"
         pnlSubjectsMenu.Size = New Size(180, 43)
@@ -297,6 +300,7 @@ Partial Class Dashboard
         pnlBatchInfoMenu.Controls.Add(lblBatchInfo)
         pnlBatchInfoMenu.Controls.Add(picBatchInfo)
         pnlBatchInfoMenu.Controls.Add(pnlBatchInfoIndicator)
+        pnlBatchInfoMenu.Cursor = Cursors.Hand
         pnlBatchInfoMenu.Location = New Point(-2, 500)
         pnlBatchInfoMenu.Name = "pnlBatchInfoMenu"
         pnlBatchInfoMenu.Size = New Size(180, 43)
@@ -351,6 +355,7 @@ Partial Class Dashboard
         pnlBatchesMenu.Controls.Add(pnlBatchesIndicator)
         pnlBatchesMenu.Controls.Add(lblBatches)
         pnlBatchesMenu.Controls.Add(picBatches)
+        pnlBatchesMenu.Cursor = Cursors.Hand
         pnlBatchesMenu.Location = New Point(0, 289)
         pnlBatchesMenu.Name = "pnlBatchesMenu"
         pnlBatchesMenu.Size = New Size(180, 43)
@@ -416,6 +421,7 @@ Partial Class Dashboard
         pnlDashboardMenu.Controls.Add(pnlDashboardIndicator)
         pnlDashboardMenu.Controls.Add(lblDashboard)
         pnlDashboardMenu.Controls.Add(picDashboard)
+        pnlDashboardMenu.Cursor = Cursors.Hand
         pnlDashboardMenu.Location = New Point(1, 147)
         pnlDashboardMenu.Name = "pnlDashboardMenu"
         pnlDashboardMenu.Size = New Size(180, 43)
@@ -470,6 +476,7 @@ Partial Class Dashboard
         pnlStudentsMenu.Controls.Add(pnlStudentsIndicator)
         pnlStudentsMenu.Controls.Add(picStudents)
         pnlStudentsMenu.Controls.Add(lblStudents)
+        pnlStudentsMenu.Cursor = Cursors.Hand
         pnlStudentsMenu.Location = New Point(2, 232)
         pnlStudentsMenu.Name = "pnlStudentsMenu"
         pnlStudentsMenu.Size = New Size(180, 43)
