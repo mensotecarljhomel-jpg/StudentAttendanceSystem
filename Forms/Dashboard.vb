@@ -1,67 +1,79 @@
 ﻿Public Class Dashboard
+
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Font = New Font("Poppins", 10)
 
+        ' Hide indicator when the app starts
+        pnlStudentsIndicator.Visible = False
+    End Sub
+
+    '==========================
+    ' Reset Sidebar
+    '==========================
+    Private Sub ResetSidebar()
+
+        ' Hide all indicators
+        pnlStudentsIndicator.Visible = False
+
+        ' Reset text colors
+        lblStudents.ForeColor = Color.White
+
+        ' Later we will reset all icons here
+        ' picStudents.Image = My.Resources.students_white
 
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+    '==========================
+    ' Open Students
+    '==========================
+    Private Sub OpenStudents()
+
+        ResetSidebar()
+
+        ' Highlight Students
+        pnlStudentsIndicator.Visible = True
+
+        ' Change text color
+        lblStudents.ForeColor = Color.FromArgb(128, 0, 255)
+
+        ' Later:
+        ' picStudents.Image = My.Resources.students_purple
+
+        ' Load Students UserControl
+        pnlContent.Controls.Clear()
+
+        Dim studentPage As New ucStudents()
+        studentPage.Dock = DockStyle.Fill
+
+        pnlContent.Controls.Add(studentPage)
 
     End Sub
 
-    Private Sub Panel1_Paint_1(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+    '==========================
+    ' Click Events
+    '==========================
+
+    Private Sub pnlStudentsMenu_Click(sender As Object, e As EventArgs) Handles pnlStudentsMenu.Click
+        OpenStudents
+    End Sub
+
+    Private Sub lblStudents_Click(sender As Object, e As EventArgs) Handles lblStudents.Click
+        OpenStudents
+    End Sub
+
+    Private Sub picStudents_Click(sender As Object, e As EventArgs) Handles picStudents.Click
+        OpenStudents
+    End Sub
+
+    Private Sub picDashboard_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub Panel1_Paint_2(sender As Object, e As PaintEventArgs) Handles pnlRight.Paint
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles pnlDashboardMenu.Paint
 
     End Sub
 
-    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-
-    End Sub
-
-    Private Sub Panel1_Paint_3(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub pnlTopbar_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopbar.Paint
-
-    End Sub
-
-    Private Sub Panel1_Paint_4(sender As Object, e As PaintEventArgs) Handles pnlSeparator2.Paint
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-
-    End Sub
-
-    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
-
-    End Sub
-
-    Private Sub Label3_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label3_Click_1(sender As Object, e As EventArgs) Handles Label3.Click
-
-    End Sub
-
-    Private Sub PictureBox2_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub PictureBox2_Click_1(sender As Object, e As EventArgs) Handles PictureBox2.Click
-
-    End Sub
-
-    Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
+    Private Sub picSubjects_Click(sender As Object, e As EventArgs) Handles picSubjects.Click
 
     End Sub
 End Class
