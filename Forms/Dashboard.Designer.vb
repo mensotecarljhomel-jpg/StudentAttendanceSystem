@@ -51,8 +51,6 @@ Partial Class Dashboard
         picBatches = New PictureBox()
         PictureBox8 = New PictureBox()
         pnlDashboardMenu = New Panel()
-        picPurpleDashboard = New PictureBox()
-        pnlDashboardIndicator = New Panel()
         lblDashboard = New Label()
         picDashboard = New PictureBox()
         pnlStudentsMenu = New Panel()
@@ -68,13 +66,15 @@ Partial Class Dashboard
         pnlSeparator1 = New Panel()
         pnlRight = New Panel()
         pnlContent = New Panel()
-        pnlContentDashboard = New Panel()
-        Panel3 = New Panel()
-        Panel4 = New Panel()
         pnlShadow = New Panel()
         pnlSeparator2 = New Panel()
         pnlTopbar = New Panel()
         ScreenIndicator = New Label()
+        picPurpleDashboard = New PictureBox()
+        Panel4 = New Panel()
+        Panel3 = New Panel()
+        pnlContentDashboard = New Panel()
+        pnlDashboardIndicator = New Panel()
         pnlSidebar.SuspendLayout()
         pnlPrintMenu.SuspendLayout()
         CType(picPurplePrint, ComponentModel.ISupportInitialize).BeginInit()
@@ -93,15 +93,15 @@ Partial Class Dashboard
         CType(picBatches, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox8, ComponentModel.ISupportInitialize).BeginInit()
         pnlDashboardMenu.SuspendLayout()
-        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).BeginInit()
         CType(picDashboard, ComponentModel.ISupportInitialize).BeginInit()
         pnlStudentsMenu.SuspendLayout()
         CType(picPurpleStudents, ComponentModel.ISupportInitialize).BeginInit()
         CType(picStudents, ComponentModel.ISupportInitialize).BeginInit()
         pnlRight.SuspendLayout()
         pnlContent.SuspendLayout()
-        pnlContentDashboard.SuspendLayout()
         pnlTopbar.SuspendLayout()
+        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).BeginInit()
+        pnlContentDashboard.SuspendLayout()
         SuspendLayout()
         ' 
         ' pnlSidebar
@@ -427,27 +427,6 @@ Partial Class Dashboard
         pnlDashboardMenu.Size = New Size(180, 43)
         pnlDashboardMenu.TabIndex = 12
         ' 
-        ' picPurpleDashboard
-        ' 
-        picPurpleDashboard.BackColor = Color.Transparent
-        picPurpleDashboard.Image = CType(resources.GetObject("picPurpleDashboard.Image"), Image)
-        picPurpleDashboard.Location = New Point(12, 7)
-        picPurpleDashboard.Name = "picPurpleDashboard"
-        picPurpleDashboard.Size = New Size(42, 32)
-        picPurpleDashboard.SizeMode = PictureBoxSizeMode.StretchImage
-        picPurpleDashboard.TabIndex = 18
-        picPurpleDashboard.TabStop = False
-        picPurpleDashboard.Visible = False
-        ' 
-        ' pnlDashboardIndicator
-        ' 
-        pnlDashboardIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlDashboardIndicator.Location = New Point(-1, 0)
-        pnlDashboardIndicator.Name = "pnlDashboardIndicator"
-        pnlDashboardIndicator.Size = New Size(10, 43)
-        pnlDashboardIndicator.TabIndex = 16
-        pnlDashboardIndicator.Visible = False
-        ' 
         ' lblDashboard
         ' 
         lblDashboard.AutoSize = True
@@ -612,36 +591,6 @@ Partial Class Dashboard
         pnlContent.Size = New Size(1396, 788)
         pnlContent.TabIndex = 1
         ' 
-        ' pnlContentDashboard
-        ' 
-        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlContentDashboard.Controls.Add(Panel3)
-        pnlContentDashboard.Controls.Add(Panel4)
-        pnlContentDashboard.Dock = DockStyle.Fill
-        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        pnlContentDashboard.Location = New Point(0, 2)
-        pnlContentDashboard.Name = "pnlContentDashboard"
-        pnlContentDashboard.Size = New Size(1396, 786)
-        pnlContentDashboard.TabIndex = 2
-        ' 
-        ' Panel3
-        ' 
-        Panel3.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
-        Panel3.Dock = DockStyle.Top
-        Panel3.Location = New Point(0, 1)
-        Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1396, 1)
-        Panel3.TabIndex = 1
-        ' 
-        ' Panel4
-        ' 
-        Panel4.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
-        Panel4.Dock = DockStyle.Top
-        Panel4.Location = New Point(0, 0)
-        Panel4.Name = "Panel4"
-        Panel4.Size = New Size(1396, 1)
-        Panel4.TabIndex = 0
-        ' 
         ' pnlShadow
         ' 
         pnlShadow.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
@@ -680,6 +629,57 @@ Partial Class Dashboard
         ScreenIndicator.TabIndex = 2
         ScreenIndicator.Text = "Dashboard"
         ' 
+        ' picPurpleDashboard
+        ' 
+        picPurpleDashboard.BackColor = Color.Transparent
+        picPurpleDashboard.Image = CType(resources.GetObject("picPurpleDashboard.Image"), Image)
+        picPurpleDashboard.Location = New Point(12, 7)
+        picPurpleDashboard.Name = "picPurpleDashboard"
+        picPurpleDashboard.Size = New Size(42, 32)
+        picPurpleDashboard.SizeMode = PictureBoxSizeMode.StretchImage
+        picPurpleDashboard.TabIndex = 18
+        picPurpleDashboard.TabStop = False
+        picPurpleDashboard.Visible = False
+        ' 
+        ' Panel4
+        ' 
+        Panel4.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
+        Panel4.Dock = DockStyle.Top
+        Panel4.Location = New Point(0, 0)
+        Panel4.Name = "Panel4"
+        Panel4.Size = New Size(1396, 1)
+        Panel4.TabIndex = 0
+        ' 
+        ' Panel3
+        ' 
+        Panel3.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
+        Panel3.Dock = DockStyle.Top
+        Panel3.Location = New Point(0, 1)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(1396, 1)
+        Panel3.TabIndex = 1
+        ' 
+        ' pnlContentDashboard
+        ' 
+        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentDashboard.Controls.Add(Panel3)
+        pnlContentDashboard.Controls.Add(Panel4)
+        pnlContentDashboard.Dock = DockStyle.Fill
+        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        pnlContentDashboard.Location = New Point(0, 2)
+        pnlContentDashboard.Name = "pnlContentDashboard"
+        pnlContentDashboard.Size = New Size(1396, 786)
+        pnlContentDashboard.TabIndex = 2
+        ' 
+        ' pnlDashboardIndicator
+        ' 
+        pnlDashboardIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlDashboardIndicator.Location = New Point(-1, 0)
+        pnlDashboardIndicator.Name = "pnlDashboardIndicator"
+        pnlDashboardIndicator.Size = New Size(10, 43)
+        pnlDashboardIndicator.TabIndex = 16
+        pnlDashboardIndicator.Visible = False
+        ' 
         ' Dashboard
         ' 
         AutoScaleMode = AutoScaleMode.None
@@ -717,7 +717,6 @@ Partial Class Dashboard
         CType(PictureBox8, ComponentModel.ISupportInitialize).EndInit()
         pnlDashboardMenu.ResumeLayout(False)
         pnlDashboardMenu.PerformLayout()
-        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).EndInit()
         CType(picDashboard, ComponentModel.ISupportInitialize).EndInit()
         pnlStudentsMenu.ResumeLayout(False)
         pnlStudentsMenu.PerformLayout()
@@ -725,9 +724,10 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).EndInit()
         pnlRight.ResumeLayout(False)
         pnlContent.ResumeLayout(False)
-        pnlContentDashboard.ResumeLayout(False)
         pnlTopbar.ResumeLayout(False)
         pnlTopbar.PerformLayout()
+        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).EndInit()
+        pnlContentDashboard.ResumeLayout(False)
         ResumeLayout(False)
     End Sub
     Friend WithEvents pnlSidebar As Panel
@@ -748,14 +748,12 @@ Partial Class Dashboard
     Friend WithEvents lblStudents As Label
     Friend WithEvents picStudents As PictureBox
     Friend WithEvents pnlDashboardMenu As Panel
-    Friend WithEvents pnlDashboardIndicator As Panel
     Friend WithEvents lblDashboard As Label
     Friend WithEvents picDashboard As PictureBox
     Friend WithEvents pnlBatchesMenu As Panel
     Friend WithEvents pnlBatchesIndicator As Panel
     Friend WithEvents lblBatches As Label
     Friend WithEvents picBatches As PictureBox
-    Friend WithEvents pnlContentDashboard As Panel
     Friend WithEvents pnlSubjectsMenu As Panel
     Friend WithEvents picSubjects As PictureBox
     Friend WithEvents pnlSubjectsIndicator As Panel
@@ -766,7 +764,6 @@ Partial Class Dashboard
     Friend WithEvents picAbsences As PictureBox
     Friend WithEvents pnlPrintMenu As Panel
     Friend WithEvents pnlBatchInfoMenu As Panel
-    Friend WithEvents Panel4 As Panel
     Friend WithEvents pnlBatchInfoIndicator As Panel
     Friend WithEvents lblBatchInfo As Label
     Friend WithEvents picBatchInfo As PictureBox
@@ -774,13 +771,16 @@ Partial Class Dashboard
     Friend WithEvents picPrint As PictureBox
     Friend WithEvents pnlPrintIndicator As Panel
     Friend WithEvents pnlStudentsIndicator As Panel
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents picPurpleDashboard As PictureBox
     Friend WithEvents picPurplePrint As PictureBox
     Friend WithEvents picPurpleAbsences As PictureBox
     Friend WithEvents picPurpleBatchInfo As PictureBox
     Friend WithEvents picPurpleStudents As PictureBox
     Friend WithEvents picPurpleBatches As PictureBox
     Friend WithEvents picPurpleSubjects As PictureBox
+    Friend WithEvents picPurpleDashboard As PictureBox
+    Friend WithEvents pnlDashboardIndicator As Panel
+    Friend WithEvents pnlContentDashboard As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
 
 End Class
