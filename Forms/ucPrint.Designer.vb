@@ -22,8 +22,27 @@ Partial Class ucPrint
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        pnlContentPrint = New Panel()
+        SuspendLayout()
+        ' 
+        ' pnlContentPrint
+        ' 
+        pnlContentPrint.Dock = DockStyle.Fill
+        pnlContentPrint.Location = New Point(0, 0)
+        pnlContentPrint.Name = "pnlContentPrint"
+        pnlContentPrint.Size = New Size(1396, 788)
+        pnlContentPrint.TabIndex = 0
+        ' 
+        ' ucPrint
+        ' 
+        AutoScaleMode = AutoScaleMode.None
+        BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        Controls.Add(pnlContentPrint)
+        Name = "ucPrint"
+        Size = New Size(1396, 788)
+        ResumeLayout(False)
     End Sub
+
+    Friend WithEvents pnlContentPrint As Panel
 
 End Class

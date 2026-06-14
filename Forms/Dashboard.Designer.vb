@@ -35,6 +35,7 @@ Partial Class Dashboard
         lbAbsences = New Label()
         picAbsences = New PictureBox()
         pnlSubjectsMenu = New Panel()
+        picPurpleSubjects = New PictureBox()
         pnlSubjectsIndicator = New Panel()
         lblSubjects = New Label()
         picSubjects = New PictureBox()
@@ -67,8 +68,7 @@ Partial Class Dashboard
         pnlSeparator1 = New Panel()
         pnlRight = New Panel()
         pnlContent = New Panel()
-        Panel2 = New Panel()
-        picPurpleSubjects = New PictureBox()
+        pnlContentDashboard = New Panel()
         Panel3 = New Panel()
         Panel4 = New Panel()
         pnlShadow = New Panel()
@@ -83,6 +83,7 @@ Partial Class Dashboard
         CType(picPurpleAbsences, ComponentModel.ISupportInitialize).BeginInit()
         CType(picAbsences, ComponentModel.ISupportInitialize).BeginInit()
         pnlSubjectsMenu.SuspendLayout()
+        CType(picPurpleSubjects, ComponentModel.ISupportInitialize).BeginInit()
         CType(picSubjects, ComponentModel.ISupportInitialize).BeginInit()
         pnlBatchInfoMenu.SuspendLayout()
         CType(picPurpleBatchInfo, ComponentModel.ISupportInitialize).BeginInit()
@@ -99,8 +100,7 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).BeginInit()
         pnlRight.SuspendLayout()
         pnlContent.SuspendLayout()
-        Panel2.SuspendLayout()
-        CType(picPurpleSubjects, ComponentModel.ISupportInitialize).BeginInit()
+        pnlContentDashboard.SuspendLayout()
         pnlTopbar.SuspendLayout()
         SuspendLayout()
         ' 
@@ -247,6 +247,18 @@ Partial Class Dashboard
         pnlSubjectsMenu.Name = "pnlSubjectsMenu"
         pnlSubjectsMenu.Size = New Size(180, 43)
         pnlSubjectsMenu.TabIndex = 14
+        ' 
+        ' picPurpleSubjects
+        ' 
+        picPurpleSubjects.BackColor = Color.Transparent
+        picPurpleSubjects.Image = CType(resources.GetObject("picPurpleSubjects.Image"), Image)
+        picPurpleSubjects.Location = New Point(18, 3)
+        picPurpleSubjects.Name = "picPurpleSubjects"
+        picPurpleSubjects.Size = New Size(33, 36)
+        picPurpleSubjects.SizeMode = PictureBoxSizeMode.Zoom
+        picPurpleSubjects.TabIndex = 15
+        picPurpleSubjects.TabStop = False
+        picPurpleSubjects.Visible = False
         ' 
         ' pnlSubjectsIndicator
         ' 
@@ -583,7 +595,7 @@ Partial Class Dashboard
         ' pnlContent
         ' 
         pnlContent.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlContent.Controls.Add(Panel2)
+        pnlContent.Controls.Add(pnlContentDashboard)
         pnlContent.Controls.Add(pnlShadow)
         pnlContent.Controls.Add(pnlSeparator2)
         pnlContent.Dock = DockStyle.Fill
@@ -593,29 +605,17 @@ Partial Class Dashboard
         pnlContent.Size = New Size(1396, 788)
         pnlContent.TabIndex = 1
         ' 
-        ' Panel2
+        ' pnlContentDashboard
         ' 
-        Panel2.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        Panel2.Controls.Add(Panel3)
-        Panel2.Controls.Add(Panel4)
-        Panel2.Dock = DockStyle.Fill
-        Panel2.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Panel2.Location = New Point(0, 2)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(1396, 786)
-        Panel2.TabIndex = 2
-        ' 
-        ' picPurpleSubjects
-        ' 
-        picPurpleSubjects.BackColor = Color.Transparent
-        picPurpleSubjects.Image = CType(resources.GetObject("picPurpleSubjects.Image"), Image)
-        picPurpleSubjects.Location = New Point(18, 3)
-        picPurpleSubjects.Name = "picPurpleSubjects"
-        picPurpleSubjects.Size = New Size(33, 36)
-        picPurpleSubjects.SizeMode = PictureBoxSizeMode.Zoom
-        picPurpleSubjects.TabIndex = 15
-        picPurpleSubjects.TabStop = False
-        picPurpleSubjects.Visible = False
+        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentDashboard.Controls.Add(Panel3)
+        pnlContentDashboard.Controls.Add(Panel4)
+        pnlContentDashboard.Dock = DockStyle.Fill
+        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        pnlContentDashboard.Location = New Point(0, 2)
+        pnlContentDashboard.Name = "pnlContentDashboard"
+        pnlContentDashboard.Size = New Size(1396, 786)
+        pnlContentDashboard.TabIndex = 2
         ' 
         ' Panel3
         ' 
@@ -697,6 +697,7 @@ Partial Class Dashboard
         CType(picAbsences, ComponentModel.ISupportInitialize).EndInit()
         pnlSubjectsMenu.ResumeLayout(False)
         pnlSubjectsMenu.PerformLayout()
+        CType(picPurpleSubjects, ComponentModel.ISupportInitialize).EndInit()
         CType(picSubjects, ComponentModel.ISupportInitialize).EndInit()
         pnlBatchInfoMenu.ResumeLayout(False)
         pnlBatchInfoMenu.PerformLayout()
@@ -717,8 +718,7 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).EndInit()
         pnlRight.ResumeLayout(False)
         pnlContent.ResumeLayout(False)
-        Panel2.ResumeLayout(False)
-        CType(picPurpleSubjects, ComponentModel.ISupportInitialize).EndInit()
+        pnlContentDashboard.ResumeLayout(False)
         pnlTopbar.ResumeLayout(False)
         pnlTopbar.PerformLayout()
         ResumeLayout(False)
@@ -748,7 +748,7 @@ Partial Class Dashboard
     Friend WithEvents pnlBatchesIndicator As Panel
     Friend WithEvents lblBatches As Label
     Friend WithEvents picBatches As PictureBox
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlContentDashboard As Panel
     Friend WithEvents pnlSubjectsMenu As Panel
     Friend WithEvents picSubjects As PictureBox
     Friend WithEvents pnlSubjectsIndicator As Panel

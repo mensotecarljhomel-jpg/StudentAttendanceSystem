@@ -22,8 +22,28 @@ Partial Class ucBatches
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        pnlContentBatches = New Panel()
+        SuspendLayout()
+        ' 
+        ' pnlContentBatches
+        ' 
+        pnlContentBatches.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentBatches.Dock = DockStyle.Fill
+        pnlContentBatches.Font = New Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        pnlContentBatches.Location = New Point(0, 0)
+        pnlContentBatches.Name = "pnlContentBatches"
+        pnlContentBatches.Size = New Size(1396, 786)
+        pnlContentBatches.TabIndex = 0
+        ' 
+        ' ucBatches
+        ' 
+        AutoScaleMode = AutoScaleMode.None
+        Controls.Add(pnlContentBatches)
+        Name = "ucBatches"
+        Size = New Size(1396, 786)
+        ResumeLayout(False)
     End Sub
+
+    Friend WithEvents pnlContentBatches As Panel
 
 End Class

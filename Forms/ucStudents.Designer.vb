@@ -23,32 +23,32 @@ Partial Class ucStudents
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucStudents))
-        pnlContent = New Panel()
+        pnlContentStudents = New Panel()
         RoundedPanel1 = New RoundedPanel()
+        RoundedPanel41 = New RoundedPanel4()
+        txtSearch = New TextBox()
+        PictureBox1 = New PictureBox()
         RoundedPanel2 = New RoundedPanel()
         Label2 = New Label()
         Label1 = New Label()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        RoundedPanel41 = New RoundedPanel4()
-        PictureBox1 = New PictureBox()
-        txtSearch = New TextBox()
-        pnlContent.SuspendLayout()
+        pnlContentStudents.SuspendLayout()
         RoundedPanel1.SuspendLayout()
         RoundedPanel41.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' pnlContent
+        ' pnlContentStudents
         ' 
-        pnlContent.Controls.Add(RoundedPanel1)
-        pnlContent.Controls.Add(RoundedPanel2)
-        pnlContent.Controls.Add(Label2)
-        pnlContent.Controls.Add(Label1)
-        pnlContent.Dock = DockStyle.Fill
-        pnlContent.Location = New Point(0, 0)
-        pnlContent.Name = "pnlContent"
-        pnlContent.Size = New Size(1396, 788)
-        pnlContent.TabIndex = 0
+        pnlContentStudents.Controls.Add(RoundedPanel1)
+        pnlContentStudents.Controls.Add(RoundedPanel2)
+        pnlContentStudents.Controls.Add(Label2)
+        pnlContentStudents.Controls.Add(Label1)
+        pnlContentStudents.Dock = DockStyle.Fill
+        pnlContentStudents.Location = New Point(0, 0)
+        pnlContentStudents.Name = "pnlContentStudents"
+        pnlContentStudents.Size = New Size(1396, 788)
+        pnlContentStudents.TabIndex = 0
         ' 
         ' RoundedPanel1
         ' 
@@ -58,6 +58,39 @@ Partial Class ucStudents
         RoundedPanel1.Name = "RoundedPanel1"
         RoundedPanel1.Size = New Size(1323, 615)
         RoundedPanel1.TabIndex = 3
+        ' 
+        ' RoundedPanel41
+        ' 
+        RoundedPanel41.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        RoundedPanel41.Controls.Add(txtSearch)
+        RoundedPanel41.Controls.Add(PictureBox1)
+        RoundedPanel41.Location = New Point(26, 18)
+        RoundedPanel41.Name = "RoundedPanel41"
+        RoundedPanel41.Size = New Size(232, 37)
+        RoundedPanel41.TabIndex = 0
+        ' 
+        ' txtSearch
+        ' 
+        txtSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        txtSearch.BorderStyle = BorderStyle.None
+        txtSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
+        txtSearch.Location = New Point(29, 9)
+        txtSearch.Name = "txtSearch"
+        txtSearch.Size = New Size(198, 20)
+        txtSearch.TabIndex = 1
+        txtSearch.Text = "Search by name or student ID"
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackColor = Color.Transparent
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(6, 4)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(22, 29)
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox1.TabIndex = 0
+        PictureBox1.TabStop = False
         ' 
         ' RoundedPanel2
         ' 
@@ -87,49 +120,16 @@ Partial Class ucStudents
         Label1.TabIndex = 1
         Label1.Text = "Students"
         ' 
-        ' RoundedPanel41
-        ' 
-        RoundedPanel41.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        RoundedPanel41.Controls.Add(txtSearch)
-        RoundedPanel41.Controls.Add(PictureBox1)
-        RoundedPanel41.Location = New Point(26, 18)
-        RoundedPanel41.Name = "RoundedPanel41"
-        RoundedPanel41.Size = New Size(232, 37)
-        RoundedPanel41.TabIndex = 0
-        ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.BackColor = Color.Transparent
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(6, 4)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(22, 29)
-        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox1.TabIndex = 0
-        PictureBox1.TabStop = False
-        ' 
-        ' txtSearch
-        ' 
-        txtSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        txtSearch.BorderStyle = BorderStyle.None
-        txtSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        txtSearch.Location = New Point(29, 9)
-        txtSearch.Name = "txtSearch"
-        txtSearch.Size = New Size(198, 20)
-        txtSearch.TabIndex = 1
-        txtSearch.Text = "Search by name or student ID"
-        ' 
         ' ucStudents
         ' 
         AutoScaleMode = AutoScaleMode.None
         BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        Controls.Add(pnlContent)
+        Controls.Add(pnlContentStudents)
         Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Name = "ucStudents"
         Size = New Size(1396, 788)
-        pnlContent.ResumeLayout(False)
-        pnlContent.PerformLayout()
+        pnlContentStudents.ResumeLayout(False)
+        pnlContentStudents.PerformLayout()
         RoundedPanel1.ResumeLayout(False)
         RoundedPanel41.ResumeLayout(False)
         RoundedPanel41.PerformLayout()
@@ -137,7 +137,7 @@ Partial Class ucStudents
         ResumeLayout(False)
     End Sub
 
-    Friend WithEvents pnlContent As Panel
+    Friend WithEvents pnlContentStudents As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker

@@ -22,8 +22,27 @@ Partial Class ucSubjects
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        pnlContentSubjects = New Panel()
+        SuspendLayout()
+        ' 
+        ' pnlContentSubjects
+        ' 
+        pnlContentSubjects.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentSubjects.Dock = DockStyle.Fill
+        pnlContentSubjects.Location = New Point(0, 0)
+        pnlContentSubjects.Name = "pnlContentSubjects"
+        pnlContentSubjects.Size = New Size(1396, 788)
+        pnlContentSubjects.TabIndex = 0
+        ' 
+        ' ucSubjects
+        ' 
+        AutoScaleMode = AutoScaleMode.None
+        Controls.Add(pnlContentSubjects)
+        Name = "ucSubjects"
+        Size = New Size(1396, 788)
+        ResumeLayout(False)
     End Sub
+
+    Friend WithEvents pnlContentSubjects As Panel
 
 End Class

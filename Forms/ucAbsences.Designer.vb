@@ -22,30 +22,27 @@ Partial Class ucAbsences
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Label1 = New Label()
+        pnlContentAbsences = New Panel()
         SuspendLayout()
         ' 
-        ' Label1
+        ' pnlContentAbsences
         ' 
-        Label1.AutoSize = True
-        Label1.Location = New Point(564, 266)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(52, 15)
-        Label1.TabIndex = 0
-        Label1.Text = "Absence"
+        pnlContentAbsences.Dock = DockStyle.Fill
+        pnlContentAbsences.Location = New Point(0, 0)
+        pnlContentAbsences.Name = "pnlContentAbsences"
+        pnlContentAbsences.Size = New Size(1396, 788)
+        pnlContentAbsences.TabIndex = 0
         ' 
-        ' pnlContent
+        ' ucAbsences
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
-        AutoScaleMode = AutoScaleMode.Font
+        AutoScaleMode = AutoScaleMode.None
         BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        Controls.Add(Label1)
+        Controls.Add(pnlContentAbsences)
         Name = "ucAbsences"
         Size = New Size(1396, 788)
         ResumeLayout(False)
-        PerformLayout()
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlContentAbsences As Panel
 
 End Class

@@ -22,8 +22,27 @@ Partial Class ucBatchInfo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        pnlContentBatchInfo = New Panel()
+        SuspendLayout()
+        ' 
+        ' pnlContentBatchInfo
+        ' 
+        pnlContentBatchInfo.Dock = DockStyle.Fill
+        pnlContentBatchInfo.Location = New Point(0, 0)
+        pnlContentBatchInfo.Name = "pnlContentBatchInfo"
+        pnlContentBatchInfo.Size = New Size(1396, 788)
+        pnlContentBatchInfo.TabIndex = 0
+        ' 
+        ' ucBatchInfo
+        ' 
+        AutoScaleMode = AutoScaleMode.None
+        BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        Controls.Add(pnlContentBatchInfo)
+        Name = "ucBatchInfo"
+        Size = New Size(1396, 788)
+        ResumeLayout(False)
     End Sub
+
+    Friend WithEvents pnlContentBatchInfo As Panel
 
 End Class
