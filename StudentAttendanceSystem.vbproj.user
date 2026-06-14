@@ -4,6 +4,9 @@
     <Compile Update="Forms\Dashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\ucAbsences.vb">
       <SubType>UserControl</SubType>
     </Compile>
