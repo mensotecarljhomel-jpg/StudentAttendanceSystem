@@ -136,4 +136,7 @@
 
     End Sub
 
+    Private Sub pnlContentStudents_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentStudents.Paint
+
+    End Sub
 End Class
