@@ -86,7 +86,7 @@
             .DefaultCellStyle.SelectionForeColor =
                 Color.Black
 
-            .RowTemplate.Height = 48
+            .RowTemplate.Height = 75
 
             '==========================
             ' Columns

@@ -43,9 +43,9 @@ Partial Class ucBatches
         picRefreshStudent = New PictureBox()
         pnlRefreshBatches = New RoundedPanel4()
         RoundedPanel1 = New RoundedPanel()
-        dgvBatches = New DataGridView()
         pnlContentBatches = New Panel()
         Label1 = New Label()
+        dgvBatches = New DataGridView()
         CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         pnlSearch.SuspendLayout()
         CType(picAddStudent, ComponentModel.ISupportInitialize).BeginInit()
@@ -57,8 +57,8 @@ Partial Class ucBatches
         CType(picRefreshStudent, ComponentModel.ISupportInitialize).BeginInit()
         pnlRefreshBatches.SuspendLayout()
         RoundedPanel1.SuspendLayout()
-        CType(dgvBatches, ComponentModel.ISupportInitialize).BeginInit()
         pnlContentBatches.SuspendLayout()
+        CType(dgvBatches, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' RoundedPanel2
@@ -268,23 +268,6 @@ Partial Class ucBatches
         RoundedPanel1.Size = New Size(1323, 615)
         RoundedPanel1.TabIndex = 3
         ' 
-        ' dgvBatches
-        ' 
-        dgvBatches.AllowUserToAddRows = False
-        dgvBatches.AllowUserToDeleteRows = False
-        dgvBatches.BackgroundColor = Color.White
-        dgvBatches.BorderStyle = BorderStyle.None
-        dgvBatches.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvBatches.Cursor = Cursors.Hand
-        dgvBatches.Location = New Point(10, 82)
-        dgvBatches.MultiSelect = False
-        dgvBatches.Name = "dgvBatches"
-        dgvBatches.ReadOnly = True
-        dgvBatches.RowHeadersWidth = 51
-        dgvBatches.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvBatches.Size = New Size(1300, 511)
-        dgvBatches.TabIndex = 11
-        ' 
         ' pnlContentBatches
         ' 
         pnlContentBatches.Controls.Add(RoundedPanel1)
@@ -305,6 +288,23 @@ Partial Class ucBatches
         Label1.Size = New Size(120, 31)
         Label1.TabIndex = 1
         Label1.Text = "Batches"
+        ' 
+        ' dgvBatches
+        ' 
+        dgvBatches.AllowUserToAddRows = False
+        dgvBatches.AllowUserToDeleteRows = False
+        dgvBatches.BackgroundColor = Color.White
+        dgvBatches.BorderStyle = BorderStyle.None
+        dgvBatches.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvBatches.Cursor = Cursors.Hand
+        dgvBatches.Location = New Point(10, 82)
+        dgvBatches.MultiSelect = False
+        dgvBatches.Name = "dgvBatches"
+        dgvBatches.ReadOnly = True
+        dgvBatches.RowHeadersWidth = 51
+        dgvBatches.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvBatches.Size = New Size(1300, 626)
+        dgvBatches.TabIndex = 11
         ' 
         ' ucBatches
         ' 
@@ -329,9 +329,9 @@ Partial Class ucBatches
         pnlRefreshBatches.ResumeLayout(False)
         pnlRefreshBatches.PerformLayout()
         RoundedPanel1.ResumeLayout(False)
-        CType(dgvBatches, ComponentModel.ISupportInitialize).EndInit()
         pnlContentBatches.ResumeLayout(False)
         pnlContentBatches.PerformLayout()
+        CType(dgvBatches, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -355,8 +355,8 @@ Partial Class ucBatches
     Friend WithEvents picRefreshStudent As PictureBox
     Friend WithEvents pnlRefreshBatches As RoundedPanel4
     Friend WithEvents RoundedPanel1 As RoundedPanel
-    Friend WithEvents dgvBatches As DataGridView
     Friend WithEvents pnlContentBatches As Panel
     Friend WithEvents Label1 As Label
+    Friend WithEvents dgvBatches As DataGridView
 
 End Class

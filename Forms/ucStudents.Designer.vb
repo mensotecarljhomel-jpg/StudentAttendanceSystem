@@ -83,7 +83,7 @@ Partial Class ucStudents
         RoundedPanel1.Controls.Add(pnlAddStudent)
         RoundedPanel1.Controls.Add(cboBatchFilter)
         RoundedPanel1.Controls.Add(pnlSearch)
-        RoundedPanel1.Location = New Point(40, 100)
+        RoundedPanel1.Location = New Point(40, 103)
         RoundedPanel1.Name = "RoundedPanel1"
         RoundedPanel1.Size = New Size(1323, 615)
         RoundedPanel1.TabIndex = 3
@@ -280,7 +280,7 @@ Partial Class ucStudents
         ' RoundedPanel2
         ' 
         RoundedPanel2.BackColor = Color.FromArgb(CByte(220), CByte(220), CByte(230))
-        RoundedPanel2.Location = New Point(47, 100)
+        RoundedPanel2.Location = New Point(47, 103)
         RoundedPanel2.Name = "RoundedPanel2"
         RoundedPanel2.Size = New Size(1320, 618)
         RoundedPanel2.TabIndex = 4
