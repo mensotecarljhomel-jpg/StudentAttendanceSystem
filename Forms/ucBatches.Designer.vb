@@ -26,45 +26,46 @@ Partial Class ucBatches
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         RoundedPanel2 = New RoundedPanel()
         Label2 = New Label()
+        RoundedPanel1 = New RoundedPanel()
+        cboBatchFilter = New ComboBox()
+        pnlRefreshBatches = New RoundedPanel4()
+        lblRefreshBatches = New Label()
+        picRefreshBatches = New PictureBox()
+        pnlDeleteBatches = New RoundedPanel4()
+        lblDeleteBatches = New Label()
+        picDeleteBatches = New PictureBox()
+        pnlEditBatches = New RoundedPanel4()
+        lblEditBatches = New Label()
+        picEditBatches = New PictureBox()
+        pnlAddBatches = New RoundedPanel4()
+        lblAddBatches = New Label()
+        picAddBatches = New PictureBox()
+        pnlSearch = New RoundedPanel4()
         lblSearch = New TextBox()
         imgSearch = New PictureBox()
-        cboBatchFilter = New ComboBox()
-        pnlSearch = New RoundedPanel4()
-        lblAddBatch = New Label()
-        picAddStudent = New PictureBox()
-        pnlAddBatch = New RoundedPanel4()
-        lblEditBatch = New Label()
-        picEditStudent = New PictureBox()
-        pnlEditBatch = New RoundedPanel4()
-        lblDeleteBatch = New Label()
-        picDeleteStudent = New PictureBox()
-        pnlDeleteBatch = New RoundedPanel4()
-        lblRefreshBatch = New Label()
-        picRefreshStudent = New PictureBox()
-        pnlRefreshBatches = New RoundedPanel4()
-        RoundedPanel1 = New RoundedPanel()
+        dgvBatches = New DataGridView()
         pnlContentBatches = New Panel()
         Label1 = New Label()
-        dgvBatches = New DataGridView()
-        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
-        pnlSearch.SuspendLayout()
-        CType(picAddStudent, ComponentModel.ISupportInitialize).BeginInit()
-        pnlAddBatch.SuspendLayout()
-        CType(picEditStudent, ComponentModel.ISupportInitialize).BeginInit()
-        pnlEditBatch.SuspendLayout()
-        CType(picDeleteStudent, ComponentModel.ISupportInitialize).BeginInit()
-        pnlDeleteBatch.SuspendLayout()
-        CType(picRefreshStudent, ComponentModel.ISupportInitialize).BeginInit()
-        pnlRefreshBatches.SuspendLayout()
         RoundedPanel1.SuspendLayout()
-        pnlContentBatches.SuspendLayout()
+        pnlRefreshBatches.SuspendLayout()
+        CType(picRefreshBatches, ComponentModel.ISupportInitialize).BeginInit()
+        pnlDeleteBatches.SuspendLayout()
+        CType(picDeleteBatches, ComponentModel.ISupportInitialize).BeginInit()
+        pnlEditBatches.SuspendLayout()
+        CType(picEditBatches, ComponentModel.ISupportInitialize).BeginInit()
+        pnlAddBatches.SuspendLayout()
+        CType(picAddBatches, ComponentModel.ISupportInitialize).BeginInit()
+        pnlSearch.SuspendLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvBatches, ComponentModel.ISupportInitialize).BeginInit()
+        pnlContentBatches.SuspendLayout()
         SuspendLayout()
         ' 
         ' RoundedPanel2
         ' 
         RoundedPanel2.BackColor = Color.FromArgb(CByte(220), CByte(220), CByte(230))
-        RoundedPanel2.Location = New Point(47, 100)
+        RoundedPanel2.Location = New Point(47, 103)
+        RoundedPanel2.Margin = New Padding(3, 2, 3, 2)
         RoundedPanel2.Name = "RoundedPanel2"
         RoundedPanel2.Size = New Size(1320, 618)
         RoundedPanel2.TabIndex = 4
@@ -72,25 +73,192 @@ Partial Class ucBatches
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Microsoft Sans Serif", 9.75F)
+        Label2.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        Label2.Location = New Point(40, 61)
+        Label2.Location = New Point(40, 62)
         Label2.Name = "Label2"
-        Label2.Size = New Size(334, 20)
+        Label2.Size = New Size(288, 23)
         Label2.TabIndex = 2
         Label2.Text = "Organize students into batches or sections."
+        ' 
+        ' RoundedPanel1
+        ' 
+        RoundedPanel1.BackColor = Color.White
+        RoundedPanel1.Controls.Add(cboBatchFilter)
+        RoundedPanel1.Controls.Add(pnlRefreshBatches)
+        RoundedPanel1.Controls.Add(pnlDeleteBatches)
+        RoundedPanel1.Controls.Add(pnlEditBatches)
+        RoundedPanel1.Controls.Add(pnlAddBatches)
+        RoundedPanel1.Controls.Add(pnlSearch)
+        RoundedPanel1.Controls.Add(dgvBatches)
+        RoundedPanel1.Location = New Point(42, 103)
+        RoundedPanel1.Margin = New Padding(3, 2, 3, 2)
+        RoundedPanel1.Name = "RoundedPanel1"
+        RoundedPanel1.Size = New Size(1320, 618)
+        RoundedPanel1.TabIndex = 3
+        ' 
+        ' cboBatchFilter
+        ' 
+        cboBatchFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        cboBatchFilter.DropDownStyle = ComboBoxStyle.DropDownList
+        cboBatchFilter.Font = New Font("Poppins", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cboBatchFilter.FormattingEnabled = True
+        cboBatchFilter.IntegralHeight = False
+        cboBatchFilter.Location = New Point(273, 20)
+        cboBatchFilter.Name = "cboBatchFilter"
+        cboBatchFilter.Size = New Size(121, 30)
+        cboBatchFilter.TabIndex = 18
+        ' 
+        ' pnlRefreshBatches
+        ' 
+        pnlRefreshBatches.BackColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
+        pnlRefreshBatches.Controls.Add(lblRefreshBatches)
+        pnlRefreshBatches.Controls.Add(picRefreshBatches)
+        pnlRefreshBatches.Cursor = Cursors.Hand
+        pnlRefreshBatches.Location = New Point(928, 18)
+        pnlRefreshBatches.Name = "pnlRefreshBatches"
+        pnlRefreshBatches.Size = New Size(86, 42)
+        pnlRefreshBatches.TabIndex = 17
+        ' 
+        ' lblRefreshBatches
+        ' 
+        lblRefreshBatches.AutoSize = True
+        lblRefreshBatches.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblRefreshBatches.ForeColor = Color.White
+        lblRefreshBatches.Location = New Point(24, 10)
+        lblRefreshBatches.Name = "lblRefreshBatches"
+        lblRefreshBatches.Size = New Size(61, 23)
+        lblRefreshBatches.TabIndex = 5
+        lblRefreshBatches.Text = "Refresh"
+        ' 
+        ' picRefreshBatches
+        ' 
+        picRefreshBatches.Image = CType(resources.GetObject("picRefreshBatches.Image"), Image)
+        picRefreshBatches.Location = New Point(4, 11)
+        picRefreshBatches.Name = "picRefreshBatches"
+        picRefreshBatches.Size = New Size(23, 19)
+        picRefreshBatches.SizeMode = PictureBoxSizeMode.StretchImage
+        picRefreshBatches.TabIndex = 6
+        picRefreshBatches.TabStop = False
+        ' 
+        ' pnlDeleteBatches
+        ' 
+        pnlDeleteBatches.BackColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
+        pnlDeleteBatches.Controls.Add(lblDeleteBatches)
+        pnlDeleteBatches.Controls.Add(picDeleteBatches)
+        pnlDeleteBatches.Cursor = Cursors.Hand
+        pnlDeleteBatches.Location = New Point(1020, 18)
+        pnlDeleteBatches.Name = "pnlDeleteBatches"
+        pnlDeleteBatches.Size = New Size(81, 42)
+        pnlDeleteBatches.TabIndex = 16
+        ' 
+        ' lblDeleteBatches
+        ' 
+        lblDeleteBatches.AutoSize = True
+        lblDeleteBatches.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDeleteBatches.ForeColor = Color.White
+        lblDeleteBatches.Location = New Point(24, 10)
+        lblDeleteBatches.Name = "lblDeleteBatches"
+        lblDeleteBatches.Size = New Size(52, 23)
+        lblDeleteBatches.TabIndex = 5
+        lblDeleteBatches.Text = "Delete"
+        ' 
+        ' picDeleteBatches
+        ' 
+        picDeleteBatches.Image = CType(resources.GetObject("picDeleteBatches.Image"), Image)
+        picDeleteBatches.Location = New Point(2, 11)
+        picDeleteBatches.Name = "picDeleteBatches"
+        picDeleteBatches.Size = New Size(23, 19)
+        picDeleteBatches.SizeMode = PictureBoxSizeMode.StretchImage
+        picDeleteBatches.TabIndex = 6
+        picDeleteBatches.TabStop = False
+        ' 
+        ' pnlEditBatches
+        ' 
+        pnlEditBatches.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        pnlEditBatches.Controls.Add(lblEditBatches)
+        pnlEditBatches.Controls.Add(picEditBatches)
+        pnlEditBatches.Cursor = Cursors.Hand
+        pnlEditBatches.Location = New Point(1107, 18)
+        pnlEditBatches.Name = "pnlEditBatches"
+        pnlEditBatches.Size = New Size(64, 42)
+        pnlEditBatches.TabIndex = 15
+        ' 
+        ' lblEditBatches
+        ' 
+        lblEditBatches.AutoSize = True
+        lblEditBatches.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblEditBatches.ForeColor = Color.White
+        lblEditBatches.Location = New Point(26, 10)
+        lblEditBatches.Name = "lblEditBatches"
+        lblEditBatches.Size = New Size(35, 23)
+        lblEditBatches.TabIndex = 5
+        lblEditBatches.Text = "Edit"
+        ' 
+        ' picEditBatches
+        ' 
+        picEditBatches.Image = CType(resources.GetObject("picEditBatches.Image"), Image)
+        picEditBatches.Location = New Point(3, 11)
+        picEditBatches.Name = "picEditBatches"
+        picEditBatches.Size = New Size(23, 19)
+        picEditBatches.SizeMode = PictureBoxSizeMode.StretchImage
+        picEditBatches.TabIndex = 6
+        picEditBatches.TabStop = False
+        ' 
+        ' pnlAddBatches
+        ' 
+        pnlAddBatches.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlAddBatches.Controls.Add(lblAddBatches)
+        pnlAddBatches.Controls.Add(picAddBatches)
+        pnlAddBatches.Cursor = Cursors.Hand
+        pnlAddBatches.Location = New Point(1178, 18)
+        pnlAddBatches.Name = "pnlAddBatches"
+        pnlAddBatches.Size = New Size(123, 42)
+        pnlAddBatches.TabIndex = 14
+        ' 
+        ' lblAddBatches
+        ' 
+        lblAddBatches.AutoSize = True
+        lblAddBatches.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAddBatches.ForeColor = Color.White
+        lblAddBatches.Location = New Point(26, 10)
+        lblAddBatches.Name = "lblAddBatches"
+        lblAddBatches.Size = New Size(94, 23)
+        lblAddBatches.TabIndex = 5
+        lblAddBatches.Text = "Add Student"
+        ' 
+        ' picAddBatches
+        ' 
+        picAddBatches.Image = CType(resources.GetObject("picAddBatches.Image"), Image)
+        picAddBatches.Location = New Point(4, 11)
+        picAddBatches.Name = "picAddBatches"
+        picAddBatches.Size = New Size(23, 19)
+        picAddBatches.SizeMode = PictureBoxSizeMode.StretchImage
+        picAddBatches.TabIndex = 6
+        picAddBatches.TabStop = False
+        ' 
+        ' pnlSearch
+        ' 
+        pnlSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlSearch.Controls.Add(lblSearch)
+        pnlSearch.Controls.Add(imgSearch)
+        pnlSearch.Cursor = Cursors.Hand
+        pnlSearch.Location = New Point(26, 18)
+        pnlSearch.Name = "pnlSearch"
+        pnlSearch.Size = New Size(232, 37)
+        pnlSearch.TabIndex = 12
         ' 
         ' lblSearch
         ' 
         lblSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
         lblSearch.BorderStyle = BorderStyle.None
-        lblSearch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
         lblSearch.Location = New Point(29, 9)
         lblSearch.Name = "lblSearch"
-        lblSearch.Size = New Size(198, 19)
+        lblSearch.Size = New Size(198, 20)
         lblSearch.TabIndex = 1
-        lblSearch.Text = "Manage batches..."
+        lblSearch.Text = "Search by name or student ID"
         ' 
         ' imgSearch
         ' 
@@ -103,192 +271,6 @@ Partial Class ucBatches
         imgSearch.TabIndex = 0
         imgSearch.TabStop = False
         ' 
-        ' cboBatchFilter
-        ' 
-        cboBatchFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        cboBatchFilter.DropDownStyle = ComboBoxStyle.DropDownList
-        cboBatchFilter.Font = New Font("Microsoft Sans Serif", 9.75F)
-        cboBatchFilter.FormattingEnabled = True
-        cboBatchFilter.Location = New Point(273, 20)
-        cboBatchFilter.Name = "cboBatchFilter"
-        cboBatchFilter.Size = New Size(121, 28)
-        cboBatchFilter.TabIndex = 1
-        ' 
-        ' pnlSearch
-        ' 
-        pnlSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlSearch.Controls.Add(lblSearch)
-        pnlSearch.Controls.Add(imgSearch)
-        pnlSearch.Cursor = Cursors.Hand
-        pnlSearch.Location = New Point(26, 18)
-        pnlSearch.Name = "pnlSearch"
-        pnlSearch.Size = New Size(232, 37)
-        pnlSearch.TabIndex = 0
-        ' 
-        ' lblAddBatch
-        ' 
-        lblAddBatch.AutoSize = True
-        lblAddBatch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblAddBatch.ForeColor = Color.White
-        lblAddBatch.Location = New Point(26, 10)
-        lblAddBatch.Name = "lblAddBatch"
-        lblAddBatch.Size = New Size(116, 20)
-        lblAddBatch.TabIndex = 5
-        lblAddBatch.Text = "Add Batches"
-        ' 
-        ' picAddStudent
-        ' 
-        picAddStudent.Image = CType(resources.GetObject("picAddStudent.Image"), Image)
-        picAddStudent.Location = New Point(4, 11)
-        picAddStudent.Name = "picAddStudent"
-        picAddStudent.Size = New Size(23, 19)
-        picAddStudent.SizeMode = PictureBoxSizeMode.StretchImage
-        picAddStudent.TabIndex = 6
-        picAddStudent.TabStop = False
-        ' 
-        ' pnlAddBatch
-        ' 
-        pnlAddBatch.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlAddBatch.Controls.Add(lblAddBatch)
-        pnlAddBatch.Controls.Add(picAddStudent)
-        pnlAddBatch.Cursor = Cursors.Hand
-        pnlAddBatch.Location = New Point(1178, 18)
-        pnlAddBatch.Name = "pnlAddBatch"
-        pnlAddBatch.Size = New Size(123, 42)
-        pnlAddBatch.TabIndex = 7
-        ' 
-        ' lblEditBatch
-        ' 
-        lblEditBatch.AutoSize = True
-        lblEditBatch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblEditBatch.ForeColor = Color.White
-        lblEditBatch.Location = New Point(26, 10)
-        lblEditBatch.Name = "lblEditBatch"
-        lblEditBatch.Size = New Size(42, 20)
-        lblEditBatch.TabIndex = 5
-        lblEditBatch.Text = "Edit"
-        ' 
-        ' picEditStudent
-        ' 
-        picEditStudent.Image = CType(resources.GetObject("picEditStudent.Image"), Image)
-        picEditStudent.Location = New Point(3, 11)
-        picEditStudent.Name = "picEditStudent"
-        picEditStudent.Size = New Size(23, 19)
-        picEditStudent.SizeMode = PictureBoxSizeMode.StretchImage
-        picEditStudent.TabIndex = 6
-        picEditStudent.TabStop = False
-        ' 
-        ' pnlEditBatch
-        ' 
-        pnlEditBatch.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
-        pnlEditBatch.Controls.Add(lblEditBatch)
-        pnlEditBatch.Controls.Add(picEditStudent)
-        pnlEditBatch.Cursor = Cursors.Hand
-        pnlEditBatch.Location = New Point(1107, 18)
-        pnlEditBatch.Name = "pnlEditBatch"
-        pnlEditBatch.Size = New Size(64, 42)
-        pnlEditBatch.TabIndex = 8
-        ' 
-        ' lblDeleteBatch
-        ' 
-        lblDeleteBatch.AutoSize = True
-        lblDeleteBatch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblDeleteBatch.ForeColor = Color.White
-        lblDeleteBatch.Location = New Point(24, 10)
-        lblDeleteBatch.Name = "lblDeleteBatch"
-        lblDeleteBatch.Size = New Size(64, 20)
-        lblDeleteBatch.TabIndex = 5
-        lblDeleteBatch.Text = "Delete"
-        ' 
-        ' picDeleteStudent
-        ' 
-        picDeleteStudent.Image = CType(resources.GetObject("picDeleteStudent.Image"), Image)
-        picDeleteStudent.Location = New Point(2, 11)
-        picDeleteStudent.Name = "picDeleteStudent"
-        picDeleteStudent.Size = New Size(23, 19)
-        picDeleteStudent.SizeMode = PictureBoxSizeMode.StretchImage
-        picDeleteStudent.TabIndex = 6
-        picDeleteStudent.TabStop = False
-        ' 
-        ' pnlDeleteBatch
-        ' 
-        pnlDeleteBatch.BackColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
-        pnlDeleteBatch.Controls.Add(lblDeleteBatch)
-        pnlDeleteBatch.Controls.Add(picDeleteStudent)
-        pnlDeleteBatch.Cursor = Cursors.Hand
-        pnlDeleteBatch.Location = New Point(1020, 18)
-        pnlDeleteBatch.Name = "pnlDeleteBatch"
-        pnlDeleteBatch.Size = New Size(81, 42)
-        pnlDeleteBatch.TabIndex = 9
-        ' 
-        ' lblRefreshBatch
-        ' 
-        lblRefreshBatch.AutoSize = True
-        lblRefreshBatch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblRefreshBatch.ForeColor = Color.White
-        lblRefreshBatch.Location = New Point(24, 10)
-        lblRefreshBatch.Name = "lblRefreshBatch"
-        lblRefreshBatch.Size = New Size(75, 20)
-        lblRefreshBatch.TabIndex = 5
-        lblRefreshBatch.Text = "Refresh"
-        ' 
-        ' picRefreshStudent
-        ' 
-        picRefreshStudent.Image = CType(resources.GetObject("picRefreshStudent.Image"), Image)
-        picRefreshStudent.Location = New Point(4, 11)
-        picRefreshStudent.Name = "picRefreshStudent"
-        picRefreshStudent.Size = New Size(23, 19)
-        picRefreshStudent.SizeMode = PictureBoxSizeMode.StretchImage
-        picRefreshStudent.TabIndex = 6
-        picRefreshStudent.TabStop = False
-        ' 
-        ' pnlRefreshBatches
-        ' 
-        pnlRefreshBatches.BackColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
-        pnlRefreshBatches.Controls.Add(lblRefreshBatch)
-        pnlRefreshBatches.Controls.Add(picRefreshStudent)
-        pnlRefreshBatches.Cursor = Cursors.Hand
-        pnlRefreshBatches.Location = New Point(928, 18)
-        pnlRefreshBatches.Name = "pnlRefreshBatches"
-        pnlRefreshBatches.Size = New Size(86, 42)
-        pnlRefreshBatches.TabIndex = 10
-        ' 
-        ' RoundedPanel1
-        ' 
-        RoundedPanel1.BackColor = Color.White
-        RoundedPanel1.Controls.Add(dgvBatches)
-        RoundedPanel1.Controls.Add(pnlRefreshBatches)
-        RoundedPanel1.Controls.Add(pnlDeleteBatch)
-        RoundedPanel1.Controls.Add(pnlEditBatch)
-        RoundedPanel1.Controls.Add(pnlAddBatch)
-        RoundedPanel1.Controls.Add(cboBatchFilter)
-        RoundedPanel1.Controls.Add(pnlSearch)
-        RoundedPanel1.Location = New Point(40, 100)
-        RoundedPanel1.Name = "RoundedPanel1"
-        RoundedPanel1.Size = New Size(1323, 615)
-        RoundedPanel1.TabIndex = 3
-        ' 
-        ' pnlContentBatches
-        ' 
-        pnlContentBatches.Controls.Add(RoundedPanel1)
-        pnlContentBatches.Controls.Add(RoundedPanel2)
-        pnlContentBatches.Controls.Add(Label2)
-        pnlContentBatches.Controls.Add(Label1)
-        pnlContentBatches.Location = New Point(8, 8)
-        pnlContentBatches.Name = "pnlContentBatches"
-        pnlContentBatches.Size = New Size(1396, 788)
-        pnlContentBatches.TabIndex = 1
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(37, 33)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(120, 31)
-        Label1.TabIndex = 1
-        Label1.Text = "Batches"
-        ' 
         ' dgvBatches
         ' 
         dgvBatches.AllowUserToAddRows = False
@@ -297,66 +279,90 @@ Partial Class ucBatches
         dgvBatches.BorderStyle = BorderStyle.None
         dgvBatches.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvBatches.Cursor = Cursors.Hand
-        dgvBatches.Location = New Point(10, 82)
+        dgvBatches.Location = New Point(10, 91)
+        dgvBatches.Margin = New Padding(3, 2, 3, 2)
         dgvBatches.MultiSelect = False
         dgvBatches.Name = "dgvBatches"
         dgvBatches.ReadOnly = True
         dgvBatches.RowHeadersWidth = 51
         dgvBatches.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvBatches.Size = New Size(1300, 626)
+        dgvBatches.Size = New Size(1300, 511)
         dgvBatches.TabIndex = 11
+        ' 
+        ' pnlContentBatches
+        ' 
+        pnlContentBatches.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentBatches.Controls.Add(RoundedPanel1)
+        pnlContentBatches.Controls.Add(RoundedPanel2)
+        pnlContentBatches.Controls.Add(Label2)
+        pnlContentBatches.Controls.Add(Label1)
+        pnlContentBatches.Location = New Point(0, 0)
+        pnlContentBatches.Margin = New Padding(3, 2, 3, 2)
+        pnlContentBatches.Name = "pnlContentBatches"
+        pnlContentBatches.Size = New Size(1396, 788)
+        pnlContentBatches.TabIndex = 1
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Poppins", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(37, 33)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(106, 37)
+        Label1.TabIndex = 1
+        Label1.Text = "Batches"
         ' 
         ' ucBatches
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
-        AutoScaleMode = AutoScaleMode.Font
+        AutoScaleMode = AutoScaleMode.None
         Controls.Add(pnlContentBatches)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "ucBatches"
         Size = New Size(1396, 788)
-        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
-        pnlSearch.ResumeLayout(False)
-        pnlSearch.PerformLayout()
-        CType(picAddStudent, ComponentModel.ISupportInitialize).EndInit()
-        pnlAddBatch.ResumeLayout(False)
-        pnlAddBatch.PerformLayout()
-        CType(picEditStudent, ComponentModel.ISupportInitialize).EndInit()
-        pnlEditBatch.ResumeLayout(False)
-        pnlEditBatch.PerformLayout()
-        CType(picDeleteStudent, ComponentModel.ISupportInitialize).EndInit()
-        pnlDeleteBatch.ResumeLayout(False)
-        pnlDeleteBatch.PerformLayout()
-        CType(picRefreshStudent, ComponentModel.ISupportInitialize).EndInit()
+        RoundedPanel1.ResumeLayout(False)
         pnlRefreshBatches.ResumeLayout(False)
         pnlRefreshBatches.PerformLayout()
-        RoundedPanel1.ResumeLayout(False)
+        CType(picRefreshBatches, ComponentModel.ISupportInitialize).EndInit()
+        pnlDeleteBatches.ResumeLayout(False)
+        pnlDeleteBatches.PerformLayout()
+        CType(picDeleteBatches, ComponentModel.ISupportInitialize).EndInit()
+        pnlEditBatches.ResumeLayout(False)
+        pnlEditBatches.PerformLayout()
+        CType(picEditBatches, ComponentModel.ISupportInitialize).EndInit()
+        pnlAddBatches.ResumeLayout(False)
+        pnlAddBatches.PerformLayout()
+        CType(picAddBatches, ComponentModel.ISupportInitialize).EndInit()
+        pnlSearch.ResumeLayout(False)
+        pnlSearch.PerformLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvBatches, ComponentModel.ISupportInitialize).EndInit()
         pnlContentBatches.ResumeLayout(False)
         pnlContentBatches.PerformLayout()
-        CType(dgvBatches, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents RoundedPanel2 As RoundedPanel
     Friend WithEvents Label2 As Label
-    Friend WithEvents lblSearch As TextBox
-    Friend WithEvents imgSearch As PictureBox
-    Friend WithEvents cboBatchFilter As ComboBox
-    Friend WithEvents pnlSearch As RoundedPanel4
-    Friend WithEvents lblAddBatch As Label
-    Friend WithEvents picAddStudent As PictureBox
-    Friend WithEvents pnlAddBatch As RoundedPanel4
-    Friend WithEvents lblEditBatch As Label
-    Friend WithEvents picEditStudent As PictureBox
-    Friend WithEvents pnlEditBatch As RoundedPanel4
-    Friend WithEvents lblDeleteBatch As Label
-    Friend WithEvents picDeleteStudent As PictureBox
-    Friend WithEvents pnlDeleteBatch As RoundedPanel4
-    Friend WithEvents lblRefreshBatch As Label
-    Friend WithEvents picRefreshStudent As PictureBox
-    Friend WithEvents pnlRefreshBatches As RoundedPanel4
     Friend WithEvents RoundedPanel1 As RoundedPanel
     Friend WithEvents pnlContentBatches As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents dgvBatches As DataGridView
+    Friend WithEvents pnlDeleteBatches As RoundedPanel4
+    Friend WithEvents lblDeleteBatches As Label
+    Friend WithEvents picDeleteBatches As PictureBox
+    Friend WithEvents pnlEditBatches As RoundedPanel4
+    Friend WithEvents lblEditBatches As Label
+    Friend WithEvents picEditBatches As PictureBox
+    Friend WithEvents pnlAddBatches As RoundedPanel4
+    Friend WithEvents lblAddBatches As Label
+    Friend WithEvents picAddBatches As PictureBox
+    Friend WithEvents pnlSearch As RoundedPanel4
+    Friend WithEvents lblSearch As TextBox
+    Friend WithEvents imgSearch As PictureBox
+    Friend WithEvents pnlRefreshBatches As RoundedPanel4
+    Friend WithEvents lblRefreshBatches As Label
+    Friend WithEvents picRefreshBatches As PictureBox
+    Friend WithEvents cboBatchFilter As ComboBox
 
 End Class

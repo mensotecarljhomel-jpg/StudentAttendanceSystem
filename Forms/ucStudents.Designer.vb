@@ -83,9 +83,9 @@ Partial Class ucStudents
         RoundedPanel1.Controls.Add(pnlAddStudent)
         RoundedPanel1.Controls.Add(cboBatchFilter)
         RoundedPanel1.Controls.Add(pnlSearch)
-        RoundedPanel1.Location = New Point(40, 103)
+        RoundedPanel1.Location = New Point(42, 103)
         RoundedPanel1.Name = "RoundedPanel1"
-        RoundedPanel1.Size = New Size(1323, 615)
+        RoundedPanel1.Size = New Size(1320, 618)
         RoundedPanel1.TabIndex = 3
         ' 
         ' dgvStudents
@@ -119,11 +119,11 @@ Partial Class ucStudents
         ' lblRefreshStudent
         ' 
         lblRefreshStudent.AutoSize = True
-        lblRefreshStudent.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblRefreshStudent.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblRefreshStudent.ForeColor = Color.White
         lblRefreshStudent.Location = New Point(24, 10)
         lblRefreshStudent.Name = "lblRefreshStudent"
-        lblRefreshStudent.Size = New Size(75, 20)
+        lblRefreshStudent.Size = New Size(61, 23)
         lblRefreshStudent.TabIndex = 5
         lblRefreshStudent.Text = "Refresh"
         ' 
@@ -151,11 +151,11 @@ Partial Class ucStudents
         ' lblDeleteStudent
         ' 
         lblDeleteStudent.AutoSize = True
-        lblDeleteStudent.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDeleteStudent.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDeleteStudent.ForeColor = Color.White
         lblDeleteStudent.Location = New Point(24, 10)
         lblDeleteStudent.Name = "lblDeleteStudent"
-        lblDeleteStudent.Size = New Size(64, 20)
+        lblDeleteStudent.Size = New Size(52, 23)
         lblDeleteStudent.TabIndex = 5
         lblDeleteStudent.Text = "Delete"
         ' 
@@ -183,11 +183,11 @@ Partial Class ucStudents
         ' lblEditStudent
         ' 
         lblEditStudent.AutoSize = True
-        lblEditStudent.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblEditStudent.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblEditStudent.ForeColor = Color.White
         lblEditStudent.Location = New Point(26, 10)
         lblEditStudent.Name = "lblEditStudent"
-        lblEditStudent.Size = New Size(42, 20)
+        lblEditStudent.Size = New Size(35, 23)
         lblEditStudent.TabIndex = 5
         lblEditStudent.Text = "Edit"
         ' 
@@ -215,11 +215,11 @@ Partial Class ucStudents
         ' lblAddStudent
         ' 
         lblAddStudent.AutoSize = True
-        lblAddStudent.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAddStudent.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAddStudent.ForeColor = Color.White
         lblAddStudent.Location = New Point(26, 10)
         lblAddStudent.Name = "lblAddStudent"
-        lblAddStudent.Size = New Size(111, 20)
+        lblAddStudent.Size = New Size(94, 23)
         lblAddStudent.TabIndex = 5
         lblAddStudent.Text = "Add Student"
         ' 
@@ -240,7 +240,7 @@ Partial Class ucStudents
         cboBatchFilter.FormattingEnabled = True
         cboBatchFilter.Location = New Point(273, 20)
         cboBatchFilter.Name = "cboBatchFilter"
-        cboBatchFilter.Size = New Size(121, 28)
+        cboBatchFilter.Size = New Size(121, 24)
         cboBatchFilter.TabIndex = 1
         ' 
         ' pnlSearch
@@ -258,11 +258,11 @@ Partial Class ucStudents
         ' 
         lblSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
         lblSearch.BorderStyle = BorderStyle.None
-        lblSearch.Font = New Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
         lblSearch.Location = New Point(29, 9)
         lblSearch.Name = "lblSearch"
-        lblSearch.Size = New Size(198, 19)
+        lblSearch.Size = New Size(198, 20)
         lblSearch.TabIndex = 1
         lblSearch.Text = "Search by name or student ID"
         ' 
@@ -288,20 +288,21 @@ Partial Class ucStudents
         ' Label2
         ' 
         Label2.AutoSize = True
+        Label2.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
         Label2.Location = New Point(40, 62)
         Label2.Name = "Label2"
-        Label2.Size = New Size(446, 20)
+        Label2.Size = New Size(394, 23)
         Label2.TabIndex = 2
         Label2.Text = "Manage all enrolled students and their attendance records."
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Poppins", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(37, 33)
         Label1.Name = "Label1"
-        Label1.Size = New Size(130, 31)
+        Label1.Size = New Size(115, 37)
         Label1.TabIndex = 1
         Label1.Text = "Students"
         ' 

@@ -131,4 +131,16 @@
     Private Sub dgvBatches_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
+
+    Private Sub pnlContentBatches_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentBatches.Paint
+
+    End Sub
+
+    Private Sub cboBatchFilter_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub cboBatchFilter_SelectedIndexChanged_1(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

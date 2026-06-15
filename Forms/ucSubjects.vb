@@ -133,4 +133,7 @@
 
     End Sub
 
+    Private Sub pnlContentBatches_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
 End Class
