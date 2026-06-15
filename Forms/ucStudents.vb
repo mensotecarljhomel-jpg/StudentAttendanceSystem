@@ -1,4 +1,7 @@
-﻿Public Class ucStudents
+﻿Imports MySql.Data.MySqlClient
+
+Public Class ucStudents
+
     Private Sub ucStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         '==========================
@@ -17,7 +20,7 @@
         cboBatchFilter.SelectedIndex = 0
 
         SetupStudentGrid()
-        LoadSampleStudents()
+        LoadStudentsFromDatabase()
 
     End Sub
 
@@ -31,27 +34,18 @@
             ' Basic Settings
             '==========================
             .ReadOnly = True
-
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
-
             .AllowUserToResizeRows = False
             .AllowUserToResizeColumns = False
-
             .MultiSelect = False
-
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
             .RowHeadersVisible = False
-
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             .BackgroundColor = Color.White
-
             .BorderStyle = BorderStyle.None
-
             .CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
-
             .GridColor = Color.FromArgb(235, 235, 235)
 
             .EnableHeadersVisualStyles = False
@@ -109,32 +103,72 @@
 
             '==========================
             ' Disable Sorting
-            '==========================
             For Each col As DataGridViewColumn In .Columns
                 col.SortMode = DataGridViewColumnSortMode.NotSortable
             Next
+
+            .Columns("StudentID").SortMode = DataGridViewColumnSortMode.Automatic
+            .Columns("LastName").SortMode = DataGridViewColumnSortMode.Automatic
 
         End With
 
     End Sub
 
-    Private Sub LoadSampleStudents()
+    Public Sub LoadStudentsFromDatabase()
 
-        dgvStudents.Rows.Clear()
+        Try
 
-        dgvStudents.Rows.Add("2025-0001", "Cruz", "Juan", "Male", "Grade 11 - 1", "96%", "Good")
-        dgvStudents.Rows.Add("2025-0002", "Santos", "Maria", "Female", "Grade 11 - 1", "92%", "Good")
-        dgvStudents.Rows.Add("2025-0003", "Reyes", "John", "Male", "Grade 11 - 2", "83%", "Warning")
-        dgvStudents.Rows.Add("2025-0004", "Garcia", "Anne", "Female", "Grade 11 - 2", "88%", "Good")
-        dgvStudents.Rows.Add("2025-0005", "Dela Cruz", "Mark", "Male", "Grade 11 - 3", "78%", "Dropout Risk")
+            OpenConnection()
 
-        dgvStudents.Rows.Add("2025-0006", "Torres", "Angela", "Female", "Grade 11 - 3", "95%", "Good")
-        dgvStudents.Rows.Add("2025-0007", "Mendoza", "Joshua", "Male", "Grade 12 - 1", "82%", "Warning")
-        dgvStudents.Rows.Add("2025-0008", "Navarro", "Sophia", "Female", "Grade 12 - 1", "75%", "Dropout Risk")
-        dgvStudents.Rows.Add("2025-0009", "Castillo", "Daniel", "Male", "Grade 12 - 2", "91%", "Good")
-        dgvStudents.Rows.Add("2025-0010", "Villanueva", "Claire", "Female", "Grade 12 - 3", "98%", "Good")
+            dgvStudents.Rows.Clear()
+
+            Dim query As String =
+                "SELECT s.student_number,
+                        s.last_name,
+                        s.first_name,
+                        s.gender,
+                        b.batch_name
+                 FROM students s
+                 INNER JOIN batches b
+                 ON s.batch_id = b.batch_id
+                 ORDER BY s.student_number"
+
+            Dim cmd As New MySqlCommand(query, Connection)
+
+            Dim reader As MySqlDataReader = cmd.ExecuteReader()
+
+            While reader.Read()
+
+                dgvStudents.Rows.Add(
+                    reader("student_number").ToString(),
+                    reader("last_name").ToString(),
+                    reader("first_name").ToString(),
+                    reader("gender").ToString(),
+                    reader("batch_name").ToString(),
+                    "100%",
+                    "Good"
+                )
+
+            End While
+
+            reader.Close()
+            CloseConnection()
+
+        Catch ex As Exception
+
+            CloseConnection()
+
+            MessageBox.Show(
+                ex.Message,
+                "Database Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
+
+        End Try
 
     End Sub
+
 
     Private Sub pnlContentStudents_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentStudents.Paint
 
@@ -143,7 +177,35 @@
     Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
 
     End Sub
+
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub pnlAddStudent_Click(sender As Object, e As EventArgs) Handles pnlAddStudent.Click
+        Dim frm As New frmAddStudent()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
+
+    End Sub
+
+    Private Sub picAddStudent_Click(sender As Object, e As EventArgs) Handles picAddStudent.Click
+        Dim frm As New frmAddStudent()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
+
+    End Sub
+
+    Private Sub lblAddStudent_Click(sender As Object, e As EventArgs) Handles lblAddStudent.Click
+        Dim frm As New frmAddStudent()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
 
     End Sub
 End Class

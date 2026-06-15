@@ -4,7 +4,7 @@ Module Database
 
     Public Connection As New MySqlConnection(
         "server=localhost;" &
-        "database=student_attendance_db;" &
+        "database=proj_db;" &
         "uid=root;" &
         "password=;"
     )
