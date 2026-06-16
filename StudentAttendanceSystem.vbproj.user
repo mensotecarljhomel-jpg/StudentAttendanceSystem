@@ -28,6 +28,9 @@
     <Compile Update="frmAddStudent.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmEditStudent.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RoundedPanel.vb">
       <SubType>Component</SubType>
     </Compile>

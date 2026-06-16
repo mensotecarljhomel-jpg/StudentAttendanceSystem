@@ -208,4 +208,61 @@ Public Class ucStudents
         LoadStudentsFromDatabase()
 
     End Sub
+
+    Private Sub pnlEditStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlEditStudent.MouseClick
+        If dgvStudents.SelectedRows.Count = 0 Then
+
+            MessageBox.Show("Please select a student.")
+
+            Exit Sub
+
+        End If
+
+        Dim frm As New frmEditStudent()
+
+        frm.StudentNumber =
+            dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
+    End Sub
+
+    Private Sub picEditStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles picEditStudent.MouseClick
+        If dgvStudents.SelectedRows.Count = 0 Then
+
+            MessageBox.Show("Please select a student.")
+
+            Exit Sub
+
+        End If
+
+        Dim frm As New frmEditStudent()
+
+        frm.StudentNumber =
+            dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
+    End Sub
+
+    Private Sub lblEditStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles lblEditStudent.MouseClick
+        If dgvStudents.SelectedRows.Count = 0 Then
+
+            MessageBox.Show("Please select a student.")
+
+            Exit Sub
+
+        End If
+
+        Dim frm As New frmEditStudent()
+
+        frm.StudentNumber =
+            dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
+
+        frm.ShowDialog()
+
+        LoadStudentsFromDatabase()
+    End Sub
 End Class
