@@ -416,7 +416,7 @@ Partial Class Dashboard
         picPurpleStudents.BackColor = Color.Transparent
         picPurpleStudents.Image = CType(resources.GetObject("picPurpleStudents.Image"), Image)
         picPurpleStudents.InitialImage = CType(resources.GetObject("picPurpleStudents.InitialImage"), Image)
-        picPurpleStudents.Location = New Point(19, 5)
+        picPurpleStudents.Location = New Point(17, 3)
         picPurpleStudents.Name = "picPurpleStudents"
         picPurpleStudents.Size = New Size(27, 34)
         picPurpleStudents.SizeMode = PictureBoxSizeMode.Zoom
@@ -438,7 +438,7 @@ Partial Class Dashboard
         picStudents.BackColor = Color.Transparent
         picStudents.Image = CType(resources.GetObject("picStudents.Image"), Image)
         picStudents.InitialImage = CType(resources.GetObject("picStudents.InitialImage"), Image)
-        picStudents.Location = New Point(19, 5)
+        picStudents.Location = New Point(17, 5)
         picStudents.Name = "picStudents"
         picStudents.Size = New Size(27, 34)
         picStudents.SizeMode = PictureBoxSizeMode.Zoom

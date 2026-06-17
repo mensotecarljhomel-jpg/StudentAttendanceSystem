@@ -1,8 +1,27 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Drawing.Printing
+Imports System.IO
+Imports System.Reflection.Metadata
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
+Imports MySql.Data.MySqlClient
 
 Public Class ucStudents
 
     Private Sub ucStudents_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        '==========================
+        ' Grid Setup
+        ' MUST run before anything that can trigger
+        ' LoadStudentsFromDatabase() (e.g. setting
+        ' cboBatchFilter.SelectedIndex below), otherwise
+        ' Rows.Add() runs against a grid with 0 columns.
+        '==========================
+        SetupStudentGrid()
+
+        '==========================
+        ' Search Box Styling
+        '==========================
+        SetupSearchBox()
 
         '==========================
         ' Section Filter
@@ -17,10 +36,13 @@ Public Class ucStudents
         cboBatchFilter.Items.Add("Grade 12 - 2")
         cboBatchFilter.Items.Add("Grade 12 - 3")
 
+        ' NOTE: this line fires cboBatchFilter_SelectedIndexChanged
+        ' immediately, which calls LoadStudentsFromDatabase().
+        ' That's fine now because SetupStudentGrid() already ran above,
+        ' so the grid already has its columns. (No need for a separate
+        ' explicit LoadStudentsFromDatabase() call after this anymore —
+        ' the SelectedIndexChanged event already does it.)
         cboBatchFilter.SelectedIndex = 0
-
-        SetupStudentGrid()
-        LoadStudentsFromDatabase()
 
     End Sub
 
@@ -69,7 +91,11 @@ Public Class ucStudents
                 Color.FromArgb(107, 114, 128)
 
             .ColumnHeadersDefaultCellStyle.Font =
-                New Font("Poppins", 9, FontStyle.Bold)
+    New System.Drawing.Font(
+        "Poppins",
+        9,
+        System.Drawing.FontStyle.Bold
+    )
 
             .ColumnHeadersHeight = 45
 
@@ -81,8 +107,7 @@ Public Class ucStudents
             .DefaultCellStyle.ForeColor = Color.Black
 
             .DefaultCellStyle.Font =
-                New Font("Poppins", 9)
-
+    New System.Drawing.Font("Poppins", 9)
             .DefaultCellStyle.SelectionBackColor =
                 Color.FromArgb(235, 230, 255)
 
@@ -115,6 +140,28 @@ Public Class ucStudents
 
     End Sub
 
+    '==========================
+    ' Search Box Setup
+    ' (one-time styling — must NOT live inside
+    ' txtSearch_TextChanged, or it reapplies and
+    ' fights the user on every keystroke)
+    '==========================
+    Private Sub SetupSearchBox()
+
+        TextBox1.BackColor = Color.FromArgb(244, 242, 252)
+        TextBox1.ForeColor = Color.FromArgb(107, 114, 128)
+        TextBox1.BorderStyle = BorderStyle.None
+
+        TextBox1.Font = New System.Drawing.Font(
+    "Poppins",
+    10,
+    System.Drawing.FontStyle.Regular
+)
+
+        TextBox1.Text = "Search by name or student ID"
+
+    End Sub
+
     Public Sub LoadStudentsFromDatabase()
 
         Try
@@ -122,6 +169,12 @@ Public Class ucStudents
             OpenConnection()
 
             dgvStudents.Rows.Clear()
+
+            Dim searchTerm As String = TextBox1.Text.Trim()
+
+            If searchTerm = "Search by name or student ID" Then
+                searchTerm = ""
+            End If
 
             Dim query As String =
                 "SELECT s.student_number,
@@ -132,9 +185,17 @@ Public Class ucStudents
                  FROM students s
                  INNER JOIN batches b
                  ON s.batch_id = b.batch_id
+                 WHERE (@batch = 'All Sections' OR b.batch_name = @batch)
+                   AND (@search = ''
+                        OR s.student_number LIKE CONCAT('%', @search, '%')
+                        OR s.last_name LIKE CONCAT('%', @search, '%')
+                        OR s.first_name LIKE CONCAT('%', @search, '%'))
                  ORDER BY s.student_number"
 
             Dim cmd As New MySqlCommand(query, Connection)
+
+            cmd.Parameters.AddWithValue("@batch", cboBatchFilter.Text)
+            cmd.Parameters.AddWithValue("@search", searchTerm)
 
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
 
@@ -293,6 +354,90 @@ Public Class ucStudents
         End If
 
     End Sub
+    Private Sub ExportStudentsToPdf()
+
+        Try
+
+            Dim sfd As New SaveFileDialog()
+
+            sfd.Filter = "PDF Files|*.pdf"
+
+            sfd.FileName = "Students_Report.pdf"
+
+            If sfd.ShowDialog() <> DialogResult.OK Then Exit Sub
+
+            Dim doc As New iTextSharp.text.Document(
+    iTextSharp.text.PageSize.A4.Rotate()
+)
+
+            PdfWriter.GetInstance(
+            doc,
+            New FileStream(
+                sfd.FileName,
+                FileMode.Create
+            )
+        )
+
+            doc.Open()
+
+            Dim title As New Paragraph(
+            "Student Attendance Report"
+        )
+
+            title.Alignment = Element.ALIGN_CENTER
+
+            title.SpacingAfter = 20
+
+            doc.Add(title)
+
+            Dim table As New PdfPTable(
+            dgvStudents.Columns.Count
+        )
+
+            table.WidthPercentage = 100
+
+            ' Headers
+            For Each col As DataGridViewColumn In dgvStudents.Columns
+
+                table.AddCell(col.HeaderText)
+
+            Next
+
+            ' Rows
+            For Each row As DataGridViewRow In dgvStudents.Rows
+
+                If Not row.IsNewRow Then
+
+                    For Each cell As DataGridViewCell In row.Cells
+
+                        table.AddCell(
+                        If(cell.Value, "").ToString()
+                    )
+
+                    Next
+
+                End If
+
+            Next
+
+            doc.Add(table)
+
+            doc.Close()
+
+            MessageBox.Show(
+            "PDF generated successfully!",
+            "Success",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        )
+
+        Catch ex As Exception
+
+            MessageBox.Show(ex.Message)
+
+        End Try
+
+    End Sub
 
     '==========================
     ' Add Checkbox Column
@@ -432,4 +577,105 @@ Public Class ucStudents
 
     End Sub
 
+    Private Sub cboBatchFilter_SelectedIndexChanged(
+        sender As Object,
+        e As EventArgs
+    ) Handles cboBatchFilter.SelectedIndexChanged
+
+        ' Defensive guard: never touch the grid before it has columns
+        If dgvStudents.Columns.Count = 0 Then Exit Sub
+
+        LoadStudentsFromDatabase()
+
+    End Sub
+
+    Private Sub pnlSearch_Paint(sender As Object, e As PaintEventArgs) Handles TextBox1.Paint, TextBox1.Paint
+
+    End Sub
+
+    Private Sub imgSearch_Click(sender As Object, e As EventArgs) Handles imgSearch.Click
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged, TextBox1.TextChanged
+
+        ' Defensive guard: never touch the grid before it has columns
+        If dgvStudents.Columns.Count = 0 Then Exit Sub
+
+        LoadStudentsFromDatabase()
+
+    End Sub
+
+    Private Sub txtSearch_Enter(
+        sender As Object,
+        e As EventArgs
+    ) Handles TextBox1.Enter, TextBox1.Enter
+
+        If TextBox1.Text = "Search by name or student ID" Then
+
+            TextBox1.Text = ""
+
+            TextBox1.ForeColor = Color.Black
+
+        End If
+
+    End Sub
+
+
+    Private Sub txtSearch_Leave(
+        sender As Object,
+        e As EventArgs
+    ) Handles TextBox1.Leave, TextBox1.Leave
+
+        If TextBox1.Text.Trim = "" Then
+
+            TextBox1.Text = "Search by name or student ID"
+
+            TextBox1.ForeColor =
+                Color.FromArgb(107, 114, 128)
+
+        End If
+
+    End Sub
+
+    Private Sub lblDeleteStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles lblDeleteStudent.MouseClick
+        If Not IsDeleteMode Then
+
+            IsDeleteMode = True
+
+            lblDeleteStudent.Text = "Confirm"
+
+            AddDeleteCheckboxColumn()
+
+        Else
+
+            ConfirmAndDeleteSelectedStudents()
+
+        End If
+    End Sub
+
+    Private Sub picDeleteStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles picDeleteStudent.MouseClick
+        If Not IsDeleteMode Then
+
+            IsDeleteMode = True
+
+            lblDeleteStudent.Text = "Confirm"
+
+            AddDeleteCheckboxColumn()
+
+        Else
+
+            ConfirmAndDeleteSelectedStudents()
+
+        End If
+    End Sub
+
+    Private Sub pnlPrint_Click(
+    sender As Object,
+    e As EventArgs
+) Handles pnlPrint.Click
+
+        ExportStudentsToPdf()
+
+    End Sub
 End Class

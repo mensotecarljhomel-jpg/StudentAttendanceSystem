@@ -323,6 +323,7 @@
         OpenPrint()
     End Sub
 
+<<<<<<< HEAD
     Private Sub Label1_Click(sender As Object, e As EventArgs)
 
     End Sub
@@ -345,6 +346,9 @@
     End Sub
 
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
+=======
+    Private Sub pnlContentDashboard_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentDashboard.Paint
+>>>>>>> d416407 (WORK IN PROGRESS)
 
     End Sub
 End Class
