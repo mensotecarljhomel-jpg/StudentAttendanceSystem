@@ -64,7 +64,6 @@ Partial Class Dashboard
         pnlContent = New Panel()
         pnlTopbar = New Panel()
         ScreenIndicator = New Label()
-        Label1 = New Label()
         pnlSidebar.SuspendLayout()
         pnlPrintMenu.SuspendLayout()
         CType(picPurplePrint, ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +85,6 @@ Partial Class Dashboard
         CType(picPurpleStudents, ComponentModel.ISupportInitialize).BeginInit()
         CType(picStudents, ComponentModel.ISupportInitialize).BeginInit()
         pnlRight.SuspendLayout()
-        pnlContent.SuspendLayout()
         pnlTopbar.SuspendLayout()
         SuspendLayout()
         ' 
@@ -519,10 +517,10 @@ Partial Class Dashboard
         ' 
         ' pnlContent
         ' 
-        pnlContent.Controls.Add(Label1)
-        pnlContent.Location = New Point(3, 79)
+        pnlContent.Dock = DockStyle.Fill
+        pnlContent.Location = New Point(0, 73)
         pnlContent.Name = "pnlContent"
-        pnlContent.Size = New Size(1393, 782)
+        pnlContent.Size = New Size(1396, 788)
         pnlContent.TabIndex = 1
         ' 
         ' pnlTopbar
@@ -545,22 +543,13 @@ Partial Class Dashboard
         ScreenIndicator.TabIndex = 2
         ScreenIndicator.Text = "Dashboard"
         ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Location = New Point(45, 28)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(41, 15)
-        Label1.TabIndex = 0
-        Label1.Text = "Label1"
-        ' 
         ' Dashboard
         ' 
         AutoScaleMode = AutoScaleMode.None
         ClientSize = New Size(1584, 861)
         Controls.Add(pnlRight)
         Controls.Add(pnlSidebar)
-        Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
         Name = "Dashboard"
@@ -594,8 +583,6 @@ Partial Class Dashboard
         CType(picPurpleStudents, ComponentModel.ISupportInitialize).EndInit()
         CType(picStudents, ComponentModel.ISupportInitialize).EndInit()
         pnlRight.ResumeLayout(False)
-        pnlContent.ResumeLayout(False)
-        pnlContent.PerformLayout()
         pnlTopbar.ResumeLayout(False)
         pnlTopbar.PerformLayout()
         ResumeLayout(False)
@@ -641,6 +628,5 @@ Partial Class Dashboard
     Friend WithEvents picPurpleDashboard As PictureBox
     Friend WithEvents pnlDashboardIndicator As Panel
     Friend WithEvents pnlContent As Panel
-    Friend WithEvents Label1 As Label
 
 End Class

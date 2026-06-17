@@ -68,7 +68,11 @@
     '==========================
     Private Sub LoadPage(page As UserControl)
 
+        pnlContent.Controls.Clear()
 
+        page.Dock = DockStyle.Fill
+
+        pnlContent.Controls.Add(page)
     End Sub
 
     '==========================
@@ -89,6 +93,8 @@
         picPurpleDashboard.Visible = True
 
         ScreenIndicator.Text = "Dashboard"
+
+        pnlContent.Controls.Clear()
 
 
 
@@ -323,32 +329,7 @@
         OpenPrint()
     End Sub
 
-<<<<<<< HEAD
-    Private Sub Label1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub Label1_Click_1(sender As Object, e As EventArgs)
-
-
-    End Sub
-
-    Private Sub Label1_Click_2(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub pnlTopbar_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopbar.Paint
-
-    End Sub
-
-    Private Sub RoundedPanel21_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
-=======
-    Private Sub pnlContentDashboard_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentDashboard.Paint
->>>>>>> d416407 (WORK IN PROGRESS)
+    Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
     End Sub
 End Class
