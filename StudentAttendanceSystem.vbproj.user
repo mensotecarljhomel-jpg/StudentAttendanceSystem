@@ -40,5 +40,8 @@
     <Compile Update="RoundedPanel4.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="StartClass.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

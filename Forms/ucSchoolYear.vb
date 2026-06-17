@@ -4,4 +4,7 @@
 
     End Sub
 
+    Private Sub lblRefreshBatches_Click(sender As Object, e As EventArgs) Handles lblRefreshSchoolYear.Click
+
+    End Sub
 End Class

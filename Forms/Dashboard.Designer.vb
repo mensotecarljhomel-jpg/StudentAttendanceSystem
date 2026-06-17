@@ -62,13 +62,9 @@ Partial Class Dashboard
         pnlSeparator1 = New Panel()
         pnlRight = New Panel()
         pnlContent = New Panel()
-        pnlContentDashboard = New Panel()
-        Panel3 = New Panel()
-        Panel4 = New Panel()
-        pnlShadow = New Panel()
-        pnlSeparator2 = New Panel()
         pnlTopbar = New Panel()
         ScreenIndicator = New Label()
+        Label1 = New Label()
         pnlSidebar.SuspendLayout()
         pnlPrintMenu.SuspendLayout()
         CType(picPurplePrint, ComponentModel.ISupportInitialize).BeginInit()
@@ -91,7 +87,6 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).BeginInit()
         pnlRight.SuspendLayout()
         pnlContent.SuspendLayout()
-        pnlContentDashboard.SuspendLayout()
         pnlTopbar.SuspendLayout()
         SuspendLayout()
         ' 
@@ -321,7 +316,7 @@ Partial Class Dashboard
         lblBatches.AutoSize = True
         lblBatches.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold)
         lblBatches.ForeColor = Color.White
-        lblBatches.Location = New Point(50, 3)
+        lblBatches.Location = New Point(50, 0)
         lblBatches.Name = "lblBatches"
         lblBatches.Size = New Size(93, 34)
         lblBatches.TabIndex = 13
@@ -524,64 +519,11 @@ Partial Class Dashboard
         ' 
         ' pnlContent
         ' 
-        pnlContent.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlContent.Controls.Add(pnlContentDashboard)
-        pnlContent.Controls.Add(pnlShadow)
-        pnlContent.Controls.Add(pnlSeparator2)
-        pnlContent.Dock = DockStyle.Fill
-        pnlContent.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        pnlContent.Location = New Point(0, 73)
+        pnlContent.Controls.Add(Label1)
+        pnlContent.Location = New Point(3, 79)
         pnlContent.Name = "pnlContent"
-        pnlContent.Size = New Size(1396, 788)
+        pnlContent.Size = New Size(1393, 782)
         pnlContent.TabIndex = 1
-        ' 
-        ' pnlContentDashboard
-        ' 
-        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlContentDashboard.Controls.Add(Panel3)
-        pnlContentDashboard.Controls.Add(Panel4)
-        pnlContentDashboard.Dock = DockStyle.Fill
-        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        pnlContentDashboard.Location = New Point(0, 2)
-        pnlContentDashboard.Name = "pnlContentDashboard"
-        pnlContentDashboard.Size = New Size(1396, 786)
-        pnlContentDashboard.TabIndex = 2
-        ' 
-        ' Panel3
-        ' 
-        Panel3.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
-        Panel3.Dock = DockStyle.Top
-        Panel3.Location = New Point(0, 1)
-        Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1396, 1)
-        Panel3.TabIndex = 1
-        ' 
-        ' Panel4
-        ' 
-        Panel4.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
-        Panel4.Dock = DockStyle.Top
-        Panel4.Location = New Point(0, 0)
-        Panel4.Name = "Panel4"
-        Panel4.Size = New Size(1396, 1)
-        Panel4.TabIndex = 0
-        ' 
-        ' pnlShadow
-        ' 
-        pnlShadow.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
-        pnlShadow.Dock = DockStyle.Top
-        pnlShadow.Location = New Point(0, 1)
-        pnlShadow.Name = "pnlShadow"
-        pnlShadow.Size = New Size(1396, 1)
-        pnlShadow.TabIndex = 1
-        ' 
-        ' pnlSeparator2
-        ' 
-        pnlSeparator2.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
-        pnlSeparator2.Dock = DockStyle.Top
-        pnlSeparator2.Location = New Point(0, 0)
-        pnlSeparator2.Name = "pnlSeparator2"
-        pnlSeparator2.Size = New Size(1396, 1)
-        pnlSeparator2.TabIndex = 0
         ' 
         ' pnlTopbar
         ' 
@@ -603,13 +545,22 @@ Partial Class Dashboard
         ScreenIndicator.TabIndex = 2
         ScreenIndicator.Text = "Dashboard"
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(45, 28)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(41, 15)
+        Label1.TabIndex = 0
+        Label1.Text = "Label1"
+        ' 
         ' Dashboard
         ' 
         AutoScaleMode = AutoScaleMode.None
         ClientSize = New Size(1584, 861)
         Controls.Add(pnlRight)
         Controls.Add(pnlSidebar)
-        Font = New Font("Segoe UI", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
         Name = "Dashboard"
@@ -644,18 +595,15 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).EndInit()
         pnlRight.ResumeLayout(False)
         pnlContent.ResumeLayout(False)
-        pnlContentDashboard.ResumeLayout(False)
+        pnlContent.PerformLayout()
         pnlTopbar.ResumeLayout(False)
         pnlTopbar.PerformLayout()
         ResumeLayout(False)
     End Sub
     Friend WithEvents pnlSidebar As Panel
     Friend WithEvents pnlRight As Panel
-    Friend WithEvents pnlContent As Panel
     Friend WithEvents pnlSeparator1 As Panel
     Friend WithEvents pnlTopbar As Panel
-    Friend WithEvents pnlSeparator2 As Panel
-    Friend WithEvents pnlShadow As Panel
     Friend WithEvents ScreenIndicator As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel1 As Panel
@@ -692,8 +640,7 @@ Partial Class Dashboard
     Friend WithEvents picPurpleSubjects As PictureBox
     Friend WithEvents picPurpleDashboard As PictureBox
     Friend WithEvents pnlDashboardIndicator As Panel
-    Friend WithEvents pnlContentDashboard As Panel
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Panel4 As Panel
+    Friend WithEvents pnlContent As Panel
+    Friend WithEvents Label1 As Label
 
 End Class
