@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ucAbsences
+Partial Class ucSchoolYear
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.

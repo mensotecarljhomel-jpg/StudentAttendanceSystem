@@ -1,5 +1,4 @@
-﻿
-Public Class Dashboard
+﻿Public Class Dashboard
 
     '==========================
     ' Sidebar Colors
@@ -35,8 +34,7 @@ Public Class Dashboard
         pnlStudentsIndicator.Visible = False
         pnlSubjectsIndicator.Visible = False
         pnlBatchesIndicator.Visible = False
-        pnlBatchInfoIndicator.Visible = False
-        pnlAbsencesIndicator.Visible = False
+        pnlSchoolYearIndicator.Visible = False
         pnlPrintIndicator.Visible = False
 
         ' Labels
@@ -44,8 +42,7 @@ Public Class Dashboard
         lblStudents.ForeColor = InactiveColor
         lblSubjects.ForeColor = InactiveColor
         lblBatches.ForeColor = InactiveColor
-        lblBatchInfo.ForeColor = InactiveColor
-        lbAbsences.ForeColor = InactiveColor
+        lblSchoolYear.ForeColor = InactiveColor
         lblPrint.ForeColor = InactiveColor
 
         ' White Icons
@@ -53,8 +50,7 @@ Public Class Dashboard
         picStudents.Visible = True
         picSubjects.Visible = True
         picBatches.Visible = True
-        picBatchInfo.Visible = True
-        picAbsences.Visible = True
+        picSchoolYear.Visible = True
         picPrint.Visible = True
 
         ' Purple Icons
@@ -62,8 +58,7 @@ Public Class Dashboard
         picPurpleStudents.Visible = False
         picPurpleBatches.Visible = False
         picPurpleSubjects.Visible = False
-        picPurpleBatchInfo.Visible = False
-        picPurpleAbsences.Visible = False
+        picPurpleSchoolYear.Visible = False
         picPurplePrint.Visible = False
 
     End Sub
@@ -82,7 +77,7 @@ Public Class Dashboard
     End Sub
 
     '==========================
-    ' Dashboard
+    ' Open Dashboard
     '==========================
     Private Sub OpenDashboard()
 
@@ -105,7 +100,7 @@ Public Class Dashboard
     End Sub
 
     '==========================
-    ' Students
+    ' Open Students
     '==========================
     Private Sub OpenStudents()
 
@@ -126,6 +121,10 @@ Public Class Dashboard
         LoadPage(New ucStudents())
 
     End Sub
+
+    '==========================
+    ' Open Subjects
+    '==========================
     Private Sub OpenSubjects()
 
         If CurrentPage = "Subjects" Then Exit Sub
@@ -146,6 +145,9 @@ Public Class Dashboard
 
     End Sub
 
+    '==========================
+    ' Open Batches
+    '==========================
     Private Sub OpenBatches()
 
         If CurrentPage = "Batches" Then Exit Sub
@@ -155,57 +157,43 @@ Public Class Dashboard
         ResetSidebar()
 
         pnlBatchesIndicator.Visible = True
-lblBatches.ForeColor = ActiveColor
+        lblBatches.ForeColor = ActiveColor
 
-picBatches.Visible = False
-picPurpleBatches.Visible = True
+        picBatches.Visible = False
+        picPurpleBatches.Visible = True
 
-ScreenIndicator.Text = "Batches"
+        ScreenIndicator.Text = "Batches"
 
-LoadPage(New ucBatches())
+        LoadPage(New ucBatches())
 
     End Sub
 
-    Private Sub OpenBatchInfo()
+    '==========================
+    ' Open School Year
+    '==========================
+    Private Sub OpenSchoolYear()
 
-        If CurrentPage = "BatchInfo" Then Exit Sub
+        If CurrentPage = "SchoolYear" Then Exit Sub
 
-        CurrentPage = "BatchInfo"
+        CurrentPage = "SchoolYear"
 
         ResetSidebar()
 
-        pnlBatchInfoIndicator.Visible = True
-        lblBatchInfo.ForeColor = ActiveColor
+        pnlSchoolYearIndicator.Visible = True
+        lblSchoolYear.ForeColor = ActiveColor
 
-        picBatchInfo.Visible = False
-        picPurpleBatchInfo.Visible = True
+        picSchoolYear.Visible = False
+        picPurpleSchoolYear.Visible = True
 
-        ScreenIndicator.Text = "Batch Info"
+        ScreenIndicator.Text = "School Year"
 
-        LoadPage(New ucBatchInfo())
-
-    End Sub
-
-    Private Sub OpenAbsences()
-
-        If CurrentPage = "Absences" Then Exit Sub
-
-        CurrentPage = "Absences"
-
-        ResetSidebar()
-
-        pnlAbsencesIndicator.Visible = True
-        lbAbsences.ForeColor = ActiveColor
-
-        picAbsences.Visible = False
-        picPurpleAbsences.Visible = True
-
-        ScreenIndicator.Text = "Absences"
-
-        LoadPage(New ucAbsences())
+        LoadPage(New ucSchoolYear())
 
     End Sub
 
+    '==========================
+    ' Open Print
+    '==========================
     Private Sub OpenPrint()
 
         If CurrentPage = "Print" Then Exit Sub
@@ -226,9 +214,6 @@ LoadPage(New ucBatches())
 
     End Sub
 
-    '==========================
-    ' Dashboard Clicks
-    '==========================
     '==========================
     ' Dashboard Clicks
     '==========================
@@ -282,7 +267,7 @@ LoadPage(New ucBatches())
         OpenSubjects()
     End Sub
 
-    Private Sub picPurpleSubjects_Click(sender As Object, e As EventArgs)
+    Private Sub picPurpleSubjects_Click(sender As Object, e As EventArgs) Handles picPurpleSubjects.Click
         OpenSubjects()
     End Sub
 
@@ -301,46 +286,27 @@ LoadPage(New ucBatches())
         OpenBatches()
     End Sub
 
-    Private Sub picPurpleBatches_Click(sender As Object, e As EventArgs)
+    Private Sub picPurpleBatches_Click(sender As Object, e As EventArgs) Handles picPurpleBatches.Click
         OpenBatches()
     End Sub
 
     '==========================
-    ' Batch Info Clicks
+    ' School Year Clicks
     '==========================
-    Private Sub pnlBatchInfoMenu_Click(sender As Object, e As EventArgs) Handles pnlBatchInfoMenu.Click
-        OpenBatchInfo()
+    Private Sub pnlSchoolYearMenu_Click(sender As Object, e As EventArgs) Handles pnlSchoolYear.Click
+        OpenSchoolYear()
     End Sub
 
-    Private Sub lblBatchInfo_Click(sender As Object, e As EventArgs) Handles lblBatchInfo.Click
-        OpenBatchInfo()
+    Private Sub lblSchoolYear_Click(sender As Object, e As EventArgs) Handles lblSchoolYear.Click
+        OpenSchoolYear()
     End Sub
 
-    Private Sub picBatchInfo_Click(sender As Object, e As EventArgs) Handles picBatchInfo.Click
-        OpenBatchInfo()
+    Private Sub picSchoolYear_Click(sender As Object, e As EventArgs) Handles picSchoolYear.Click
+        OpenSchoolYear()
     End Sub
 
-    Private Sub picPurpleBatchInfo_Click(sender As Object, e As EventArgs) Handles picPurpleBatchInfo.Click
-        OpenBatchInfo()
-    End Sub
-
-    '==========================
-    ' Absences Clicks
-    '==========================
-    Private Sub pnlAbsencesMenu_Click(sender As Object, e As EventArgs) Handles pnlAbsencesMenu.Click
-        OpenAbsences()
-    End Sub
-
-    Private Sub lbAbsences_Click(sender As Object, e As EventArgs) Handles lbAbsences.Click
-        OpenAbsences()
-    End Sub
-
-    Private Sub picAbsences_Click(sender As Object, e As EventArgs) Handles picAbsences.Click
-        OpenAbsences()
-    End Sub
-
-    Private Sub picPurpleAbsences_Click(sender As Object, e As EventArgs) Handles picPurpleAbsences.Click
-        OpenAbsences()
+    Private Sub picPurpleSchoolYear_Click(sender As Object, e As EventArgs) Handles picPurpleSchoolYear.Click
+        OpenSchoolYear()
     End Sub
 
     '==========================
@@ -361,6 +327,5 @@ LoadPage(New ucBatches())
     Private Sub picPurplePrint_Click(sender As Object, e As EventArgs) Handles picPurplePrint.Click
         OpenPrint()
     End Sub
-
 
 End Class

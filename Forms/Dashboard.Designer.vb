@@ -29,21 +29,16 @@ Partial Class Dashboard
         lblPrint = New Label()
         picPrint = New PictureBox()
         pnlPrintIndicator = New Panel()
-        pnlAbsencesMenu = New Panel()
-        picPurpleAbsences = New PictureBox()
-        pnlAbsencesIndicator = New Panel()
-        lbAbsences = New Label()
-        picAbsences = New PictureBox()
+        pnlSchoolYear = New Panel()
+        picPurpleSchoolYear = New PictureBox()
+        pnlSchoolYearIndicator = New Panel()
+        lblSchoolYear = New Label()
+        picSchoolYear = New PictureBox()
         pnlSubjectsMenu = New Panel()
         picPurpleSubjects = New PictureBox()
         pnlSubjectsIndicator = New Panel()
         lblSubjects = New Label()
         picSubjects = New PictureBox()
-        pnlBatchInfoMenu = New Panel()
-        picPurpleBatchInfo = New PictureBox()
-        lblBatchInfo = New Label()
-        picBatchInfo = New PictureBox()
-        pnlBatchInfoIndicator = New Panel()
         pnlBatchesMenu = New Panel()
         picPurpleBatches = New PictureBox()
         pnlBatchesIndicator = New Panel()
@@ -51,6 +46,8 @@ Partial Class Dashboard
         picBatches = New PictureBox()
         PictureBox8 = New PictureBox()
         pnlDashboardMenu = New Panel()
+        picPurpleDashboard = New PictureBox()
+        pnlDashboardIndicator = New Panel()
         lblDashboard = New Label()
         picDashboard = New PictureBox()
         pnlStudentsMenu = New Panel()
@@ -59,64 +56,56 @@ Partial Class Dashboard
         picStudents = New PictureBox()
         lblStudents = New Label()
         Label11 = New Label()
-        Label8 = New Label()
         Label4 = New Label()
         Panel1 = New Panel()
         Label2 = New Label()
         pnlSeparator1 = New Panel()
         pnlRight = New Panel()
         pnlContent = New Panel()
+        pnlContentDashboard = New Panel()
+        Panel3 = New Panel()
+        Panel4 = New Panel()
         pnlShadow = New Panel()
         pnlSeparator2 = New Panel()
         pnlTopbar = New Panel()
         ScreenIndicator = New Label()
-        picPurpleDashboard = New PictureBox()
-        Panel4 = New Panel()
-        Panel3 = New Panel()
-        pnlContentDashboard = New Panel()
-        pnlDashboardIndicator = New Panel()
         pnlSidebar.SuspendLayout()
         pnlPrintMenu.SuspendLayout()
         CType(picPurplePrint, ComponentModel.ISupportInitialize).BeginInit()
         CType(picPrint, ComponentModel.ISupportInitialize).BeginInit()
-        pnlAbsencesMenu.SuspendLayout()
-        CType(picPurpleAbsences, ComponentModel.ISupportInitialize).BeginInit()
-        CType(picAbsences, ComponentModel.ISupportInitialize).BeginInit()
+        pnlSchoolYear.SuspendLayout()
+        CType(picPurpleSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
+        CType(picSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
         pnlSubjectsMenu.SuspendLayout()
         CType(picPurpleSubjects, ComponentModel.ISupportInitialize).BeginInit()
         CType(picSubjects, ComponentModel.ISupportInitialize).BeginInit()
-        pnlBatchInfoMenu.SuspendLayout()
-        CType(picPurpleBatchInfo, ComponentModel.ISupportInitialize).BeginInit()
-        CType(picBatchInfo, ComponentModel.ISupportInitialize).BeginInit()
         pnlBatchesMenu.SuspendLayout()
         CType(picPurpleBatches, ComponentModel.ISupportInitialize).BeginInit()
         CType(picBatches, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox8, ComponentModel.ISupportInitialize).BeginInit()
         pnlDashboardMenu.SuspendLayout()
+        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).BeginInit()
         CType(picDashboard, ComponentModel.ISupportInitialize).BeginInit()
         pnlStudentsMenu.SuspendLayout()
         CType(picPurpleStudents, ComponentModel.ISupportInitialize).BeginInit()
         CType(picStudents, ComponentModel.ISupportInitialize).BeginInit()
         pnlRight.SuspendLayout()
         pnlContent.SuspendLayout()
-        pnlTopbar.SuspendLayout()
-        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).BeginInit()
         pnlContentDashboard.SuspendLayout()
+        pnlTopbar.SuspendLayout()
         SuspendLayout()
         ' 
         ' pnlSidebar
         ' 
         pnlSidebar.BackColor = Color.FromArgb(CByte(23), CByte(22), CByte(39))
         pnlSidebar.Controls.Add(pnlPrintMenu)
-        pnlSidebar.Controls.Add(pnlAbsencesMenu)
+        pnlSidebar.Controls.Add(pnlSchoolYear)
         pnlSidebar.Controls.Add(pnlSubjectsMenu)
-        pnlSidebar.Controls.Add(pnlBatchInfoMenu)
         pnlSidebar.Controls.Add(pnlBatchesMenu)
         pnlSidebar.Controls.Add(PictureBox8)
         pnlSidebar.Controls.Add(pnlDashboardMenu)
         pnlSidebar.Controls.Add(pnlStudentsMenu)
         pnlSidebar.Controls.Add(Label11)
-        pnlSidebar.Controls.Add(Label8)
         pnlSidebar.Controls.Add(Label4)
         pnlSidebar.Controls.Add(Panel1)
         pnlSidebar.Controls.Add(Label2)
@@ -182,62 +171,62 @@ Partial Class Dashboard
         pnlPrintIndicator.TabIndex = 16
         pnlPrintIndicator.Visible = False
         ' 
-        ' pnlAbsencesMenu
+        ' pnlSchoolYear
         ' 
-        pnlAbsencesMenu.Controls.Add(picPurpleAbsences)
-        pnlAbsencesMenu.Controls.Add(pnlAbsencesIndicator)
-        pnlAbsencesMenu.Controls.Add(lbAbsences)
-        pnlAbsencesMenu.Controls.Add(picAbsences)
-        pnlAbsencesMenu.Cursor = Cursors.Hand
-        pnlAbsencesMenu.Location = New Point(-2, 439)
-        pnlAbsencesMenu.Name = "pnlAbsencesMenu"
-        pnlAbsencesMenu.Size = New Size(180, 43)
-        pnlAbsencesMenu.TabIndex = 14
+        pnlSchoolYear.Controls.Add(picPurpleSchoolYear)
+        pnlSchoolYear.Controls.Add(pnlSchoolYearIndicator)
+        pnlSchoolYear.Controls.Add(lblSchoolYear)
+        pnlSchoolYear.Controls.Add(picSchoolYear)
+        pnlSchoolYear.Cursor = Cursors.Hand
+        pnlSchoolYear.Location = New Point(0, 409)
+        pnlSchoolYear.Name = "pnlSchoolYear"
+        pnlSchoolYear.Size = New Size(180, 43)
+        pnlSchoolYear.TabIndex = 14
         ' 
-        ' picPurpleAbsences
+        ' picPurpleSchoolYear
         ' 
-        picPurpleAbsences.BackColor = Color.Transparent
-        picPurpleAbsences.Image = CType(resources.GetObject("picPurpleAbsences.Image"), Image)
-        picPurpleAbsences.InitialImage = CType(resources.GetObject("picPurpleAbsences.InitialImage"), Image)
-        picPurpleAbsences.Location = New Point(19, -1)
-        picPurpleAbsences.Name = "picPurpleAbsences"
-        picPurpleAbsences.Size = New Size(30, 46)
-        picPurpleAbsences.SizeMode = PictureBoxSizeMode.Zoom
-        picPurpleAbsences.TabIndex = 21
-        picPurpleAbsences.TabStop = False
-        picPurpleAbsences.Visible = False
+        picPurpleSchoolYear.BackColor = Color.Transparent
+        picPurpleSchoolYear.Image = CType(resources.GetObject("picPurpleSchoolYear.Image"), Image)
+        picPurpleSchoolYear.InitialImage = CType(resources.GetObject("picPurpleSchoolYear.InitialImage"), Image)
+        picPurpleSchoolYear.Location = New Point(19, -1)
+        picPurpleSchoolYear.Name = "picPurpleSchoolYear"
+        picPurpleSchoolYear.Size = New Size(30, 46)
+        picPurpleSchoolYear.SizeMode = PictureBoxSizeMode.Zoom
+        picPurpleSchoolYear.TabIndex = 21
+        picPurpleSchoolYear.TabStop = False
+        picPurpleSchoolYear.Visible = False
         ' 
-        ' pnlAbsencesIndicator
+        ' pnlSchoolYearIndicator
         ' 
-        pnlAbsencesIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlAbsencesIndicator.Location = New Point(2, 1)
-        pnlAbsencesIndicator.Name = "pnlAbsencesIndicator"
-        pnlAbsencesIndicator.Size = New Size(10, 43)
-        pnlAbsencesIndicator.TabIndex = 19
-        pnlAbsencesIndicator.Visible = False
+        pnlSchoolYearIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlSchoolYearIndicator.Location = New Point(2, 1)
+        pnlSchoolYearIndicator.Name = "pnlSchoolYearIndicator"
+        pnlSchoolYearIndicator.Size = New Size(10, 43)
+        pnlSchoolYearIndicator.TabIndex = 19
+        pnlSchoolYearIndicator.Visible = False
         ' 
-        ' lbAbsences
+        ' lblSchoolYear
         ' 
-        lbAbsences.AutoSize = True
-        lbAbsences.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold)
-        lbAbsences.ForeColor = Color.White
-        lbAbsences.Location = New Point(52, 5)
-        lbAbsences.Name = "lbAbsences"
-        lbAbsences.Size = New Size(110, 34)
-        lbAbsences.TabIndex = 18
-        lbAbsences.Text = "Absences"
+        lblSchoolYear.AutoSize = True
+        lblSchoolYear.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold)
+        lblSchoolYear.ForeColor = Color.White
+        lblSchoolYear.Location = New Point(52, 5)
+        lblSchoolYear.Name = "lblSchoolYear"
+        lblSchoolYear.Size = New Size(110, 34)
+        lblSchoolYear.TabIndex = 18
+        lblSchoolYear.Text = "Absences"
         ' 
-        ' picAbsences
+        ' picSchoolYear
         ' 
-        picAbsences.BackColor = Color.Transparent
-        picAbsences.Image = CType(resources.GetObject("picAbsences.Image"), Image)
-        picAbsences.InitialImage = CType(resources.GetObject("picAbsences.InitialImage"), Image)
-        picAbsences.Location = New Point(19, -1)
-        picAbsences.Name = "picAbsences"
-        picAbsences.Size = New Size(30, 46)
-        picAbsences.SizeMode = PictureBoxSizeMode.Zoom
-        picAbsences.TabIndex = 17
-        picAbsences.TabStop = False
+        picSchoolYear.BackColor = Color.Transparent
+        picSchoolYear.Image = CType(resources.GetObject("picSchoolYear.Image"), Image)
+        picSchoolYear.InitialImage = CType(resources.GetObject("picSchoolYear.InitialImage"), Image)
+        picSchoolYear.Location = New Point(19, -1)
+        picSchoolYear.Name = "picSchoolYear"
+        picSchoolYear.Size = New Size(30, 46)
+        picSchoolYear.SizeMode = PictureBoxSizeMode.Zoom
+        picSchoolYear.TabIndex = 17
+        picSchoolYear.TabStop = False
         ' 
         ' pnlSubjectsMenu
         ' 
@@ -293,61 +282,6 @@ Partial Class Dashboard
         picSubjects.SizeMode = PictureBoxSizeMode.Zoom
         picSubjects.TabIndex = 14
         picSubjects.TabStop = False
-        ' 
-        ' pnlBatchInfoMenu
-        ' 
-        pnlBatchInfoMenu.Controls.Add(picPurpleBatchInfo)
-        pnlBatchInfoMenu.Controls.Add(lblBatchInfo)
-        pnlBatchInfoMenu.Controls.Add(picBatchInfo)
-        pnlBatchInfoMenu.Controls.Add(pnlBatchInfoIndicator)
-        pnlBatchInfoMenu.Cursor = Cursors.Hand
-        pnlBatchInfoMenu.Location = New Point(-2, 500)
-        pnlBatchInfoMenu.Name = "pnlBatchInfoMenu"
-        pnlBatchInfoMenu.Size = New Size(180, 43)
-        pnlBatchInfoMenu.TabIndex = 13
-        ' 
-        ' picPurpleBatchInfo
-        ' 
-        picPurpleBatchInfo.BackColor = Color.Transparent
-        picPurpleBatchInfo.Image = CType(resources.GetObject("picPurpleBatchInfo.Image"), Image)
-        picPurpleBatchInfo.Location = New Point(18, 3)
-        picPurpleBatchInfo.Name = "picPurpleBatchInfo"
-        picPurpleBatchInfo.Size = New Size(33, 36)
-        picPurpleBatchInfo.SizeMode = PictureBoxSizeMode.Zoom
-        picPurpleBatchInfo.TabIndex = 22
-        picPurpleBatchInfo.TabStop = False
-        picPurpleBatchInfo.Visible = False
-        ' 
-        ' lblBatchInfo
-        ' 
-        lblBatchInfo.AutoSize = True
-        lblBatchInfo.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold)
-        lblBatchInfo.ForeColor = Color.White
-        lblBatchInfo.Location = New Point(52, 4)
-        lblBatchInfo.Name = "lblBatchInfo"
-        lblBatchInfo.Size = New Size(113, 34)
-        lblBatchInfo.TabIndex = 20
-        lblBatchInfo.Text = "Batch Info"
-        ' 
-        ' picBatchInfo
-        ' 
-        picBatchInfo.BackColor = Color.Transparent
-        picBatchInfo.Image = CType(resources.GetObject("picBatchInfo.Image"), Image)
-        picBatchInfo.Location = New Point(18, 3)
-        picBatchInfo.Name = "picBatchInfo"
-        picBatchInfo.Size = New Size(33, 36)
-        picBatchInfo.SizeMode = PictureBoxSizeMode.Zoom
-        picBatchInfo.TabIndex = 19
-        picBatchInfo.TabStop = False
-        ' 
-        ' pnlBatchInfoIndicator
-        ' 
-        pnlBatchInfoIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlBatchInfoIndicator.Location = New Point(2, 1)
-        pnlBatchInfoIndicator.Name = "pnlBatchInfoIndicator"
-        pnlBatchInfoIndicator.Size = New Size(10, 43)
-        pnlBatchInfoIndicator.TabIndex = 15
-        pnlBatchInfoIndicator.Visible = False
         ' 
         ' pnlBatchesMenu
         ' 
@@ -426,6 +360,27 @@ Partial Class Dashboard
         pnlDashboardMenu.Name = "pnlDashboardMenu"
         pnlDashboardMenu.Size = New Size(180, 43)
         pnlDashboardMenu.TabIndex = 12
+        ' 
+        ' picPurpleDashboard
+        ' 
+        picPurpleDashboard.BackColor = Color.Transparent
+        picPurpleDashboard.Image = CType(resources.GetObject("picPurpleDashboard.Image"), Image)
+        picPurpleDashboard.Location = New Point(12, 7)
+        picPurpleDashboard.Name = "picPurpleDashboard"
+        picPurpleDashboard.Size = New Size(42, 32)
+        picPurpleDashboard.SizeMode = PictureBoxSizeMode.StretchImage
+        picPurpleDashboard.TabIndex = 18
+        picPurpleDashboard.TabStop = False
+        picPurpleDashboard.Visible = False
+        ' 
+        ' pnlDashboardIndicator
+        ' 
+        pnlDashboardIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlDashboardIndicator.Location = New Point(-1, 0)
+        pnlDashboardIndicator.Name = "pnlDashboardIndicator"
+        pnlDashboardIndicator.Size = New Size(10, 43)
+        pnlDashboardIndicator.TabIndex = 16
+        pnlDashboardIndicator.Visible = False
         ' 
         ' lblDashboard
         ' 
@@ -517,17 +472,6 @@ Partial Class Dashboard
         Label11.TabIndex = 19
         Label11.Text = "SYSTEM"
         ' 
-        ' Label8
-        ' 
-        Label8.AutoSize = True
-        Label8.Font = New Font("Poppins", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label8.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(145))
-        Label8.Location = New Point(21, 417)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(59, 19)
-        Label8.TabIndex = 14
-        Label8.Text = "REPORTS"
-        ' 
         ' Label4
         ' 
         Label4.AutoSize = True
@@ -591,6 +535,36 @@ Partial Class Dashboard
         pnlContent.Size = New Size(1396, 788)
         pnlContent.TabIndex = 1
         ' 
+        ' pnlContentDashboard
+        ' 
+        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentDashboard.Controls.Add(Panel3)
+        pnlContentDashboard.Controls.Add(Panel4)
+        pnlContentDashboard.Dock = DockStyle.Fill
+        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        pnlContentDashboard.Location = New Point(0, 2)
+        pnlContentDashboard.Name = "pnlContentDashboard"
+        pnlContentDashboard.Size = New Size(1396, 786)
+        pnlContentDashboard.TabIndex = 2
+        ' 
+        ' Panel3
+        ' 
+        Panel3.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
+        Panel3.Dock = DockStyle.Top
+        Panel3.Location = New Point(0, 1)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(1396, 1)
+        Panel3.TabIndex = 1
+        ' 
+        ' Panel4
+        ' 
+        Panel4.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
+        Panel4.Dock = DockStyle.Top
+        Panel4.Location = New Point(0, 0)
+        Panel4.Name = "Panel4"
+        Panel4.Size = New Size(1396, 1)
+        Panel4.TabIndex = 0
+        ' 
         ' pnlShadow
         ' 
         pnlShadow.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
@@ -629,57 +603,6 @@ Partial Class Dashboard
         ScreenIndicator.TabIndex = 2
         ScreenIndicator.Text = "Dashboard"
         ' 
-        ' picPurpleDashboard
-        ' 
-        picPurpleDashboard.BackColor = Color.Transparent
-        picPurpleDashboard.Image = CType(resources.GetObject("picPurpleDashboard.Image"), Image)
-        picPurpleDashboard.Location = New Point(12, 7)
-        picPurpleDashboard.Name = "picPurpleDashboard"
-        picPurpleDashboard.Size = New Size(42, 32)
-        picPurpleDashboard.SizeMode = PictureBoxSizeMode.StretchImage
-        picPurpleDashboard.TabIndex = 18
-        picPurpleDashboard.TabStop = False
-        picPurpleDashboard.Visible = False
-        ' 
-        ' Panel4
-        ' 
-        Panel4.BackColor = Color.FromArgb(CByte(236), CByte(236), CByte(242))
-        Panel4.Dock = DockStyle.Top
-        Panel4.Location = New Point(0, 0)
-        Panel4.Name = "Panel4"
-        Panel4.Size = New Size(1396, 1)
-        Panel4.TabIndex = 0
-        ' 
-        ' Panel3
-        ' 
-        Panel3.BackColor = Color.FromArgb(CByte(234), CByte(230), CByte(248))
-        Panel3.Dock = DockStyle.Top
-        Panel3.Location = New Point(0, 1)
-        Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1396, 1)
-        Panel3.TabIndex = 1
-        ' 
-        ' pnlContentDashboard
-        ' 
-        pnlContentDashboard.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlContentDashboard.Controls.Add(Panel3)
-        pnlContentDashboard.Controls.Add(Panel4)
-        pnlContentDashboard.Dock = DockStyle.Fill
-        pnlContentDashboard.Font = New Font("Poppins", 18.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        pnlContentDashboard.Location = New Point(0, 2)
-        pnlContentDashboard.Name = "pnlContentDashboard"
-        pnlContentDashboard.Size = New Size(1396, 786)
-        pnlContentDashboard.TabIndex = 2
-        ' 
-        ' pnlDashboardIndicator
-        ' 
-        pnlDashboardIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlDashboardIndicator.Location = New Point(-1, 0)
-        pnlDashboardIndicator.Name = "pnlDashboardIndicator"
-        pnlDashboardIndicator.Size = New Size(10, 43)
-        pnlDashboardIndicator.TabIndex = 16
-        pnlDashboardIndicator.Visible = False
-        ' 
         ' Dashboard
         ' 
         AutoScaleMode = AutoScaleMode.None
@@ -698,18 +621,14 @@ Partial Class Dashboard
         pnlPrintMenu.PerformLayout()
         CType(picPurplePrint, ComponentModel.ISupportInitialize).EndInit()
         CType(picPrint, ComponentModel.ISupportInitialize).EndInit()
-        pnlAbsencesMenu.ResumeLayout(False)
-        pnlAbsencesMenu.PerformLayout()
-        CType(picPurpleAbsences, ComponentModel.ISupportInitialize).EndInit()
-        CType(picAbsences, ComponentModel.ISupportInitialize).EndInit()
+        pnlSchoolYear.ResumeLayout(False)
+        pnlSchoolYear.PerformLayout()
+        CType(picPurpleSchoolYear, ComponentModel.ISupportInitialize).EndInit()
+        CType(picSchoolYear, ComponentModel.ISupportInitialize).EndInit()
         pnlSubjectsMenu.ResumeLayout(False)
         pnlSubjectsMenu.PerformLayout()
         CType(picPurpleSubjects, ComponentModel.ISupportInitialize).EndInit()
         CType(picSubjects, ComponentModel.ISupportInitialize).EndInit()
-        pnlBatchInfoMenu.ResumeLayout(False)
-        pnlBatchInfoMenu.PerformLayout()
-        CType(picPurpleBatchInfo, ComponentModel.ISupportInitialize).EndInit()
-        CType(picBatchInfo, ComponentModel.ISupportInitialize).EndInit()
         pnlBatchesMenu.ResumeLayout(False)
         pnlBatchesMenu.PerformLayout()
         CType(picPurpleBatches, ComponentModel.ISupportInitialize).EndInit()
@@ -717,6 +636,7 @@ Partial Class Dashboard
         CType(PictureBox8, ComponentModel.ISupportInitialize).EndInit()
         pnlDashboardMenu.ResumeLayout(False)
         pnlDashboardMenu.PerformLayout()
+        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).EndInit()
         CType(picDashboard, ComponentModel.ISupportInitialize).EndInit()
         pnlStudentsMenu.ResumeLayout(False)
         pnlStudentsMenu.PerformLayout()
@@ -724,10 +644,9 @@ Partial Class Dashboard
         CType(picStudents, ComponentModel.ISupportInitialize).EndInit()
         pnlRight.ResumeLayout(False)
         pnlContent.ResumeLayout(False)
+        pnlContentDashboard.ResumeLayout(False)
         pnlTopbar.ResumeLayout(False)
         pnlTopbar.PerformLayout()
-        CType(picPurpleDashboard, ComponentModel.ISupportInitialize).EndInit()
-        pnlContentDashboard.ResumeLayout(False)
         ResumeLayout(False)
     End Sub
     Friend WithEvents pnlSidebar As Panel
@@ -741,7 +660,6 @@ Partial Class Dashboard
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label8 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents pnlStudentsMenu As Panel
@@ -758,22 +676,17 @@ Partial Class Dashboard
     Friend WithEvents picSubjects As PictureBox
     Friend WithEvents pnlSubjectsIndicator As Panel
     Friend WithEvents lblSubjects As Label
-    Friend WithEvents pnlAbsencesMenu As Panel
-    Friend WithEvents pnlAbsencesIndicator As Panel
-    Friend WithEvents lbAbsences As Label
-    Friend WithEvents picAbsences As PictureBox
+    Friend WithEvents pnlSchoolYear As Panel
+    Friend WithEvents pnlSchoolYearIndicator As Panel
+    Friend WithEvents lblSchoolYear As Label
+    Friend WithEvents picSchoolYear As PictureBox
     Friend WithEvents pnlPrintMenu As Panel
-    Friend WithEvents pnlBatchInfoMenu As Panel
-    Friend WithEvents pnlBatchInfoIndicator As Panel
-    Friend WithEvents lblBatchInfo As Label
-    Friend WithEvents picBatchInfo As PictureBox
     Friend WithEvents lblPrint As Label
     Friend WithEvents picPrint As PictureBox
     Friend WithEvents pnlPrintIndicator As Panel
     Friend WithEvents pnlStudentsIndicator As Panel
     Friend WithEvents picPurplePrint As PictureBox
-    Friend WithEvents picPurpleAbsences As PictureBox
-    Friend WithEvents picPurpleBatchInfo As PictureBox
+    Friend WithEvents picPurpleSchoolYear As PictureBox
     Friend WithEvents picPurpleStudents As PictureBox
     Friend WithEvents picPurpleBatches As PictureBox
     Friend WithEvents picPurpleSubjects As PictureBox
