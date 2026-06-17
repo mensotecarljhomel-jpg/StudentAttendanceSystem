@@ -33,7 +33,7 @@ Public Class ucStudents
             '==========================
             ' Basic Settings
             '==========================
-            .ReadOnly = True
+
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
             .AllowUserToResizeRows = False
@@ -264,5 +264,184 @@ Public Class ucStudents
         frm.ShowDialog()
 
         LoadStudentsFromDatabase()
+    End Sub
+    '==========================
+    ' Class Variables
+    '==========================
+    Private IsDeleteMode As Boolean = False
+    Private Const DeleteColumnName As String = "chkDelete"
+
+    '==========================
+    ' Delete Button Click
+    '==========================
+    Private Sub pnlDeleteStudent_Click(sender As Object, e As EventArgs) Handles pnlDeleteStudent.Click
+
+        If Not IsDeleteMode Then
+
+            IsDeleteMode = True
+
+            lblDeleteStudent.Text = "Confirm Delete"
+
+            AddDeleteCheckboxColumn()
+
+        Else
+
+            ConfirmAndDeleteSelectedStudents()
+
+        End If
+
+    End Sub
+
+    '==========================
+    ' Add Checkbox Column
+    '==========================
+    Private Sub AddDeleteCheckboxColumn()
+        If dgvStudents.Columns.Contains(DeleteColumnName) Then Exit Sub
+
+        dgvStudents.ReadOnly = False
+
+        Dim chkColumn As New DataGridViewCheckBoxColumn()
+        MessageBox.Show("Checkbox Column Added")
+
+        chkColumn.Name = DeleteColumnName
+
+        chkColumn.HeaderText = "SELECT"
+
+        chkColumn.Width = 50
+
+        dgvStudents.Columns.Insert(0, chkColumn)
+        MessageBox.Show(dgvStudents.Columns.Count.ToString())
+
+        For Each col As DataGridViewColumn In dgvStudents.Columns
+
+            If col.Name <> DeleteColumnName Then
+
+                dgvStudents.ReadOnly = False
+                dgvStudents.SelectionMode = DataGridViewSelectionMode.CellSelect
+
+            End If
+
+        Next
+
+    End Sub
+
+    '==========================
+    ' Checkbox Commit Fix
+    '==========================
+    Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
+
+        If dgvStudents.Columns.Contains(DeleteColumnName) Then
+            If e.ColumnIndex = dgvStudents.Columns(DeleteColumnName).Index Then
+                dgvStudents.EndEdit()
+            End If
+        End If
+
+    End Sub
+
+    '==========================
+    ' Confirm And Delete
+    '==========================
+    Private Sub ConfirmAndDeleteSelectedStudents()
+
+        dgvStudents.EndEdit()
+
+        Dim checkedRows As New List(Of DataGridViewRow)
+
+        For Each row As DataGridViewRow In dgvStudents.Rows
+
+            If row.Cells(DeleteColumnName).Value IsNot Nothing Then
+
+                If CBool(row.Cells(DeleteColumnName).Value) = True Then
+
+                    checkedRows.Add(row)
+
+                End If
+
+            End If
+
+        Next
+
+        If checkedRows.Count = 0 Then
+            ResetDeleteMode()
+            MessageBox.Show("Please select at least one student.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim confirm As DialogResult = MessageBox.Show(
+            "Are you sure you want to delete the selected students?",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning)
+
+        If confirm = DialogResult.No Then Exit Sub
+
+        Try
+
+            OpenConnection()
+
+            For Each row As DataGridViewRow In checkedRows
+
+                Dim studentNumber As String = row.Cells("StudentID").Value.ToString()
+
+                Dim query As String = "DELETE FROM students WHERE student_number=@student_number"
+
+                Using cmd As New MySqlCommand(query, Connection)
+                    cmd.Parameters.AddWithValue("@student_number", studentNumber)
+                    cmd.ExecuteNonQuery()
+                End Using
+
+            Next
+
+            CloseConnection()
+
+            MessageBox.Show("Selected students deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+
+            CloseConnection()
+
+            MessageBox.Show(ex.Message)
+
+            Exit Sub
+
+        End Try
+
+        ResetDeleteMode()
+
+        LoadStudentsFromDatabase()
+
+    End Sub
+
+    '==========================
+    ' Reset Delete Mode
+    '==========================
+    Private Sub ResetDeleteMode()
+
+        IsDeleteMode = False
+
+        lblDeleteStudent.Text = "Delete"
+
+        If dgvStudents.Columns.Contains(DeleteColumnName) Then
+            dgvStudents.Columns.Remove(DeleteColumnName)
+        End If
+
+    End Sub
+
+    Private Sub pnlDeleteStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlDeleteStudent.MouseClick
+
+
+        IsDeleteMode = False
+
+        lblDeleteStudent.Text = "Delete"
+
+        dgvStudents.ReadOnly = True
+
+        If dgvStudents.Columns.Contains(DeleteColumnName) Then
+
+            dgvStudents.Columns.Remove(DeleteColumnName)
+
+        End If
+
+
     End Sub
 End Class

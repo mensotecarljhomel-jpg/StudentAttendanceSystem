@@ -101,7 +101,7 @@ Partial Class ucBatches
         ' 
         cboBatchFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
         cboBatchFilter.DropDownStyle = ComboBoxStyle.DropDownList
-        cboBatchFilter.Font = New Font("Poppins", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cboBatchFilter.Font = New Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cboBatchFilter.FormattingEnabled = True
         cboBatchFilter.IntegralHeight = False
         cboBatchFilter.Location = New Point(273, 20)

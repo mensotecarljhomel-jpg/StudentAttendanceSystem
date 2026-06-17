@@ -67,7 +67,7 @@ Partial Class ucStudents
         pnlContentStudents.Controls.Add(RoundedPanel2)
         pnlContentStudents.Controls.Add(Label2)
         pnlContentStudents.Controls.Add(Label1)
-        pnlContentStudents.Dock = DockStyle.Fill
+        pnlContentStudents.Dock = DockStyle.Top
         pnlContentStudents.Location = New Point(0, 0)
         pnlContentStudents.Name = "pnlContentStudents"
         pnlContentStudents.Size = New Size(1396, 788)
