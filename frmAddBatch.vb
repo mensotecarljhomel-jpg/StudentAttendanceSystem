@@ -28,7 +28,7 @@ Public Class frmAddBatch
         Me.SuspendLayout()
 
         Me.Text = "Add Batch"
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.StartPosition = FormStartPosition.CenterScreen
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False

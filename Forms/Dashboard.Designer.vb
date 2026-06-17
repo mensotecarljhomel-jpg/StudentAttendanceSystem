@@ -24,11 +24,7 @@ Partial Class Dashboard
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         pnlSidebar = New Panel()
-        pnlPrintMenu = New Panel()
-        picPurplePrint = New PictureBox()
-        lblPrint = New Label()
-        picPrint = New PictureBox()
-        pnlPrintIndicator = New Panel()
+        pnlLogout = New RoundedPanel3()
         pnlSchoolYear = New Panel()
         picPurpleSchoolYear = New PictureBox()
         pnlSchoolYearIndicator = New Panel()
@@ -55,7 +51,6 @@ Partial Class Dashboard
         pnlStudentsIndicator = New Panel()
         picStudents = New PictureBox()
         lblStudents = New Label()
-        Label11 = New Label()
         Label4 = New Label()
         Panel1 = New Panel()
         Label2 = New Label()
@@ -64,10 +59,9 @@ Partial Class Dashboard
         pnlContent = New Panel()
         pnlTopbar = New Panel()
         ScreenIndicator = New Label()
+        Label1 = New Label()
         pnlSidebar.SuspendLayout()
-        pnlPrintMenu.SuspendLayout()
-        CType(picPurplePrint, ComponentModel.ISupportInitialize).BeginInit()
-        CType(picPrint, ComponentModel.ISupportInitialize).BeginInit()
+        pnlLogout.SuspendLayout()
         pnlSchoolYear.SuspendLayout()
         CType(picPurpleSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
         CType(picSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
@@ -91,14 +85,13 @@ Partial Class Dashboard
         ' pnlSidebar
         ' 
         pnlSidebar.BackColor = Color.FromArgb(CByte(23), CByte(22), CByte(39))
-        pnlSidebar.Controls.Add(pnlPrintMenu)
+        pnlSidebar.Controls.Add(pnlLogout)
         pnlSidebar.Controls.Add(pnlSchoolYear)
         pnlSidebar.Controls.Add(pnlSubjectsMenu)
         pnlSidebar.Controls.Add(pnlBatchesMenu)
         pnlSidebar.Controls.Add(PictureBox8)
         pnlSidebar.Controls.Add(pnlDashboardMenu)
         pnlSidebar.Controls.Add(pnlStudentsMenu)
-        pnlSidebar.Controls.Add(Label11)
         pnlSidebar.Controls.Add(Label4)
         pnlSidebar.Controls.Add(Panel1)
         pnlSidebar.Controls.Add(Label2)
@@ -109,60 +102,14 @@ Partial Class Dashboard
         pnlSidebar.Size = New Size(188, 861)
         pnlSidebar.TabIndex = 3
         ' 
-        ' pnlPrintMenu
+        ' pnlLogout
         ' 
-        pnlPrintMenu.Controls.Add(picPurplePrint)
-        pnlPrintMenu.Controls.Add(lblPrint)
-        pnlPrintMenu.Controls.Add(picPrint)
-        pnlPrintMenu.Controls.Add(pnlPrintIndicator)
-        pnlPrintMenu.Cursor = Cursors.Hand
-        pnlPrintMenu.Location = New Point(-2, 594)
-        pnlPrintMenu.Name = "pnlPrintMenu"
-        pnlPrintMenu.Size = New Size(180, 43)
-        pnlPrintMenu.TabIndex = 16
-        ' 
-        ' picPurplePrint
-        ' 
-        picPurplePrint.BackColor = Color.Transparent
-        picPurplePrint.Image = CType(resources.GetObject("picPurplePrint.Image"), Image)
-        picPurplePrint.Location = New Point(17, 3)
-        picPurplePrint.Name = "picPurplePrint"
-        picPurplePrint.Size = New Size(33, 36)
-        picPurplePrint.SizeMode = PictureBoxSizeMode.Zoom
-        picPurplePrint.TabIndex = 25
-        picPurplePrint.TabStop = False
-        picPurplePrint.Visible = False
-        ' 
-        ' lblPrint
-        ' 
-        lblPrint.AutoSize = True
-        lblPrint.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblPrint.ForeColor = Color.White
-        lblPrint.Location = New Point(56, 4)
-        lblPrint.Name = "lblPrint"
-        lblPrint.Size = New Size(60, 34)
-        lblPrint.TabIndex = 23
-        lblPrint.Text = "Print"
-        ' 
-        ' picPrint
-        ' 
-        picPrint.BackColor = Color.Transparent
-        picPrint.Image = CType(resources.GetObject("picPrint.Image"), Image)
-        picPrint.Location = New Point(17, 3)
-        picPrint.Name = "picPrint"
-        picPrint.Size = New Size(33, 36)
-        picPrint.SizeMode = PictureBoxSizeMode.Zoom
-        picPrint.TabIndex = 22
-        picPrint.TabStop = False
-        ' 
-        ' pnlPrintIndicator
-        ' 
-        pnlPrintIndicator.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlPrintIndicator.Location = New Point(2, 0)
-        pnlPrintIndicator.Name = "pnlPrintIndicator"
-        pnlPrintIndicator.Size = New Size(10, 43)
-        pnlPrintIndicator.TabIndex = 16
-        pnlPrintIndicator.Visible = False
+        pnlLogout.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlLogout.Controls.Add(Label1)
+        pnlLogout.Location = New Point(26, 807)
+        pnlLogout.Name = "pnlLogout"
+        pnlLogout.Size = New Size(133, 42)
+        pnlLogout.TabIndex = 23
         ' 
         ' pnlSchoolYear
         ' 
@@ -454,17 +401,6 @@ Partial Class Dashboard
         lblStudents.TabIndex = 10
         lblStudents.Text = "Students"
         ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Poppins", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(145))
-        Label11.Location = New Point(23, 572)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(53, 19)
-        Label11.TabIndex = 19
-        Label11.Text = "SYSTEM"
-        ' 
         ' Label4
         ' 
         Label4.AutoSize = True
@@ -480,7 +416,7 @@ Partial Class Dashboard
         ' 
         Panel1.BackColor = Color.White
         Panel1.ForeColor = SystemColors.ControlDarkDark
-        Panel1.Location = New Point(0, 762)
+        Panel1.Location = New Point(0, 710)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(190, 1)
         Panel1.TabIndex = 6
@@ -543,13 +479,24 @@ Partial Class Dashboard
         ScreenIndicator.TabIndex = 2
         ScreenIndicator.Text = "Dashboard"
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Poppins SemiBold", 14.25F, FontStyle.Bold)
+        Label1.ForeColor = Color.White
+        Label1.Location = New Point(21, 5)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(89, 34)
+        Label1.TabIndex = 24
+        Label1.Text = "Log Out"
+        ' 
         ' Dashboard
         ' 
         AutoScaleMode = AutoScaleMode.None
         ClientSize = New Size(1584, 861)
         Controls.Add(pnlRight)
         Controls.Add(pnlSidebar)
-        Font = New Font("Segoe UI", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
         Name = "Dashboard"
@@ -557,10 +504,8 @@ Partial Class Dashboard
         Text = "Dashboard"
         pnlSidebar.ResumeLayout(False)
         pnlSidebar.PerformLayout()
-        pnlPrintMenu.ResumeLayout(False)
-        pnlPrintMenu.PerformLayout()
-        CType(picPurplePrint, ComponentModel.ISupportInitialize).EndInit()
-        CType(picPrint, ComponentModel.ISupportInitialize).EndInit()
+        pnlLogout.ResumeLayout(False)
+        pnlLogout.PerformLayout()
         pnlSchoolYear.ResumeLayout(False)
         pnlSchoolYear.PerformLayout()
         CType(picPurpleSchoolYear, ComponentModel.ISupportInitialize).EndInit()
@@ -595,7 +540,6 @@ Partial Class Dashboard
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label11 As Label
     Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents pnlStudentsMenu As Panel
     Friend WithEvents lblStudents As Label
@@ -615,12 +559,7 @@ Partial Class Dashboard
     Friend WithEvents pnlSchoolYearIndicator As Panel
     Friend WithEvents lblSchoolYear As Label
     Friend WithEvents picSchoolYear As PictureBox
-    Friend WithEvents pnlPrintMenu As Panel
-    Friend WithEvents lblPrint As Label
-    Friend WithEvents picPrint As PictureBox
-    Friend WithEvents pnlPrintIndicator As Panel
     Friend WithEvents pnlStudentsIndicator As Panel
-    Friend WithEvents picPurplePrint As PictureBox
     Friend WithEvents picPurpleSchoolYear As PictureBox
     Friend WithEvents picPurpleStudents As PictureBox
     Friend WithEvents picPurpleBatches As PictureBox
@@ -628,5 +567,7 @@ Partial Class Dashboard
     Friend WithEvents picPurpleDashboard As PictureBox
     Friend WithEvents pnlDashboardIndicator As Panel
     Friend WithEvents pnlContent As Panel
+    Friend WithEvents pnlLogout As RoundedPanel3
+    Friend WithEvents Label1 As Label
 
 End Class

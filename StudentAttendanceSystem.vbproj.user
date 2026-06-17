@@ -4,7 +4,22 @@
     <Compile Update="Forms\Dashboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\frmAddSchoolYear.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmEditBatch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmEditSubject.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmStudentAttendanceReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\frmViewAttendance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\ucSchoolYear.vb">

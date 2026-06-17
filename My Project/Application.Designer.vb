@@ -33,7 +33,8 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.StudentAttendanceSystem.Dashboard
+            ' Start application with the login form as the main form so it appears first
+            Me.MainForm = Global.StudentAttendanceSystem.frmLogin
         End Sub
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>

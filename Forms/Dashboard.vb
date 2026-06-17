@@ -14,15 +14,7 @@
     '==========================
     ' Dashboard Load
     '==========================
-    Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        Me.Font = New Font("Poppins", 10)
-
-        ResetSidebar()
-
-        OpenDashboard()
-
-    End Sub
+    ' (duplicate Dashboard_Load removed; full implementation preserved near end of file)
 
     '==========================
     ' Reset Sidebar
@@ -35,7 +27,6 @@
         pnlSubjectsIndicator.Visible = False
         pnlBatchesIndicator.Visible = False
         pnlSchoolYearIndicator.Visible = False
-        pnlPrintIndicator.Visible = False
 
         ' Labels
         lblDashboard.ForeColor = InactiveColor
@@ -43,7 +34,6 @@
         lblSubjects.ForeColor = InactiveColor
         lblBatches.ForeColor = InactiveColor
         lblSchoolYear.ForeColor = InactiveColor
-        lblPrint.ForeColor = InactiveColor
 
         ' White Icons
         picDashboard.Visible = True
@@ -51,7 +41,6 @@
         picSubjects.Visible = True
         picBatches.Visible = True
         picSchoolYear.Visible = True
-        picPrint.Visible = True
 
         ' Purple Icons
         picPurpleDashboard.Visible = False
@@ -59,7 +48,6 @@
         picPurpleBatches.Visible = False
         picPurpleSubjects.Visible = False
         picPurpleSchoolYear.Visible = False
-        picPurplePrint.Visible = False
 
     End Sub
 
@@ -197,20 +185,12 @@
     '==========================
     Private Sub OpenPrint()
 
+        ' Print screen removed from sidebar in this build.
+        ' Keep method present as stub in case it is reintroduced later.
         If CurrentPage = "Print" Then Exit Sub
-
         CurrentPage = "Print"
-
         ResetSidebar()
-
-        pnlPrintIndicator.Visible = True
-        lblPrint.ForeColor = ActiveColor
-
-        picPrint.Visible = False
-        picPurplePrint.Visible = True
-
         ScreenIndicator.Text = "Print"
-
         LoadPage(New ucPrint())
 
     End Sub
@@ -313,23 +293,78 @@
     '==========================
     ' Print Clicks
     '==========================
-    Private Sub pnlPrintMenu_Click(sender As Object, e As EventArgs) Handles pnlPrintMenu.Click
-        OpenPrint()
-    End Sub
-
-    Private Sub lblPrint_Click(sender As Object, e As EventArgs) Handles lblPrint.Click
-        OpenPrint()
-    End Sub
-
-    Private Sub picPrint_Click(sender As Object, e As EventArgs) Handles picPrint.Click
-        OpenPrint()
-    End Sub
-
-    Private Sub picPurplePrint_Click(sender As Object, e As EventArgs) Handles picPurplePrint.Click
-        OpenPrint()
-    End Sub
+    ' Print-related sidebar handlers removed (controls not present in designer)
 
     Private Sub pnlContent_Paint(sender As Object, e As PaintEventArgs) Handles pnlContent.Paint
 
+    End Sub
+
+    Private Sub pnlSidebar_Paint(sender As Object, e As PaintEventArgs) Handles pnlSidebar.Paint
+
+    End Sub
+
+    '==========================
+    ' Logout handling and display
+    '==========================
+    Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Font = New Font("Poppins", 10)
+
+        ResetSidebar()
+
+        ' Setup logout area
+        Try
+            ' Add username and role labels into pnlLogout
+            Dim lblUser As New Label()
+            lblUser.Name = "lblLoggedUser"
+            lblUser.AutoSize = True
+            lblUser.Font = New Font("Poppins", 9, FontStyle.Regular)
+            lblUser.ForeColor = Color.White
+            lblUser.Location = New Point(8, 4)
+            lblUser.Text = If(String.IsNullOrEmpty(CurrentSession.Username), "", CurrentSession.Username)
+
+            Dim lblRole As New Label()
+            lblRole.Name = "lblLoggedRole"
+            lblRole.AutoSize = True
+            lblRole.Font = New Font("Poppins", 8, FontStyle.Italic)
+            lblRole.ForeColor = Color.White
+            lblRole.Location = New Point(8, 20)
+            lblRole.Text = If(String.IsNullOrEmpty(CurrentSession.Role), "", CurrentSession.Role)
+
+            ' Place username and role above the logout panel (outside of pnlLogout)
+            Dim offset As Integer = 8
+            Dim topPosition As Integer = Math.Max(8, pnlLogout.Top - 60)
+
+            lblUser.Location = New Point(pnlLogout.Left + 2, topPosition)
+            lblRole.Location = New Point(pnlLogout.Left + 2, topPosition + 18)
+
+            ' Add to sidebar so they are visually above the logout button
+            pnlSidebar.Controls.Add(lblUser)
+            pnlSidebar.Controls.Add(lblRole)
+
+            ' Ensure the existing designer Log Out label remains inside pnlLogout and wire its click
+            AddHandler pnlLogout.Click, AddressOf pnlLogout_Click
+            AddHandler Label1.Click, AddressOf pnlLogout_Click
+            AddHandler lblUser.Click, AddressOf pnlNoop_Click
+            AddHandler lblRole.Click, AddressOf pnlNoop_Click
+        Catch
+            ' silent fallback
+        End Try
+
+        OpenDashboard()
+    End Sub
+
+    Private Sub pnlNoop_Click(sender As Object, e As EventArgs)
+        ' placeholder - don't navigate when clicking username/role
+    End Sub
+
+    Private Sub pnlLogout_Click(sender As Object, e As EventArgs)
+        Try
+            CurrentSession.SignOut()
+        Catch
+        End Try
+
+        Dim f As New frmLogin()
+        f.Show()
+        Me.Close()
     End Sub
 End Class

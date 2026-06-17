@@ -35,14 +35,12 @@ Partial Class ucSchoolYear
         pnlAddSchoolYear = New RoundedPanel4()
         lblAddSchoolYear = New Label()
         picAddSchoolYear = New PictureBox()
-        pnlSearch = New RoundedPanel4()
-        lblSearch = New TextBox()
-        imgSearch = New PictureBox()
         dgvSchoolYear = New DataGridView()
         RoundedPanel2 = New RoundedPanel()
         Label2 = New Label()
         Label1 = New Label()
-        Label3 = New Label()
+        imgSearch = New PictureBox()
+        TextBox1 = New TextBox()
         RoundedPanel1.SuspendLayout()
         pnlDeleteSchoolYear.SuspendLayout()
         CType(picDeleteSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
@@ -50,9 +48,8 @@ Partial Class ucSchoolYear
         CType(picEditSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
         pnlAddSchoolYear.SuspendLayout()
         CType(picAddSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
-        pnlSearch.SuspendLayout()
-        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
+        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' pnlContentSchoolYear
@@ -66,12 +63,12 @@ Partial Class ucSchoolYear
         ' RoundedPanel1
         ' 
         RoundedPanel1.BackColor = Color.White
-        RoundedPanel1.Controls.Add(Label3)
+        RoundedPanel1.Controls.Add(imgSearch)
+        RoundedPanel1.Controls.Add(TextBox1)
         RoundedPanel1.Controls.Add(cboSchoolYearFilter)
         RoundedPanel1.Controls.Add(pnlDeleteSchoolYear)
         RoundedPanel1.Controls.Add(pnlEditSchoolYear)
         RoundedPanel1.Controls.Add(pnlAddSchoolYear)
-        RoundedPanel1.Controls.Add(pnlSearch)
         RoundedPanel1.Controls.Add(dgvSchoolYear)
         RoundedPanel1.Location = New Point(38, 120)
         RoundedPanel1.Margin = New Padding(3, 2, 3, 2)
@@ -187,40 +184,6 @@ Partial Class ucSchoolYear
         picAddSchoolYear.TabIndex = 6
         picAddSchoolYear.TabStop = False
         ' 
-        ' pnlSearch
-        ' 
-        pnlSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlSearch.Controls.Add(lblSearch)
-        pnlSearch.Controls.Add(imgSearch)
-        pnlSearch.Cursor = Cursors.Hand
-        pnlSearch.Location = New Point(26, 18)
-        pnlSearch.Name = "pnlSearch"
-        pnlSearch.Size = New Size(232, 37)
-        pnlSearch.TabIndex = 12
-        ' 
-        ' lblSearch
-        ' 
-        lblSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        lblSearch.BorderStyle = BorderStyle.None
-        lblSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        lblSearch.Location = New Point(29, 9)
-        lblSearch.Name = "lblSearch"
-        lblSearch.Size = New Size(198, 20)
-        lblSearch.TabIndex = 1
-        lblSearch.Text = "Search by name or student ID"
-        ' 
-        ' imgSearch
-        ' 
-        imgSearch.BackColor = Color.Transparent
-        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
-        imgSearch.Location = New Point(6, 4)
-        imgSearch.Name = "imgSearch"
-        imgSearch.Size = New Size(22, 29)
-        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
-        imgSearch.TabIndex = 0
-        imgSearch.TabStop = False
-        ' 
         ' dgvSchoolYear
         ' 
         dgvSchoolYear.AllowUserToAddRows = False
@@ -269,14 +232,25 @@ Partial Class ucSchoolYear
         Label1.TabIndex = 5
         Label1.Text = "School Year"
         ' 
-        ' Label3
+        ' imgSearch
         ' 
-        Label3.AutoSize = True
-        Label3.Location = New Point(472, 37)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(41, 15)
-        Label3.TabIndex = 19
-        Label3.Text = "Label3"
+        imgSearch.BackColor = Color.Transparent
+        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
+        imgSearch.Location = New Point(29, 19)
+        imgSearch.Name = "imgSearch"
+        imgSearch.Size = New Size(21, 26)
+        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
+        imgSearch.TabIndex = 19
+        imgSearch.TabStop = False
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(56, 20)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(192, 30)
+        TextBox1.TabIndex = 20
         ' 
         ' ucSchoolYear
         ' 
@@ -300,10 +274,8 @@ Partial Class ucSchoolYear
         pnlAddSchoolYear.ResumeLayout(False)
         pnlAddSchoolYear.PerformLayout()
         CType(picAddSchoolYear, ComponentModel.ISupportInitialize).EndInit()
-        pnlSearch.ResumeLayout(False)
-        pnlSearch.PerformLayout()
-        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvSchoolYear, ComponentModel.ISupportInitialize).EndInit()
+        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -323,13 +295,11 @@ Partial Class ucSchoolYear
     Friend WithEvents pnlAddSchoolYear As RoundedPanel4
     Friend WithEvents lblAddSchoolYear As Label
     Friend WithEvents picAddSchoolYear As PictureBox
-    Friend WithEvents pnlSearch As RoundedPanel4
-    Friend WithEvents lblSearch As TextBox
-    Friend WithEvents imgSearch As PictureBox
     Friend WithEvents dgvSchoolYear As DataGridView
     Friend WithEvents RoundedPanel2 As RoundedPanel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents imgSearch As PictureBox
+    Friend WithEvents TextBox1 As TextBox
 
 End Class

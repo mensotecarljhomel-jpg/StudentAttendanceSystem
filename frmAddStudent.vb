@@ -37,7 +37,7 @@ Public Class frmAddStudent
 
         Me.Text = "Add Student"
 
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.StartPosition = FormStartPosition.CenterScreen
 
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
 

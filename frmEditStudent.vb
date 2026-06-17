@@ -49,7 +49,7 @@ Public Class frmEditStudent
 
         Me.Text = "Edit Student"
 
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.StartPosition = FormStartPosition.CenterScreen
 
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
 

@@ -40,12 +40,11 @@ Partial Class ucBatches
         pnlAddBatches = New RoundedPanel4()
         lblAddBatches = New Label()
         picAddBatches = New PictureBox()
-        pnlSearch = New RoundedPanel4()
-        lblSearch = New TextBox()
-        imgSearch = New PictureBox()
         dgvBatches = New DataGridView()
         pnlContentBatches = New Panel()
         Label1 = New Label()
+        imgSearch = New PictureBox()
+        TextBox1 = New TextBox()
         RoundedPanel1.SuspendLayout()
         pnlRefreshBatches.SuspendLayout()
         CType(picRefreshBatches, ComponentModel.ISupportInitialize).BeginInit()
@@ -55,10 +54,9 @@ Partial Class ucBatches
         CType(picEditBatches, ComponentModel.ISupportInitialize).BeginInit()
         pnlAddBatches.SuspendLayout()
         CType(picAddBatches, ComponentModel.ISupportInitialize).BeginInit()
-        pnlSearch.SuspendLayout()
-        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvBatches, ComponentModel.ISupportInitialize).BeginInit()
         pnlContentBatches.SuspendLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' RoundedPanel2
@@ -84,12 +82,13 @@ Partial Class ucBatches
         ' RoundedPanel1
         ' 
         RoundedPanel1.BackColor = Color.White
+        RoundedPanel1.Controls.Add(imgSearch)
+        RoundedPanel1.Controls.Add(TextBox1)
         RoundedPanel1.Controls.Add(cboBatchFilter)
         RoundedPanel1.Controls.Add(pnlRefreshBatches)
         RoundedPanel1.Controls.Add(pnlDeleteBatches)
         RoundedPanel1.Controls.Add(pnlEditBatches)
         RoundedPanel1.Controls.Add(pnlAddBatches)
-        RoundedPanel1.Controls.Add(pnlSearch)
         RoundedPanel1.Controls.Add(dgvBatches)
         RoundedPanel1.Location = New Point(42, 103)
         RoundedPanel1.Margin = New Padding(3, 2, 3, 2)
@@ -237,40 +236,6 @@ Partial Class ucBatches
         picAddBatches.TabIndex = 6
         picAddBatches.TabStop = False
         ' 
-        ' pnlSearch
-        ' 
-        pnlSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        pnlSearch.Controls.Add(lblSearch)
-        pnlSearch.Controls.Add(imgSearch)
-        pnlSearch.Cursor = Cursors.Hand
-        pnlSearch.Location = New Point(26, 18)
-        pnlSearch.Name = "pnlSearch"
-        pnlSearch.Size = New Size(232, 37)
-        pnlSearch.TabIndex = 12
-        ' 
-        ' lblSearch
-        ' 
-        lblSearch.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        lblSearch.BorderStyle = BorderStyle.None
-        lblSearch.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblSearch.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        lblSearch.Location = New Point(29, 9)
-        lblSearch.Name = "lblSearch"
-        lblSearch.Size = New Size(198, 20)
-        lblSearch.TabIndex = 1
-        lblSearch.Text = "Search by name or student ID"
-        ' 
-        ' imgSearch
-        ' 
-        imgSearch.BackColor = Color.Transparent
-        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
-        imgSearch.Location = New Point(6, 4)
-        imgSearch.Name = "imgSearch"
-        imgSearch.Size = New Size(22, 29)
-        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
-        imgSearch.TabIndex = 0
-        imgSearch.TabStop = False
-        ' 
         ' dgvBatches
         ' 
         dgvBatches.AllowUserToAddRows = False
@@ -312,6 +277,26 @@ Partial Class ucBatches
         Label1.TabIndex = 1
         Label1.Text = "Batches"
         ' 
+        ' imgSearch
+        ' 
+        imgSearch.BackColor = Color.Transparent
+        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
+        imgSearch.Location = New Point(25, 19)
+        imgSearch.Name = "imgSearch"
+        imgSearch.Size = New Size(21, 26)
+        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
+        imgSearch.TabIndex = 19
+        imgSearch.TabStop = False
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(52, 20)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(192, 30)
+        TextBox1.TabIndex = 20
+        ' 
         ' ucBatches
         ' 
         AutoScaleMode = AutoScaleMode.None
@@ -320,6 +305,7 @@ Partial Class ucBatches
         Name = "ucBatches"
         Size = New Size(1396, 788)
         RoundedPanel1.ResumeLayout(False)
+        RoundedPanel1.PerformLayout()
         pnlRefreshBatches.ResumeLayout(False)
         pnlRefreshBatches.PerformLayout()
         CType(picRefreshBatches, ComponentModel.ISupportInitialize).EndInit()
@@ -332,12 +318,10 @@ Partial Class ucBatches
         pnlAddBatches.ResumeLayout(False)
         pnlAddBatches.PerformLayout()
         CType(picAddBatches, ComponentModel.ISupportInitialize).EndInit()
-        pnlSearch.ResumeLayout(False)
-        pnlSearch.PerformLayout()
-        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvBatches, ComponentModel.ISupportInitialize).EndInit()
         pnlContentBatches.ResumeLayout(False)
         pnlContentBatches.PerformLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -357,12 +341,11 @@ Partial Class ucBatches
     Friend WithEvents pnlAddBatches As RoundedPanel4
     Friend WithEvents lblAddBatches As Label
     Friend WithEvents picAddBatches As PictureBox
-    Friend WithEvents pnlSearch As RoundedPanel4
-    Friend WithEvents lblSearch As TextBox
-    Friend WithEvents imgSearch As PictureBox
     Friend WithEvents pnlRefreshBatches As RoundedPanel4
     Friend WithEvents lblRefreshBatches As Label
     Friend WithEvents picRefreshBatches As PictureBox
     Friend WithEvents cboBatchFilter As ComboBox
+    Friend WithEvents imgSearch As PictureBox
+    Friend WithEvents TextBox1 As TextBox
 
 End Class

@@ -134,7 +134,7 @@ Partial Class ucStudents
         ' 
         TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
         TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(39, 17)
+        TextBox1.Location = New Point(39, 16)
         TextBox1.Name = "TextBox1"
         TextBox1.Size = New Size(192, 30)
         TextBox1.TabIndex = 12
@@ -257,7 +257,7 @@ Partial Class ucStudents
         cboBatchFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
         cboBatchFilter.DropDownStyle = ComboBoxStyle.DropDownList
         cboBatchFilter.FormattingEnabled = True
-        cboBatchFilter.Location = New Point(273, 20)
+        cboBatchFilter.Location = New Point(256, 18)
         cboBatchFilter.Name = "cboBatchFilter"
         cboBatchFilter.Size = New Size(121, 24)
         cboBatchFilter.TabIndex = 1

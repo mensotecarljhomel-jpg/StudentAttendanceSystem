@@ -26,7 +26,7 @@ Public Class frmAddSubject
         Me.SuspendLayout()
 
         Me.Text = "Add Subject"
-        Me.StartPosition = FormStartPosition.CenterParent
+        Me.StartPosition = FormStartPosition.CenterScreen
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -287,30 +287,28 @@ Public Class frmAddSubject
             End If
 
             '==========================
-            ' INSERT SUBJECT
+            ' INSERT SUBJECT (adapt to schema)
             '==========================
-            Dim insertCmd As New MySqlCommand(
-    "INSERT INTO subjects (subject_name, batch_id, schedule)
-     VALUES (@subject_name, @batch_id, @schedule)",
-    Connection
-)
+            ' Check if 'schedule' column exists in subjects table
+            Dim hasSchedule As Boolean = False
 
-            insertCmd.Parameters.AddWithValue(
-    "@subject_name",
-    txtSubjectName.Text.Trim
-)
+            Dim colCmd As New MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'subjects' AND COLUMN_NAME = 'schedule'", Connection)
+            Dim colCount As Integer = Convert.ToInt32(colCmd.ExecuteScalar())
 
-            insertCmd.Parameters.AddWithValue(
-    "@batch_id",
-    selectedBatch.BatchID
-)
+            If colCount > 0 Then hasSchedule = True
 
-            insertCmd.Parameters.AddWithValue(
-    "@schedule",
-    txtSchedule.Text.Trim
-)
-
-            insertCmd.ExecuteNonQuery()
+            If hasSchedule Then
+                Dim insertCmd As New MySqlCommand("INSERT INTO subjects (subject_name, batch_id, schedule) VALUES (@subject_name, @batch_id, @schedule)", Connection)
+                insertCmd.Parameters.AddWithValue("@subject_name", txtSubjectName.Text.Trim)
+                insertCmd.Parameters.AddWithValue("@batch_id", selectedBatch.BatchID)
+                insertCmd.Parameters.AddWithValue("@schedule", txtSchedule.Text.Trim)
+                insertCmd.ExecuteNonQuery()
+            Else
+                Dim insertCmd As New MySqlCommand("INSERT INTO subjects (subject_name, batch_id) VALUES (@subject_name, @batch_id)", Connection)
+                insertCmd.Parameters.AddWithValue("@subject_name", txtSubjectName.Text.Trim)
+                insertCmd.Parameters.AddWithValue("@batch_id", selectedBatch.BatchID)
+                insertCmd.ExecuteNonQuery()
+            End If
 
             CloseConnection()
 

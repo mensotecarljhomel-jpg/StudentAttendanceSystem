@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucSubjects
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,16 +20,18 @@ Partial Class ucSubjects
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucSubjects))
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         BackgroundWorker2 = New ComponentModel.BackgroundWorker()
         RoundedPanel6 = New RoundedPanel()
         RoundedPanel5 = New RoundedPanel()
-        pnlPrint = New RoundedPanel4()
-        lblPrint = New Label()
-        picPrint = New PictureBox()
+        imgSearch = New PictureBox()
+        TextBox1 = New TextBox()
+        pnlViewRecords = New RoundedPanel4()
+        lblViewRecords = New Label()
+        picViewRecords = New PictureBox()
         dgvSubjects = New DataGridView()
         pnlDeleteSubject = New RoundedPanel4()
         lblDeleteSubject = New Label()
@@ -41,15 +43,19 @@ Partial Class ucSubjects
         lblAddSubject = New Label()
         picSubjectAdd = New PictureBox()
         cboSubjectFilter = New ComboBox()
-        RoundedPanel41 = New RoundedPanel4()
-        TextBox1 = New TextBox()
-        PictureBox5 = New PictureBox()
+        pnlPrint = New RoundedPanel4()
+        lblPrint = New Label()
+        picPrint = New PictureBox()
         pnlContentSubjects = New Panel()
+        pnlStartClass = New RoundedPanel4()
+        lblStartClass = New Label()
+        picStartClass = New PictureBox()
         Label2 = New Label()
         lblBatches = New Label()
         RoundedPanel5.SuspendLayout()
-        pnlPrint.SuspendLayout()
-        CType(picPrint, ComponentModel.ISupportInitialize).BeginInit()
+        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
+        pnlViewRecords.SuspendLayout()
+        CType(picViewRecords, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvSubjects, ComponentModel.ISupportInitialize).BeginInit()
         pnlDeleteSubject.SuspendLayout()
         CType(picSubjectDelete, ComponentModel.ISupportInitialize).BeginInit()
@@ -57,9 +63,11 @@ Partial Class ucSubjects
         CType(picSubjectEdit, ComponentModel.ISupportInitialize).BeginInit()
         pnlAddSubject.SuspendLayout()
         CType(picSubjectAdd, ComponentModel.ISupportInitialize).BeginInit()
-        RoundedPanel41.SuspendLayout()
-        CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
+        pnlPrint.SuspendLayout()
+        CType(picPrint, ComponentModel.ISupportInitialize).BeginInit()
         pnlContentSubjects.SuspendLayout()
+        pnlStartClass.SuspendLayout()
+        CType(picStartClass, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' RoundedPanel6
@@ -73,49 +81,69 @@ Partial Class ucSubjects
         ' RoundedPanel5
         ' 
         RoundedPanel5.BackColor = Color.White
-        RoundedPanel5.Controls.Add(pnlPrint)
+        RoundedPanel5.Controls.Add(imgSearch)
+        RoundedPanel5.Controls.Add(TextBox1)
+        RoundedPanel5.Controls.Add(pnlViewRecords)
         RoundedPanel5.Controls.Add(dgvSubjects)
         RoundedPanel5.Controls.Add(pnlDeleteSubject)
         RoundedPanel5.Controls.Add(pnlEditSubject)
         RoundedPanel5.Controls.Add(pnlAddSubject)
         RoundedPanel5.Controls.Add(cboSubjectFilter)
-        RoundedPanel5.Controls.Add(RoundedPanel41)
         RoundedPanel5.Location = New Point(40, 108)
         RoundedPanel5.Name = "RoundedPanel5"
         RoundedPanel5.Size = New Size(1320, 618)
         RoundedPanel5.TabIndex = 3
         ' 
-        ' pnlPrint
+        ' imgSearch
         ' 
-        pnlPrint.BackColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        pnlPrint.Controls.Add(lblPrint)
-        pnlPrint.Controls.Add(picPrint)
-        pnlPrint.Cursor = Cursors.Hand
-        pnlPrint.Location = New Point(919, 18)
-        pnlPrint.Name = "pnlPrint"
-        pnlPrint.Size = New Size(82, 42)
-        pnlPrint.TabIndex = 12
+        imgSearch.BackColor = Color.Transparent
+        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
+        imgSearch.Location = New Point(30, 17)
+        imgSearch.Name = "imgSearch"
+        imgSearch.Size = New Size(21, 26)
+        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
+        imgSearch.TabIndex = 15
+        imgSearch.TabStop = False
         ' 
-        ' lblPrint
+        ' TextBox1
         ' 
-        lblPrint.AutoSize = True
-        lblPrint.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblPrint.ForeColor = Color.White
-        lblPrint.Location = New Point(34, 10)
-        lblPrint.Name = "lblPrint"
-        lblPrint.Size = New Size(42, 23)
-        lblPrint.TabIndex = 5
-        lblPrint.Text = "Print"
+        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(57, 18)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(192, 30)
+        TextBox1.TabIndex = 16
         ' 
-        ' picPrint
+        ' pnlViewRecords
         ' 
-        picPrint.Image = CType(resources.GetObject("picPrint.Image"), Image)
-        picPrint.Location = New Point(9, 11)
-        picPrint.Name = "picPrint"
-        picPrint.Size = New Size(23, 19)
-        picPrint.SizeMode = PictureBoxSizeMode.StretchImage
-        picPrint.TabIndex = 6
-        picPrint.TabStop = False
+        pnlViewRecords.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        pnlViewRecords.Controls.Add(lblViewRecords)
+        pnlViewRecords.Controls.Add(picViewRecords)
+        pnlViewRecords.Cursor = Cursors.Hand
+        pnlViewRecords.Location = New Point(927, 18)
+        pnlViewRecords.Name = "pnlViewRecords"
+        pnlViewRecords.Size = New Size(74, 42)
+        pnlViewRecords.TabIndex = 14
+        ' 
+        ' lblViewRecords
+        ' 
+        lblViewRecords.AutoSize = True
+        lblViewRecords.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblViewRecords.ForeColor = Color.White
+        lblViewRecords.Location = New Point(24, 10)
+        lblViewRecords.Name = "lblViewRecords"
+        lblViewRecords.Size = New Size(42, 23)
+        lblViewRecords.TabIndex = 5
+        lblViewRecords.Text = "View"
+        ' 
+        ' picViewRecords
+        ' 
+        picViewRecords.Location = New Point(4, 11)
+        picViewRecords.Name = "picViewRecords"
+        picViewRecords.Size = New Size(23, 19)
+        picViewRecords.SizeMode = PictureBoxSizeMode.StretchImage
+        picViewRecords.TabIndex = 6
+        picViewRecords.TabStop = False
         ' 
         ' dgvSubjects
         ' 
@@ -241,43 +269,43 @@ Partial Class ucSubjects
         cboSubjectFilter.Size = New Size(121, 24)
         cboSubjectFilter.TabIndex = 1
         ' 
-        ' RoundedPanel41
+        ' pnlPrint
         ' 
-        RoundedPanel41.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        RoundedPanel41.Controls.Add(TextBox1)
-        RoundedPanel41.Controls.Add(PictureBox5)
-        RoundedPanel41.Cursor = Cursors.Hand
-        RoundedPanel41.Location = New Point(26, 18)
-        RoundedPanel41.Name = "RoundedPanel41"
-        RoundedPanel41.Size = New Size(232, 37)
-        RoundedPanel41.TabIndex = 0
+        pnlPrint.BackColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
+        pnlPrint.Controls.Add(lblPrint)
+        pnlPrint.Controls.Add(picPrint)
+        pnlPrint.Cursor = Cursors.Hand
+        pnlPrint.Location = New Point(1129, 60)
+        pnlPrint.Name = "pnlPrint"
+        pnlPrint.Size = New Size(82, 42)
+        pnlPrint.TabIndex = 12
         ' 
-        ' TextBox1
+        ' lblPrint
         ' 
-        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        TextBox1.BorderStyle = BorderStyle.None
-        TextBox1.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        TextBox1.Location = New Point(29, 9)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(198, 20)
-        TextBox1.TabIndex = 1
-        TextBox1.Text = "Search Subjects..."
+        lblPrint.AutoSize = True
+        lblPrint.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPrint.ForeColor = Color.White
+        lblPrint.Location = New Point(34, 10)
+        lblPrint.Name = "lblPrint"
+        lblPrint.Size = New Size(42, 23)
+        lblPrint.TabIndex = 5
+        lblPrint.Text = "Print"
         ' 
-        ' PictureBox5
+        ' picPrint
         ' 
-        PictureBox5.BackColor = Color.Transparent
-        PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), Image)
-        PictureBox5.Location = New Point(6, 4)
-        PictureBox5.Name = "PictureBox5"
-        PictureBox5.Size = New Size(22, 29)
-        PictureBox5.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox5.TabIndex = 0
-        PictureBox5.TabStop = False
+        picPrint.Image = CType(resources.GetObject("picPrint.Image"), Image)
+        picPrint.Location = New Point(9, 11)
+        picPrint.Name = "picPrint"
+        picPrint.Size = New Size(23, 19)
+        picPrint.SizeMode = PictureBoxSizeMode.StretchImage
+        picPrint.TabIndex = 6
+        picPrint.TabStop = False
         ' 
         ' pnlContentSubjects
         ' 
         pnlContentSubjects.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        pnlContentSubjects.Controls.Add(pnlPrint)
+        pnlContentSubjects.Controls.Add(pnlStartClass)
         pnlContentSubjects.Controls.Add(RoundedPanel5)
         pnlContentSubjects.Controls.Add(Label2)
         pnlContentSubjects.Controls.Add(lblBatches)
@@ -287,6 +315,39 @@ Partial Class ucSubjects
         pnlContentSubjects.Name = "pnlContentSubjects"
         pnlContentSubjects.Size = New Size(1396, 788)
         pnlContentSubjects.TabIndex = 0
+        ' 
+        ' pnlStartClass
+        ' 
+        pnlStartClass.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlStartClass.Controls.Add(lblStartClass)
+        pnlStartClass.Controls.Add(picStartClass)
+        pnlStartClass.Cursor = Cursors.Hand
+        pnlStartClass.Location = New Point(1218, 60)
+        pnlStartClass.Name = "pnlStartClass"
+        pnlStartClass.Size = New Size(123, 42)
+        pnlStartClass.TabIndex = 15
+        ' 
+        ' lblStartClass
+        ' 
+        lblStartClass.AutoSize = True
+        lblStartClass.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblStartClass.ForeColor = Color.White
+        lblStartClass.Location = New Point(32, 10)
+        lblStartClass.Name = "lblStartClass"
+        lblStartClass.Size = New Size(83, 23)
+        lblStartClass.TabIndex = 5
+        lblStartClass.Text = "Start Class"
+        ' 
+        ' picStartClass
+        ' 
+        picStartClass.ErrorImage = CType(resources.GetObject("picStartClass.ErrorImage"), Image)
+        picStartClass.Image = CType(resources.GetObject("picStartClass.Image"), Image)
+        picStartClass.Location = New Point(4, 11)
+        picStartClass.Name = "picStartClass"
+        picStartClass.Size = New Size(23, 19)
+        picStartClass.SizeMode = PictureBoxSizeMode.StretchImage
+        picStartClass.TabIndex = 6
+        picStartClass.TabStop = False
         ' 
         ' Label2
         ' 
@@ -316,9 +377,11 @@ Partial Class ucSubjects
         Name = "ucSubjects"
         Size = New Size(1396, 788)
         RoundedPanel5.ResumeLayout(False)
-        pnlPrint.ResumeLayout(False)
-        pnlPrint.PerformLayout()
-        CType(picPrint, ComponentModel.ISupportInitialize).EndInit()
+        RoundedPanel5.PerformLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
+        pnlViewRecords.ResumeLayout(False)
+        pnlViewRecords.PerformLayout()
+        CType(picViewRecords, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvSubjects, ComponentModel.ISupportInitialize).EndInit()
         pnlDeleteSubject.ResumeLayout(False)
         pnlDeleteSubject.PerformLayout()
@@ -329,11 +392,14 @@ Partial Class ucSubjects
         pnlAddSubject.ResumeLayout(False)
         pnlAddSubject.PerformLayout()
         CType(picSubjectAdd, ComponentModel.ISupportInitialize).EndInit()
-        RoundedPanel41.ResumeLayout(False)
-        RoundedPanel41.PerformLayout()
-        CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
+        pnlPrint.ResumeLayout(False)
+        pnlPrint.PerformLayout()
+        CType(picPrint, ComponentModel.ISupportInitialize).EndInit()
         pnlContentSubjects.ResumeLayout(False)
         pnlContentSubjects.PerformLayout()
+        pnlStartClass.ResumeLayout(False)
+        pnlStartClass.PerformLayout()
+        CType(picStartClass, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
@@ -350,15 +416,20 @@ Partial Class ucSubjects
     Friend WithEvents pnlAddSubject As RoundedPanel4
     Friend WithEvents lblAddSubject As Label
     Friend WithEvents picSubjectAdd As PictureBox
+    Friend WithEvents pnlViewRecords As RoundedPanel4
+    Friend WithEvents lblViewRecords As Label
+    Friend WithEvents picViewRecords As PictureBox
     Friend WithEvents cboSubjectFilter As ComboBox
-    Friend WithEvents RoundedPanel41 As RoundedPanel4
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents PictureBox5 As PictureBox
     Friend WithEvents pnlContentSubjects As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents lblBatches As Label
     Friend WithEvents pnlPrint As RoundedPanel4
     Friend WithEvents lblPrint As Label
     Friend WithEvents picPrint As PictureBox
+    Friend WithEvents pnlStartClass As RoundedPanel4
+    Friend WithEvents lblStartClass As Label
+    Friend WithEvents picStartClass As PictureBox
+    Friend WithEvents imgSearch As PictureBox
+    Friend WithEvents TextBox1 As TextBox
 
 End Class

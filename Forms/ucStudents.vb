@@ -1,8 +1,8 @@
 ﻿Imports System.Drawing.Printing
 Imports System.IO
 Imports System.Reflection.Metadata
-Imports iTextSharp.text
-Imports iTextSharp.text.pdf
+Imports PdfSharpCore.Pdf
+Imports PdfSharpCore.Drawing
 Imports MySql.Data.MySqlClient
 
 Public Class ucStudents
@@ -181,7 +181,9 @@ Public Class ucStudents
                         s.last_name,
                         s.first_name,
                         s.gender,
-                        b.batch_name
+                        b.batch_name,
+                        COALESCE((SELECT COUNT(*) FROM attendance_records ar WHERE ar.student_number = s.student_number AND ar.status = 'Present'),0) AS presents,
+                        COALESCE((SELECT COUNT(*) FROM attendance_records ar WHERE ar.student_number = s.student_number),0) AS total
                  FROM students s
                  INNER JOIN batches b
                  ON s.batch_id = b.batch_id
@@ -201,13 +203,23 @@ Public Class ucStudents
 
             While reader.Read()
 
+                Dim presents As Integer = Convert.ToInt32(reader("presents"))
+                Dim total As Integer = Convert.ToInt32(reader("total"))
+
+                Dim attendanceText As String = "100%"
+
+                If total > 0 Then
+                    Dim pct As Integer = CInt(Math.Round((presents * 100.0) / total))
+                    attendanceText = pct.ToString() & "%"
+                End If
+
                 dgvStudents.Rows.Add(
                     reader("student_number").ToString(),
                     reader("last_name").ToString(),
                     reader("first_name").ToString(),
                     reader("gender").ToString(),
                     reader("batch_name").ToString(),
-                    "100%",
+                    attendanceText,
                     "Good"
                 )
 
@@ -231,6 +243,28 @@ Public Class ucStudents
 
     End Sub
 
+    Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
+        If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Return
+
+        Dim colName = dgvStudents.Columns(e.ColumnIndex).Name
+
+        If String.Equals(colName, "Attendance", StringComparison.OrdinalIgnoreCase) Then
+            Dim studentNumber = dgvStudents.Rows(e.RowIndex).Cells("StudentID").Value.ToString()
+
+            Dim frm As New frmStudentAttendanceReport()
+            frm.StartPosition = FormStartPosition.CenterParent
+            frm.StudentNumber = studentNumber
+
+            Dim owner = Me.FindForm()
+            If owner IsNot Nothing Then
+                frm.ShowDialog(owner)
+            Else
+                frm.ShowDialog()
+            End If
+        End If
+
+    End Sub
+
 
     Private Sub pnlContentStudents_Paint(sender As Object, e As PaintEventArgs) Handles pnlContentStudents.Paint
 
@@ -246,8 +280,14 @@ Public Class ucStudents
 
     Private Sub pnlAddStudent_Click(sender As Object, e As EventArgs) Handles pnlAddStudent.Click
         Dim frm As New frmAddStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
+        Dim owner = Me.FindForm()
 
-        frm.ShowDialog()
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
 
@@ -255,8 +295,14 @@ Public Class ucStudents
 
     Private Sub picAddStudent_Click(sender As Object, e As EventArgs) Handles picAddStudent.Click
         Dim frm As New frmAddStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
+        Dim owner = Me.FindForm()
 
-        frm.ShowDialog()
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
 
@@ -264,8 +310,14 @@ Public Class ucStudents
 
     Private Sub lblAddStudent_Click(sender As Object, e As EventArgs) Handles lblAddStudent.Click
         Dim frm As New frmAddStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
+        Dim owner = Me.FindForm()
 
-        frm.ShowDialog()
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
 
@@ -281,11 +333,18 @@ Public Class ucStudents
         End If
 
         Dim frm As New frmEditStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
 
         frm.StudentNumber =
             dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
 
-        frm.ShowDialog()
+        Dim owner = Me.FindForm()
+
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
     End Sub
@@ -300,11 +359,18 @@ Public Class ucStudents
         End If
 
         Dim frm As New frmEditStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
 
         frm.StudentNumber =
             dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
 
-        frm.ShowDialog()
+        Dim owner = Me.FindForm()
+
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
     End Sub
@@ -319,11 +385,18 @@ Public Class ucStudents
         End If
 
         Dim frm As New frmEditStudent()
+        frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
 
         frm.StudentNumber =
             dgvStudents.SelectedRows(0).Cells("StudentID").Value.ToString()
 
-        frm.ShowDialog()
+        Dim owner = Me.FindForm()
+
+        If owner IsNot Nothing Then
+            frm.ShowDialog(owner)
+        Else
+            frm.ShowDialog()
+        End If
 
         LoadStudentsFromDatabase()
     End Sub
@@ -366,70 +439,67 @@ Public Class ucStudents
 
             If sfd.ShowDialog() <> DialogResult.OK Then Exit Sub
 
-            Dim doc As New iTextSharp.text.Document(
-    iTextSharp.text.PageSize.A4.Rotate()
-)
+            ' Use PdfSharpCore to generate a simple table-like PDF
+            Dim document As New PdfDocument()
+            document.Info.Title = "Student Attendance Report"
 
-            PdfWriter.GetInstance(
-            doc,
-            New FileStream(
-                sfd.FileName,
-                FileMode.Create
-            )
-        )
+            Dim page = document.AddPage()
+            page.Size = PdfSharpCore.PageSize.A4
+            page.Orientation = PdfSharpCore.PageOrientation.Landscape
 
-            doc.Open()
+            Dim gfx = XGraphics.FromPdfPage(page)
+            Dim titleFont = New XFont("Poppins", 16, XFontStyle.Bold)
+            Dim font = New XFont("Poppins", 10, XFontStyle.Regular)
 
-            Dim title As New Paragraph(
-            "Student Attendance Report"
-        )
+            gfx.DrawString("Student Attendance Report", titleFont, XBrushes.Black, New XRect(0, 10, page.Width, 30), XStringFormats.TopCenter)
 
-            title.Alignment = Element.ALIGN_CENTER
+            Dim startX As Double = 40
+            Dim startY As Double = 50
+            Dim rowHeight As Double = 22
 
-            title.SpacingAfter = 20
+            ' Compute column widths evenly (adjust if you want specific widths)
+            Dim colCount As Integer = dgvStudents.Columns.Count
+            Dim pageWidth As Double = CDbl(page.Width.Point) - 2 * startX
+            Dim colWidth As Double = pageWidth / colCount
 
-            doc.Add(title)
-
-            Dim table As New PdfPTable(
-            dgvStudents.Columns.Count
-        )
-
-            table.WidthPercentage = 100
-
-            ' Headers
-            For Each col As DataGridViewColumn In dgvStudents.Columns
-
-                table.AddCell(col.HeaderText)
-
+            ' Draw headers
+            Dim x As Double = startX
+            For i As Integer = 0 To dgvStudents.Columns.Count - 1
+                Dim hdr = dgvStudents.Columns(i).HeaderText
+                gfx.DrawRectangle(XPens.LightGray, x, startY, colWidth, rowHeight)
+                gfx.DrawString(hdr, font, XBrushes.Black, New XRect(x + 4, startY + 4, colWidth - 8, rowHeight - 8), XStringFormats.TopLeft)
+                x += colWidth
             Next
 
-            ' Rows
+            startY += rowHeight
+
+            ' Draw rows
             For Each row As DataGridViewRow In dgvStudents.Rows
+                If row.IsNewRow Then Continue For
 
-                If Not row.IsNewRow Then
+                x = startX
+                For i As Integer = 0 To dgvStudents.Columns.Count - 1
+                    Dim cellText As String = If(row.Cells(i).Value, "").ToString()
+                    gfx.DrawRectangle(XPens.LightGray, x, startY, colWidth, rowHeight)
+                    gfx.DrawString(cellText, font, XBrushes.Black, New XRect(x + 4, startY + 4, colWidth - 8, rowHeight - 8), XStringFormats.TopLeft)
+                    x += colWidth
+                Next
 
-                    For Each cell As DataGridViewCell In row.Cells
+                startY += rowHeight
 
-                        table.AddCell(
-                        If(cell.Value, "").ToString()
-                    )
-
-                    Next
-
+                If startY + rowHeight > CDbl(page.Height.Point) - 40 Then
+                    page = document.AddPage()
+                    page.Orientation = PdfSharpCore.PageOrientation.Landscape
+                    gfx = XGraphics.FromPdfPage(page)
+                    startY = 40
                 End If
-
             Next
 
-            doc.Add(table)
+            Using fs As New FileStream(sfd.FileName, FileMode.Create)
+                document.Save(fs)
+            End Using
 
-            doc.Close()
-
-            MessageBox.Show(
-            "PDF generated successfully!",
-            "Success",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information
-        )
+            MessageBox.Show("PDF generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Catch ex As Exception
 
