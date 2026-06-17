@@ -205,9 +205,9 @@ Partial Class Dashboard
         lblSchoolYear.ForeColor = Color.White
         lblSchoolYear.Location = New Point(52, 5)
         lblSchoolYear.Name = "lblSchoolYear"
-        lblSchoolYear.Size = New Size(110, 34)
+        lblSchoolYear.Size = New Size(130, 34)
         lblSchoolYear.TabIndex = 18
-        lblSchoolYear.Text = "Absences"
+        lblSchoolYear.Text = "School Year"
         ' 
         ' picSchoolYear
         ' 

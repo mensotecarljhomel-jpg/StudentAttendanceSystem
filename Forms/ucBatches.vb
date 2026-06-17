@@ -1,10 +1,17 @@
-﻿Public Class ucBatches
+﻿Imports MySql.Data.MySqlClient
+
+Public Class ucBatches
+
+    '==========================
+    ' MySQL Connection
+    '==========================
+    Dim conn As New MySqlConnection(
+        "server=localhost;user id=root;password=;database=proj_db")
 
     Private Sub ucBatches_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        '==========================
-        ' Batch Filter
-        '==========================
+        SetupBatchGrid()
+
         cboBatchFilter.Items.Clear()
 
         cboBatchFilter.Items.Add("All Batches")
@@ -17,8 +24,8 @@
 
         cboBatchFilter.SelectedIndex = 0
 
-        SetupBatchGrid()
-        LoadSampleBatches()
+        'Remove this line
+        'LoadBatches()
 
     End Sub
 
@@ -28,9 +35,6 @@
 
             .Columns.Clear()
 
-            '==========================
-            ' Basic Settings
-            '==========================
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
@@ -48,9 +52,6 @@
 
             .EnableHeadersVisualStyles = False
 
-            '==========================
-            ' Header Style
-            '==========================
             .ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
 
             .ColumnHeadersDefaultCellStyle.BackColor =
@@ -70,21 +71,14 @@
 
             .ColumnHeadersHeight = 45
 
-            '==========================
-            ' Cell Style
-            '==========================
             .DefaultCellStyle.BackColor = Color.White
-
             .DefaultCellStyle.ForeColor = Color.Black
-
-            .DefaultCellStyle.Font =
-                New Font("Poppins", 9)
+            .DefaultCellStyle.Font = New Font("Poppins", 9)
 
             .DefaultCellStyle.SelectionBackColor =
                 Color.FromArgb(235, 230, 255)
 
-            .DefaultCellStyle.SelectionForeColor =
-                Color.Black
+            .DefaultCellStyle.SelectionForeColor = Color.Black
 
             .RowTemplate.Height = 75
 
@@ -94,14 +88,8 @@
             .Columns.Add("BatchID", "BATCH ID")
             .Columns.Add("BatchName", "BATCH NAME")
             .Columns.Add("Adviser", "ADVISER")
-            .Columns.Add("StudentCount", "STUDENT COUNT")
-            .Columns.Add("SubjectCount", "SUBJECT COUNT")
-            .Columns.Add("Attendance", "AVERAGE ATTENDANCE")
-            .Columns.Add("Status", "STATUS")
+            .Columns.Add("SchoolYear", "SCHOOL YEAR")
 
-            '==========================
-            ' Disable Sorting
-            '==========================
             For Each col As DataGridViewColumn In .Columns
                 col.SortMode = DataGridViewColumnSortMode.NotSortable
             Next
@@ -110,21 +98,48 @@
 
     End Sub
 
-    Private Sub LoadSampleBatches()
+    Private Sub LoadBatches()
 
         dgvBatches.Rows.Clear()
 
-        dgvBatches.Rows.Add("G11-1", "Grade 11 - 1", "Mr. Santos", "35", "8", "96%", "Outstanding")
+        Try
 
-        dgvBatches.Rows.Add("G11-2", "Grade 11 - 2", "Ms. Reyes", "32", "8", "83%", "Satisfied")
+            conn.Open()
 
-        dgvBatches.Rows.Add("G11-3", "Grade 11 - 3", "Mr. Bautista", "38", "8", "91%", "Outstanding")
+            Dim query As String =
+                "SELECT b.batch_id,
+                        b.batch_name,
+                        b.adviser,
+                        sy.school_year
+                 FROM batches b
+                 INNER JOIN school_years sy
+                 ON b.schoolyear_id = sy.schoolyear_id"
 
-        dgvBatches.Rows.Add("G12-1", "Grade 12 - 1", "Mr. Cruz", "30", "7", "77%", "Unsatisfied")
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader = cmd.ExecuteReader()
 
-        dgvBatches.Rows.Add("G12-2", "Grade 12 - 2", "Ms. Villanueva", "31", "7", "85%", "Satisfied")
+            While reader.Read()
 
-        dgvBatches.Rows.Add("G12-3", "Grade 12 - 3", "Mr. Dela Rosa", "29", "6", "94%", "Outstanding")
+                dgvBatches.Rows.Add(
+                    reader("batch_id").ToString(),
+                    reader("batch_name").ToString(),
+                    reader("adviser").ToString(),
+                    reader("school_year").ToString()
+                )
+
+            End While
+
+            reader.Close()
+
+        Catch ex As Exception
+
+            MessageBox.Show(ex.Message)
+
+        Finally
+
+            conn.Close()
+
+        End Try
 
     End Sub
 
@@ -136,15 +151,52 @@
 
     End Sub
 
-    Private Sub cboBatchFilter_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub cboBatchFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboBatchFilter.SelectedIndexChanged
+
+        LoadBatches()
 
     End Sub
 
-    Private Sub cboBatchFilter_SelectedIndexChanged_1(sender As Object, e As EventArgs)
+    Private Sub RoundedPanel1_Paint(sender As Object, e As PaintEventArgs) Handles RoundedPanel1.Paint
 
     End Sub
+
 
     Private Sub pnlAddBatches_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlAddBatches.MouseClick
+        Dim frm As New frmAddBatch()
+        frm.ShowDialog()
+        LoadBatches()
+    End Sub
+
+
+
+    '----------------------------------------------------------------------------------------------------------------'
+    ' Refresh button
+    Private Sub pnlRefreshBatches_Click(sender As Object, e As EventArgs) Handles pnlRefreshBatches.Click
 
     End Sub
+    '----------------------------------------------------------------------------------------------------------------'
+
+    'Delete Button
+    Private Sub pnlDeleteBatches_Click(sender As Object, e As EventArgs) Handles pnlDeleteBatches.Click
+
+    End Sub
+
+    '----------------------------------------------------------------------------------------------------------------'
+    'Edit Button
+    Private Sub pnlEditBatches_Click(sender As Object, e As EventArgs) Handles pnlEditBatches.Click
+
+    End Sub
+
+    '----------------------------------------------------------------------------------------------------------------'
+    ' Add Button
+    Private Sub pnlAddBatches_Click(sender As Object, e As EventArgs) Handles pnlAddBatches.Click
+
+    End Sub
+
+    Private Sub pnlAddBatches_Paint(sender As Object, e As PaintEventArgs) Handles pnlAddBatches.Paint
+
+    End Sub
+
+    '----------------------------------------------------------------------------------------------------------------'
 End Class

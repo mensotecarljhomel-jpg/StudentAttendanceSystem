@@ -2,22 +2,24 @@
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
-Public Class frmAddSubject
+Public Class frmAddBatch
 
     Private lblTitle As Label
     Private lblSubtitle As Label
     Private picIcon As PictureBox
 
-    Private lblSubjectName As Label
-    Private lblBatch As Label
-    Private lblSchedule As Label
-    Public txtSubjectName As TextBox
-    Public cboBatch As ComboBox
-    Public txtSchedule As TextBox
+    Private lblBatchName As Label
+    Private lblAdviser As Label
+    Private lblSchoolYear As Label
+
+    Public txtBatchName As TextBox
+    Public txtAdviser As TextBox
+    Public cboSchoolYear As ComboBox
+
     Public btnCancel As Button
     Public btnSave As Button
 
-    Private Sub frmAddSubject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmAddBatch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeUI()
     End Sub
 
@@ -25,14 +27,14 @@ Public Class frmAddSubject
 
         Me.SuspendLayout()
 
-        Me.Text = "Add Subject"
+        Me.Text = "Add Batch"
         Me.StartPosition = FormStartPosition.CenterParent
         Me.FormBorderStyle = FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.ShowIcon = False
         Me.BackColor = Color.FromArgb(244, 242, 252)
-        Me.ClientSize = New Size(500, 520)
+        Me.ClientSize = New Size(500, 490)
 
         '==========================
         ' ICON
@@ -43,7 +45,7 @@ Public Class frmAddSubject
         picIcon.Location = New Point(218, 20)
         picIcon.SizeMode = PictureBoxSizeMode.Zoom
         picIcon.BackColor = Color.Transparent
-        'picIcon.Image = My.Resources.subject
+        'picIcon.Image = My.Resources.batch
         Me.Controls.Add(picIcon)
 
         '==========================
@@ -51,10 +53,10 @@ Public Class frmAddSubject
         '==========================
 
         lblTitle = New Label()
-        lblTitle.Text = "Add New Subject"
+        lblTitle.Text = "Add New Batch"
         lblTitle.Font = New Font("Poppins", 18, FontStyle.Bold)
         lblTitle.AutoSize = True
-        lblTitle.Location = New Point(130, 100)
+        lblTitle.Location = New Point(145, 100)
         Me.Controls.Add(lblTitle)
 
         '==========================
@@ -62,7 +64,7 @@ Public Class frmAddSubject
         '==========================
 
         lblSubtitle = New Label()
-        lblSubtitle.Text = "Register a new subject into the attendance system"
+        lblSubtitle.Text = "Register a new batch into the attendance system"
         lblSubtitle.Font = New Font("Poppins", 9)
         lblSubtitle.ForeColor = Color.Gray
         lblSubtitle.AutoSize = False
@@ -72,61 +74,59 @@ Public Class frmAddSubject
         Me.Controls.Add(lblSubtitle)
 
         '==========================
-        ' SUBJECT NAME
+        ' BATCH NAME
         '==========================
 
-        lblSubjectName = New Label()
-        lblSubjectName.Text = "Subject Name"
-        lblSubjectName.Font = New Font("Poppins", 9, FontStyle.Bold)
-        lblSubjectName.Location = New Point(40, 185)
-        lblSubjectName.AutoSize = True
-        Me.Controls.Add(lblSubjectName)
+        lblBatchName = New Label()
+        lblBatchName.Text = "Batch Name"
+        lblBatchName.Font = New Font("Poppins", 9, FontStyle.Bold)
+        lblBatchName.Location = New Point(40, 185)
+        lblBatchName.AutoSize = True
+        Me.Controls.Add(lblBatchName)
 
-        txtSubjectName = New TextBox()
-        txtSubjectName.Name = "txtSubjectName"
-        txtSubjectName.Size = New Size(420, 32)
-        txtSubjectName.Location = New Point(40, 208)
-        txtSubjectName.Font = New Font("Poppins", 10)
-        Me.Controls.Add(txtSubjectName)
-
-
-        '==========================
-        ' SCHEDULE
-        '==========================
-
-        lblSchedule = New Label()
-        lblSchedule.Text = "Schedule"
-        lblSchedule.Font = New Font("Poppins", 9, FontStyle.Bold)
-        lblSchedule.Location = New Point(40, 325)
-        lblSchedule.AutoSize = True
-        Me.Controls.Add(lblSchedule)
-
-        txtSchedule = New TextBox()
-        txtSchedule.Name = "txtSchedule"
-        txtSchedule.Size = New Size(420, 32)
-        txtSchedule.Location = New Point(40, 348)
-        txtSchedule.Font = New Font("Poppins", 10)
-        txtSchedule.PlaceholderText = "e.g. Monday 7:30 AM - 8:30 AM"
-        Me.Controls.Add(txtSchedule)
+        txtBatchName = New TextBox()
+        txtBatchName.Name = "txtBatchName"
+        txtBatchName.Size = New Size(420, 32)
+        txtBatchName.Location = New Point(40, 208)
+        txtBatchName.Font = New Font("Poppins", 10)
+        Me.Controls.Add(txtBatchName)
 
         '==========================
-        ' BATCH
+        ' ADVISER
         '==========================
 
-        lblBatch = New Label()
-        lblBatch.Text = "Batch"
-        lblBatch.Font = New Font("Poppins", 9, FontStyle.Bold)
-        lblBatch.Location = New Point(40, 255)
-        lblBatch.AutoSize = True
-        Me.Controls.Add(lblBatch)
+        lblAdviser = New Label()
+        lblAdviser.Text = "Adviser"
+        lblAdviser.Font = New Font("Poppins", 9, FontStyle.Bold)
+        lblAdviser.Location = New Point(40, 255)
+        lblAdviser.AutoSize = True
+        Me.Controls.Add(lblAdviser)
 
-        cboBatch = New ComboBox()
-        cboBatch.Name = "cboBatch"
-        cboBatch.DropDownStyle = ComboBoxStyle.DropDownList
-        cboBatch.Font = New Font("Poppins", 10)
-        cboBatch.Location = New Point(40, 278)
-        cboBatch.Size = New Size(420, 32)
-        Me.Controls.Add(cboBatch)
+        txtAdviser = New TextBox()
+        txtAdviser.Name = "txtAdviser"
+        txtAdviser.Size = New Size(420, 32)
+        txtAdviser.Location = New Point(40, 278)
+        txtAdviser.Font = New Font("Poppins", 10)
+        Me.Controls.Add(txtAdviser)
+
+        '==========================
+        ' SCHOOL YEAR
+        '==========================
+
+        lblSchoolYear = New Label()
+        lblSchoolYear.Text = "School Year"
+        lblSchoolYear.Font = New Font("Poppins", 9, FontStyle.Bold)
+        lblSchoolYear.Location = New Point(40, 325)
+        lblSchoolYear.AutoSize = True
+        Me.Controls.Add(lblSchoolYear)
+
+        cboSchoolYear = New ComboBox()
+        cboSchoolYear.Name = "cboSchoolYear"
+        cboSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList
+        cboSchoolYear.Font = New Font("Poppins", 10)
+        cboSchoolYear.Location = New Point(40, 348)
+        cboSchoolYear.Size = New Size(420, 32)
+        Me.Controls.Add(cboSchoolYear)
 
         '==========================
         ' CANCEL BUTTON
@@ -135,7 +135,7 @@ Public Class frmAddSubject
         btnCancel = New Button()
         btnCancel.Text = "Cancel"
         btnCancel.Size = New Size(150, 42)
-        btnCancel.Location = New Point(40, 445)
+        btnCancel.Location = New Point(40, 415)
         btnCancel.Font = New Font("Poppins", 10, FontStyle.Bold)
         btnCancel.FlatStyle = FlatStyle.Flat
         btnCancel.FlatAppearance.BorderSize = 0
@@ -148,9 +148,9 @@ Public Class frmAddSubject
         '==========================
 
         btnSave = New Button()
-        btnSave.Text = "Save Subject"
+        btnSave.Text = "Save Batch"
         btnSave.Size = New Size(150, 42)
-        btnSave.Location = New Point(310, 445)
+        btnSave.Location = New Point(310, 415)
         btnSave.Font = New Font("Poppins", 10, FontStyle.Bold)
         btnSave.FlatStyle = FlatStyle.Flat
         btnSave.FlatAppearance.BorderSize = 0
@@ -159,36 +159,29 @@ Public Class frmAddSubject
         AddHandler btnSave.Click, AddressOf btnSave_Click
         Me.Controls.Add(btnSave)
 
-        LoadBatches()
+        LoadSchoolYears()
 
         Me.ResumeLayout()
 
     End Sub
 
-    Private Sub LoadBatches()
+    Private Sub LoadSchoolYears()
 
         Try
 
             OpenConnection()
 
-            cboBatch.Items.Clear()
+            cboSchoolYear.Items.Clear()
 
             '==========================
-            ' Show batch name + school year + semester
-            ' so the user knows exactly which batch
-            ' they are picking
+            ' Show school_year + semester
+            ' so the user picks the exact term
             '==========================
             Dim cmd As New MySqlCommand(
-                "SELECT b.batch_id,
-                        CONCAT(b.batch_name,
-                               ' | ',
-                               sy.school_year,
-                               ' ',
-                               sy.semester) AS display_name
-                 FROM batches b
-                 INNER JOIN school_years sy
-                 ON b.schoolyear_id = sy.schoolyear_id
-                 ORDER BY sy.school_year, sy.semester, b.batch_name",
+                "SELECT schoolyear_id,
+                        CONCAT(school_year, ' - ', semester) AS display_name
+                 FROM school_years
+                 ORDER BY school_year, semester",
                 Connection
             )
 
@@ -196,12 +189,12 @@ Public Class frmAddSubject
 
             While reader.Read()
 
-                Dim item As New BatchItem(
-                    Convert.ToInt32(reader("batch_id")),
+                Dim item As New SchoolYearItem(
+                    Convert.ToInt32(reader("schoolyear_id")),
                     reader("display_name").ToString()
                 )
 
-                cboBatch.Items.Add(item)
+                cboSchoolYear.Items.Add(item)
 
             End While
 
@@ -227,20 +220,26 @@ Public Class frmAddSubject
         ' VALIDATION
         '==========================
 
-        If txtSubjectName.Text.Trim = "" Then
-            MessageBox.Show("Please enter Subject Name.")
-            txtSubjectName.Focus()
+        If txtBatchName.Text.Trim = "" Then
+            MessageBox.Show("Please enter Batch Name.")
+            txtBatchName.Focus()
             Exit Sub
         End If
 
-        If cboBatch.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a Batch.")
-            cboBatch.Focus()
+        If txtAdviser.Text.Trim = "" Then
+            MessageBox.Show("Please enter Adviser.")
+            txtAdviser.Focus()
             Exit Sub
         End If
 
-        Dim selectedBatch As BatchItem =
-            DirectCast(cboBatch.SelectedItem, BatchItem)
+        If cboSchoolYear.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a School Year.")
+            cboSchoolYear.Focus()
+            Exit Sub
+        End If
+
+        Dim selectedSY As SchoolYearItem =
+            DirectCast(cboSchoolYear.SelectedItem, SchoolYearItem)
 
         Try
 
@@ -248,25 +247,25 @@ Public Class frmAddSubject
 
             '==========================
             ' CHECK DUPLICATE
-            ' Same subject name must not exist
-            ' under the same batch
+            ' Same batch name must not exist
+            ' under the same school year term
             '==========================
 
             Dim checkCmd As New MySqlCommand(
-                "SELECT COUNT(*) FROM subjects
-                 WHERE subject_name = @subject_name
-                   AND batch_id     = @batch_id",
+                "SELECT COUNT(*) FROM batches
+                 WHERE batch_name     = @batch_name
+                   AND schoolyear_id  = @schoolyear_id",
                 Connection
             )
 
             checkCmd.Parameters.AddWithValue(
-                "@subject_name",
-                txtSubjectName.Text.Trim
+                "@batch_name",
+                txtBatchName.Text.Trim
             )
 
             checkCmd.Parameters.AddWithValue(
-                "@batch_id",
-                selectedBatch.BatchID
+                "@schoolyear_id",
+                selectedSY.SchoolYearID
             )
 
             Dim total As Integer =
@@ -275,7 +274,7 @@ Public Class frmAddSubject
             If total > 0 Then
 
                 MessageBox.Show(
-                    "This subject already exists for the selected batch.",
+                    "This batch already exists for the selected school year.",
                     "Duplicate",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -287,35 +286,36 @@ Public Class frmAddSubject
             End If
 
             '==========================
-            ' INSERT SUBJECT
+            ' INSERT BATCH
             '==========================
+
             Dim insertCmd As New MySqlCommand(
-    "INSERT INTO subjects (subject_name, batch_id, schedule)
-     VALUES (@subject_name, @batch_id, @schedule)",
-    Connection
-)
+                "INSERT INTO batches (batch_name, adviser, schoolyear_id)
+                 VALUES (@batch_name, @adviser, @schoolyear_id)",
+                Connection
+            )
 
             insertCmd.Parameters.AddWithValue(
-    "@subject_name",
-    txtSubjectName.Text.Trim
-)
+                "@batch_name",
+                txtBatchName.Text.Trim
+            )
 
             insertCmd.Parameters.AddWithValue(
-    "@batch_id",
-    selectedBatch.BatchID
-)
+                "@adviser",
+                txtAdviser.Text.Trim
+            )
 
             insertCmd.Parameters.AddWithValue(
-    "@schedule",
-    txtSchedule.Text.Trim
-)
+                "@schoolyear_id",
+                selectedSY.SchoolYearID
+            )
 
             insertCmd.ExecuteNonQuery()
 
             CloseConnection()
 
             MessageBox.Show(
-                "Subject added successfully.",
+                "Batch added successfully.",
                 "Success",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
@@ -341,17 +341,17 @@ Public Class frmAddSubject
 End Class
 
 '==========================
-' Helper class to store batch_id
+' Helper class to store schoolyear_id
 ' while showing a friendly name
 ' in the ComboBox
 '==========================
-Public Class BatchItem
+Public Class SchoolYearItem
 
-    Public Property BatchID As Integer
+    Public Property SchoolYearID As Integer
     Public Property DisplayName As String
 
     Public Sub New(id As Integer, name As String)
-        BatchID = id
+        SchoolYearID = id
         DisplayName = name
     End Sub
 
