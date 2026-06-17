@@ -111,7 +111,7 @@ Partial Class ucStudents
         pnlRefreshStudent.Controls.Add(lblRefreshStudent)
         pnlRefreshStudent.Controls.Add(picRefreshStudent)
         pnlRefreshStudent.Cursor = Cursors.Hand
-        pnlRefreshStudent.Location = New Point(928, 18)
+        pnlRefreshStudent.Location = New Point(915, 18)
         pnlRefreshStudent.Name = "pnlRefreshStudent"
         pnlRefreshStudent.Size = New Size(86, 42)
         pnlRefreshStudent.TabIndex = 10
@@ -143,9 +143,9 @@ Partial Class ucStudents
         pnlDeleteStudent.Controls.Add(lblDeleteStudent)
         pnlDeleteStudent.Controls.Add(picDeleteStudent)
         pnlDeleteStudent.Cursor = Cursors.Hand
-        pnlDeleteStudent.Location = New Point(1020, 18)
+        pnlDeleteStudent.Location = New Point(1007, 18)
         pnlDeleteStudent.Name = "pnlDeleteStudent"
-        pnlDeleteStudent.Size = New Size(81, 42)
+        pnlDeleteStudent.Size = New Size(94, 42)
         pnlDeleteStudent.TabIndex = 9
         ' 
         ' lblDeleteStudent
@@ -153,7 +153,7 @@ Partial Class ucStudents
         lblDeleteStudent.AutoSize = True
         lblDeleteStudent.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDeleteStudent.ForeColor = Color.White
-        lblDeleteStudent.Location = New Point(24, 10)
+        lblDeleteStudent.Location = New Point(27, 10)
         lblDeleteStudent.Name = "lblDeleteStudent"
         lblDeleteStudent.Size = New Size(52, 23)
         lblDeleteStudent.TabIndex = 5

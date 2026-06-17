@@ -22,27 +22,27 @@ Partial Class ucSchoolYear
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        pnlContentAbsences = New Panel()
+        pnlContentSchoolYear = New Panel()
         SuspendLayout()
         ' 
-        ' pnlContentAbsences
+        ' pnlContentSchoolYear
         ' 
-        pnlContentAbsences.Dock = DockStyle.Fill
-        pnlContentAbsences.Location = New Point(0, 0)
-        pnlContentAbsences.Name = "pnlContentAbsences"
-        pnlContentAbsences.Size = New Size(1396, 788)
-        pnlContentAbsences.TabIndex = 0
+        pnlContentSchoolYear.Dock = DockStyle.Fill
+        pnlContentSchoolYear.Location = New Point(0, 0)
+        pnlContentSchoolYear.Name = "pnlContentSchoolYear"
+        pnlContentSchoolYear.Size = New Size(1396, 788)
+        pnlContentSchoolYear.TabIndex = 0
         ' 
-        ' ucAbsences
+        ' ucSchoolYear
         ' 
         AutoScaleMode = AutoScaleMode.None
         BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        Controls.Add(pnlContentAbsences)
-        Name = "ucAbsences"
+        Controls.Add(pnlContentSchoolYear)
+        Name = "ucSchoolYear"
         Size = New Size(1396, 788)
         ResumeLayout(False)
     End Sub
 
-    Friend WithEvents pnlContentAbsences As Panel
+    Friend WithEvents pnlContentSchoolYear As Panel
 
 End Class

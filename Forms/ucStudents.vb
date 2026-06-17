@@ -42,6 +42,7 @@ Public Class ucStudents
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             .RowHeadersVisible = False
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            .ReadOnly = True
 
             .BackgroundColor = Color.White
             .BorderStyle = BorderStyle.None
@@ -265,6 +266,7 @@ Public Class ucStudents
 
         LoadStudentsFromDatabase()
     End Sub
+
     '==========================
     ' Class Variables
     '==========================
@@ -280,7 +282,7 @@ Public Class ucStudents
 
             IsDeleteMode = True
 
-            lblDeleteStudent.Text = "Confirm Delete"
+            lblDeleteStudent.Text = "Confirm"
 
             AddDeleteCheckboxColumn()
 
@@ -298,10 +300,7 @@ Public Class ucStudents
     Private Sub AddDeleteCheckboxColumn()
         If dgvStudents.Columns.Contains(DeleteColumnName) Then Exit Sub
 
-        dgvStudents.ReadOnly = False
-
         Dim chkColumn As New DataGridViewCheckBoxColumn()
-        MessageBox.Show("Checkbox Column Added")
 
         chkColumn.Name = DeleteColumnName
 
@@ -310,14 +309,15 @@ Public Class ucStudents
         chkColumn.Width = 50
 
         dgvStudents.Columns.Insert(0, chkColumn)
-        MessageBox.Show(dgvStudents.Columns.Count.ToString())
+
+        dgvStudents.ReadOnly = False
+        dgvStudents.SelectionMode = DataGridViewSelectionMode.CellSelect
 
         For Each col As DataGridViewColumn In dgvStudents.Columns
 
             If col.Name <> DeleteColumnName Then
 
-                dgvStudents.ReadOnly = False
-                dgvStudents.SelectionMode = DataGridViewSelectionMode.CellSelect
+                col.ReadOnly = True
 
             End If
 
@@ -329,6 +329,8 @@ Public Class ucStudents
     ' Checkbox Commit Fix
     '==========================
     Private Sub dgvStudents_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellContentClick
+
+        If e.RowIndex < 0 Then Exit Sub
 
         If dgvStudents.Columns.Contains(DeleteColumnName) Then
             If e.ColumnIndex = dgvStudents.Columns(DeleteColumnName).Index Then
@@ -425,23 +427,9 @@ Public Class ucStudents
             dgvStudents.Columns.Remove(DeleteColumnName)
         End If
 
-    End Sub
-
-    Private Sub pnlDeleteStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlDeleteStudent.MouseClick
-
-
-        IsDeleteMode = False
-
-        lblDeleteStudent.Text = "Delete"
-
         dgvStudents.ReadOnly = True
-
-        If dgvStudents.Columns.Contains(DeleteColumnName) Then
-
-            dgvStudents.Columns.Remove(DeleteColumnName)
-
-        End If
-
+        dgvStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
     End Sub
+
 End Class
