@@ -136,4 +136,8 @@
     Private Sub pnlContentBatches_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
+
+    Private Sub pnlAddSubject_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlAddSubject.MouseClick
+
+    End Sub
 End Class

@@ -27,38 +27,38 @@ Partial Class ucSubjects
         BackgroundWorker2 = New ComponentModel.BackgroundWorker()
         RoundedPanel6 = New RoundedPanel()
         RoundedPanel5 = New RoundedPanel()
-        RoundedPanel41 = New RoundedPanel4()
-        PictureBox5 = New PictureBox()
-        TextBox1 = New TextBox()
-        cboSubjectFilter = New ComboBox()
-        pnlAddSubject = New RoundedPanel4()
-        picSubjectAdd = New PictureBox()
-        lblAddSubject = New Label()
-        pnlEditSubject = New RoundedPanel4()
-        picSubjectEdit = New PictureBox()
-        lblEditSubject = New Label()
-        pnlDeleteSubject = New RoundedPanel4()
-        picSubjectDelete = New PictureBox()
-        lblDeleteSubject = New Label()
-        pnlRefreshSubject = New RoundedPanel4()
-        picSubjectRefresh = New PictureBox()
-        lblRefreshSubject = New Label()
+        pnlPrint = New RoundedPanel4()
+        lblPrint = New Label()
+        picPrint = New PictureBox()
         dgvSubjects = New DataGridView()
+        pnlDeleteSubject = New RoundedPanel4()
+        lblDeleteSubject = New Label()
+        picSubjectDelete = New PictureBox()
+        pnlEditSubject = New RoundedPanel4()
+        lblEditSubject = New Label()
+        picSubjectEdit = New PictureBox()
+        pnlAddSubject = New RoundedPanel4()
+        lblAddSubject = New Label()
+        picSubjectAdd = New PictureBox()
+        cboSubjectFilter = New ComboBox()
+        RoundedPanel41 = New RoundedPanel4()
+        TextBox1 = New TextBox()
+        PictureBox5 = New PictureBox()
         pnlContentSubjects = New Panel()
         Label2 = New Label()
         lblBatches = New Label()
         RoundedPanel5.SuspendLayout()
-        RoundedPanel41.SuspendLayout()
-        CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
-        pnlAddSubject.SuspendLayout()
-        CType(picSubjectAdd, ComponentModel.ISupportInitialize).BeginInit()
-        pnlEditSubject.SuspendLayout()
-        CType(picSubjectEdit, ComponentModel.ISupportInitialize).BeginInit()
+        pnlPrint.SuspendLayout()
+        CType(picPrint, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvSubjects, ComponentModel.ISupportInitialize).BeginInit()
         pnlDeleteSubject.SuspendLayout()
         CType(picSubjectDelete, ComponentModel.ISupportInitialize).BeginInit()
-        pnlRefreshSubject.SuspendLayout()
-        CType(picSubjectRefresh, ComponentModel.ISupportInitialize).BeginInit()
-        CType(dgvSubjects, ComponentModel.ISupportInitialize).BeginInit()
+        pnlEditSubject.SuspendLayout()
+        CType(picSubjectEdit, ComponentModel.ISupportInitialize).BeginInit()
+        pnlAddSubject.SuspendLayout()
+        CType(picSubjectAdd, ComponentModel.ISupportInitialize).BeginInit()
+        RoundedPanel41.SuspendLayout()
+        CType(PictureBox5, ComponentModel.ISupportInitialize).BeginInit()
         pnlContentSubjects.SuspendLayout()
         SuspendLayout()
         ' 
@@ -73,8 +73,8 @@ Partial Class ucSubjects
         ' RoundedPanel5
         ' 
         RoundedPanel5.BackColor = Color.White
+        RoundedPanel5.Controls.Add(pnlPrint)
         RoundedPanel5.Controls.Add(dgvSubjects)
-        RoundedPanel5.Controls.Add(pnlRefreshSubject)
         RoundedPanel5.Controls.Add(pnlDeleteSubject)
         RoundedPanel5.Controls.Add(pnlEditSubject)
         RoundedPanel5.Controls.Add(pnlAddSubject)
@@ -85,178 +85,37 @@ Partial Class ucSubjects
         RoundedPanel5.Size = New Size(1320, 618)
         RoundedPanel5.TabIndex = 3
         ' 
-        ' RoundedPanel41
+        ' pnlPrint
         ' 
-        RoundedPanel41.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        RoundedPanel41.Controls.Add(TextBox1)
-        RoundedPanel41.Controls.Add(PictureBox5)
-        RoundedPanel41.Cursor = Cursors.Hand
-        RoundedPanel41.Location = New Point(26, 18)
-        RoundedPanel41.Name = "RoundedPanel41"
-        RoundedPanel41.Size = New Size(232, 37)
-        RoundedPanel41.TabIndex = 0
+        pnlPrint.BackColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
+        pnlPrint.Controls.Add(lblPrint)
+        pnlPrint.Controls.Add(picPrint)
+        pnlPrint.Cursor = Cursors.Hand
+        pnlPrint.Location = New Point(919, 18)
+        pnlPrint.Name = "pnlPrint"
+        pnlPrint.Size = New Size(82, 42)
+        pnlPrint.TabIndex = 12
         ' 
-        ' PictureBox5
+        ' lblPrint
         ' 
-        PictureBox5.BackColor = Color.Transparent
-        PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), Image)
-        PictureBox5.Location = New Point(6, 4)
-        PictureBox5.Name = "PictureBox5"
-        PictureBox5.Size = New Size(22, 29)
-        PictureBox5.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox5.TabIndex = 0
-        PictureBox5.TabStop = False
+        lblPrint.AutoSize = True
+        lblPrint.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPrint.ForeColor = Color.White
+        lblPrint.Location = New Point(34, 10)
+        lblPrint.Name = "lblPrint"
+        lblPrint.Size = New Size(42, 23)
+        lblPrint.TabIndex = 5
+        lblPrint.Text = "Print"
         ' 
-        ' TextBox1
+        ' picPrint
         ' 
-        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        TextBox1.BorderStyle = BorderStyle.None
-        TextBox1.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
-        TextBox1.Location = New Point(29, 9)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(198, 20)
-        TextBox1.TabIndex = 1
-        TextBox1.Text = "Search Subjects..."
-        ' 
-        ' cboSubjectFilter
-        ' 
-        cboSubjectFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        cboSubjectFilter.DropDownStyle = ComboBoxStyle.DropDownList
-        cboSubjectFilter.Font = New Font("Microsoft Sans Serif", 9.75F)
-        cboSubjectFilter.FormattingEnabled = True
-        cboSubjectFilter.Location = New Point(273, 20)
-        cboSubjectFilter.Name = "cboSubjectFilter"
-        cboSubjectFilter.Size = New Size(121, 24)
-        cboSubjectFilter.TabIndex = 1
-        ' 
-        ' pnlAddSubject
-        ' 
-        pnlAddSubject.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
-        pnlAddSubject.Controls.Add(lblAddSubject)
-        pnlAddSubject.Controls.Add(picSubjectAdd)
-        pnlAddSubject.Cursor = Cursors.Hand
-        pnlAddSubject.Location = New Point(1178, 18)
-        pnlAddSubject.Name = "pnlAddSubject"
-        pnlAddSubject.Size = New Size(123, 42)
-        pnlAddSubject.TabIndex = 7
-        ' 
-        ' picSubjectAdd
-        ' 
-        picSubjectAdd.Image = CType(resources.GetObject("picSubjectAdd.Image"), Image)
-        picSubjectAdd.Location = New Point(4, 11)
-        picSubjectAdd.Name = "picSubjectAdd"
-        picSubjectAdd.Size = New Size(23, 19)
-        picSubjectAdd.SizeMode = PictureBoxSizeMode.StretchImage
-        picSubjectAdd.TabIndex = 6
-        picSubjectAdd.TabStop = False
-        ' 
-        ' lblAddSubject
-        ' 
-        lblAddSubject.AutoSize = True
-        lblAddSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblAddSubject.ForeColor = Color.White
-        lblAddSubject.Location = New Point(26, 10)
-        lblAddSubject.Name = "lblAddSubject"
-        lblAddSubject.Size = New Size(96, 23)
-        lblAddSubject.TabIndex = 5
-        lblAddSubject.Text = "Add Batches"
-        ' 
-        ' pnlEditSubject
-        ' 
-        pnlEditSubject.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
-        pnlEditSubject.Controls.Add(lblEditSubject)
-        pnlEditSubject.Controls.Add(picSubjectEdit)
-        pnlEditSubject.Cursor = Cursors.Hand
-        pnlEditSubject.Location = New Point(1107, 18)
-        pnlEditSubject.Name = "pnlEditSubject"
-        pnlEditSubject.Size = New Size(64, 42)
-        pnlEditSubject.TabIndex = 8
-        ' 
-        ' picSubjectEdit
-        ' 
-        picSubjectEdit.Image = CType(resources.GetObject("picSubjectEdit.Image"), Image)
-        picSubjectEdit.Location = New Point(3, 11)
-        picSubjectEdit.Name = "picSubjectEdit"
-        picSubjectEdit.Size = New Size(23, 19)
-        picSubjectEdit.SizeMode = PictureBoxSizeMode.StretchImage
-        picSubjectEdit.TabIndex = 6
-        picSubjectEdit.TabStop = False
-        ' 
-        ' lblEditSubject
-        ' 
-        lblEditSubject.AutoSize = True
-        lblEditSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblEditSubject.ForeColor = Color.White
-        lblEditSubject.Location = New Point(26, 10)
-        lblEditSubject.Name = "lblEditSubject"
-        lblEditSubject.Size = New Size(35, 23)
-        lblEditSubject.TabIndex = 5
-        lblEditSubject.Text = "Edit"
-        ' 
-        ' pnlDeleteSubject
-        ' 
-        pnlDeleteSubject.BackColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
-        pnlDeleteSubject.Controls.Add(lblDeleteSubject)
-        pnlDeleteSubject.Controls.Add(picSubjectDelete)
-        pnlDeleteSubject.Cursor = Cursors.Hand
-        pnlDeleteSubject.Location = New Point(1020, 18)
-        pnlDeleteSubject.Name = "pnlDeleteSubject"
-        pnlDeleteSubject.Size = New Size(81, 42)
-        pnlDeleteSubject.TabIndex = 9
-        ' 
-        ' picSubjectDelete
-        ' 
-        picSubjectDelete.Image = CType(resources.GetObject("picSubjectDelete.Image"), Image)
-        picSubjectDelete.Location = New Point(2, 11)
-        picSubjectDelete.Name = "picSubjectDelete"
-        picSubjectDelete.Size = New Size(23, 19)
-        picSubjectDelete.SizeMode = PictureBoxSizeMode.StretchImage
-        picSubjectDelete.TabIndex = 6
-        picSubjectDelete.TabStop = False
-        ' 
-        ' lblDeleteSubject
-        ' 
-        lblDeleteSubject.AutoSize = True
-        lblDeleteSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblDeleteSubject.ForeColor = Color.White
-        lblDeleteSubject.Location = New Point(24, 10)
-        lblDeleteSubject.Name = "lblDeleteSubject"
-        lblDeleteSubject.Size = New Size(52, 23)
-        lblDeleteSubject.TabIndex = 5
-        lblDeleteSubject.Text = "Delete"
-        ' 
-        ' pnlRefreshSubject
-        ' 
-        pnlRefreshSubject.BackColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
-        pnlRefreshSubject.Controls.Add(lblRefreshSubject)
-        pnlRefreshSubject.Controls.Add(picSubjectRefresh)
-        pnlRefreshSubject.Cursor = Cursors.Hand
-        pnlRefreshSubject.Location = New Point(928, 18)
-        pnlRefreshSubject.Name = "pnlRefreshSubject"
-        pnlRefreshSubject.Size = New Size(86, 42)
-        pnlRefreshSubject.TabIndex = 10
-        ' 
-        ' picSubjectRefresh
-        ' 
-        picSubjectRefresh.Image = CType(resources.GetObject("picSubjectRefresh.Image"), Image)
-        picSubjectRefresh.Location = New Point(4, 11)
-        picSubjectRefresh.Name = "picSubjectRefresh"
-        picSubjectRefresh.Size = New Size(23, 19)
-        picSubjectRefresh.SizeMode = PictureBoxSizeMode.StretchImage
-        picSubjectRefresh.TabIndex = 6
-        picSubjectRefresh.TabStop = False
-        ' 
-        ' lblRefreshSubject
-        ' 
-        lblRefreshSubject.AutoSize = True
-        lblRefreshSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblRefreshSubject.ForeColor = Color.White
-        lblRefreshSubject.Location = New Point(24, 10)
-        lblRefreshSubject.Name = "lblRefreshSubject"
-        lblRefreshSubject.Size = New Size(61, 23)
-        lblRefreshSubject.TabIndex = 5
-        lblRefreshSubject.Text = "Refresh"
+        picPrint.Image = CType(resources.GetObject("picPrint.Image"), Image)
+        picPrint.Location = New Point(9, 11)
+        picPrint.Name = "picPrint"
+        picPrint.Size = New Size(23, 19)
+        picPrint.SizeMode = PictureBoxSizeMode.StretchImage
+        picPrint.TabIndex = 6
+        picPrint.TabStop = False
         ' 
         ' dgvSubjects
         ' 
@@ -274,6 +133,147 @@ Partial Class ucSubjects
         dgvSubjects.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvSubjects.Size = New Size(1300, 511)
         dgvSubjects.TabIndex = 11
+        ' 
+        ' pnlDeleteSubject
+        ' 
+        pnlDeleteSubject.BackColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
+        pnlDeleteSubject.Controls.Add(lblDeleteSubject)
+        pnlDeleteSubject.Controls.Add(picSubjectDelete)
+        pnlDeleteSubject.Cursor = Cursors.Hand
+        pnlDeleteSubject.Location = New Point(1007, 18)
+        pnlDeleteSubject.Name = "pnlDeleteSubject"
+        pnlDeleteSubject.Size = New Size(94, 42)
+        pnlDeleteSubject.TabIndex = 9
+        ' 
+        ' lblDeleteSubject
+        ' 
+        lblDeleteSubject.AutoSize = True
+        lblDeleteSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDeleteSubject.ForeColor = Color.White
+        lblDeleteSubject.Location = New Point(24, 10)
+        lblDeleteSubject.Name = "lblDeleteSubject"
+        lblDeleteSubject.Size = New Size(52, 23)
+        lblDeleteSubject.TabIndex = 5
+        lblDeleteSubject.Text = "Delete"
+        ' 
+        ' picSubjectDelete
+        ' 
+        picSubjectDelete.Image = CType(resources.GetObject("picSubjectDelete.Image"), Image)
+        picSubjectDelete.Location = New Point(2, 11)
+        picSubjectDelete.Name = "picSubjectDelete"
+        picSubjectDelete.Size = New Size(23, 19)
+        picSubjectDelete.SizeMode = PictureBoxSizeMode.StretchImage
+        picSubjectDelete.TabIndex = 6
+        picSubjectDelete.TabStop = False
+        ' 
+        ' pnlEditSubject
+        ' 
+        pnlEditSubject.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        pnlEditSubject.Controls.Add(lblEditSubject)
+        pnlEditSubject.Controls.Add(picSubjectEdit)
+        pnlEditSubject.Cursor = Cursors.Hand
+        pnlEditSubject.Location = New Point(1107, 18)
+        pnlEditSubject.Name = "pnlEditSubject"
+        pnlEditSubject.Size = New Size(64, 42)
+        pnlEditSubject.TabIndex = 8
+        ' 
+        ' lblEditSubject
+        ' 
+        lblEditSubject.AutoSize = True
+        lblEditSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblEditSubject.ForeColor = Color.White
+        lblEditSubject.Location = New Point(26, 10)
+        lblEditSubject.Name = "lblEditSubject"
+        lblEditSubject.Size = New Size(35, 23)
+        lblEditSubject.TabIndex = 5
+        lblEditSubject.Text = "Edit"
+        ' 
+        ' picSubjectEdit
+        ' 
+        picSubjectEdit.Image = CType(resources.GetObject("picSubjectEdit.Image"), Image)
+        picSubjectEdit.Location = New Point(3, 11)
+        picSubjectEdit.Name = "picSubjectEdit"
+        picSubjectEdit.Size = New Size(23, 19)
+        picSubjectEdit.SizeMode = PictureBoxSizeMode.StretchImage
+        picSubjectEdit.TabIndex = 6
+        picSubjectEdit.TabStop = False
+        ' 
+        ' pnlAddSubject
+        ' 
+        pnlAddSubject.BackColor = Color.FromArgb(CByte(139), CByte(92), CByte(246))
+        pnlAddSubject.Controls.Add(lblAddSubject)
+        pnlAddSubject.Controls.Add(picSubjectAdd)
+        pnlAddSubject.Cursor = Cursors.Hand
+        pnlAddSubject.Location = New Point(1178, 18)
+        pnlAddSubject.Name = "pnlAddSubject"
+        pnlAddSubject.Size = New Size(123, 42)
+        pnlAddSubject.TabIndex = 7
+        ' 
+        ' lblAddSubject
+        ' 
+        lblAddSubject.AutoSize = True
+        lblAddSubject.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAddSubject.ForeColor = Color.White
+        lblAddSubject.Location = New Point(26, 10)
+        lblAddSubject.Name = "lblAddSubject"
+        lblAddSubject.Size = New Size(99, 23)
+        lblAddSubject.TabIndex = 5
+        lblAddSubject.Text = "Add Subjects"
+        ' 
+        ' picSubjectAdd
+        ' 
+        picSubjectAdd.Image = CType(resources.GetObject("picSubjectAdd.Image"), Image)
+        picSubjectAdd.Location = New Point(4, 11)
+        picSubjectAdd.Name = "picSubjectAdd"
+        picSubjectAdd.Size = New Size(23, 19)
+        picSubjectAdd.SizeMode = PictureBoxSizeMode.StretchImage
+        picSubjectAdd.TabIndex = 6
+        picSubjectAdd.TabStop = False
+        ' 
+        ' cboSubjectFilter
+        ' 
+        cboSubjectFilter.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        cboSubjectFilter.DropDownStyle = ComboBoxStyle.DropDownList
+        cboSubjectFilter.Font = New Font("Microsoft Sans Serif", 9.75F)
+        cboSubjectFilter.FormattingEnabled = True
+        cboSubjectFilter.Location = New Point(273, 20)
+        cboSubjectFilter.Name = "cboSubjectFilter"
+        cboSubjectFilter.Size = New Size(121, 24)
+        cboSubjectFilter.TabIndex = 1
+        ' 
+        ' RoundedPanel41
+        ' 
+        RoundedPanel41.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        RoundedPanel41.Controls.Add(TextBox1)
+        RoundedPanel41.Controls.Add(PictureBox5)
+        RoundedPanel41.Cursor = Cursors.Hand
+        RoundedPanel41.Location = New Point(26, 18)
+        RoundedPanel41.Name = "RoundedPanel41"
+        RoundedPanel41.Size = New Size(232, 37)
+        RoundedPanel41.TabIndex = 0
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        TextBox1.BorderStyle = BorderStyle.None
+        TextBox1.Font = New Font("Poppins", 9.75F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.ForeColor = Color.FromArgb(CByte(120), CByte(120), CByte(150))
+        TextBox1.Location = New Point(29, 9)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(198, 20)
+        TextBox1.TabIndex = 1
+        TextBox1.Text = "Search Subjects..."
+        ' 
+        ' PictureBox5
+        ' 
+        PictureBox5.BackColor = Color.Transparent
+        PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), Image)
+        PictureBox5.Location = New Point(6, 4)
+        PictureBox5.Name = "PictureBox5"
+        PictureBox5.Size = New Size(22, 29)
+        PictureBox5.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox5.TabIndex = 0
+        PictureBox5.TabStop = False
         ' 
         ' pnlContentSubjects
         ' 
@@ -316,22 +316,22 @@ Partial Class ucSubjects
         Name = "ucSubjects"
         Size = New Size(1396, 788)
         RoundedPanel5.ResumeLayout(False)
-        RoundedPanel41.ResumeLayout(False)
-        RoundedPanel41.PerformLayout()
-        CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
-        pnlAddSubject.ResumeLayout(False)
-        pnlAddSubject.PerformLayout()
-        CType(picSubjectAdd, ComponentModel.ISupportInitialize).EndInit()
-        pnlEditSubject.ResumeLayout(False)
-        pnlEditSubject.PerformLayout()
-        CType(picSubjectEdit, ComponentModel.ISupportInitialize).EndInit()
+        pnlPrint.ResumeLayout(False)
+        pnlPrint.PerformLayout()
+        CType(picPrint, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvSubjects, ComponentModel.ISupportInitialize).EndInit()
         pnlDeleteSubject.ResumeLayout(False)
         pnlDeleteSubject.PerformLayout()
         CType(picSubjectDelete, ComponentModel.ISupportInitialize).EndInit()
-        pnlRefreshSubject.ResumeLayout(False)
-        pnlRefreshSubject.PerformLayout()
-        CType(picSubjectRefresh, ComponentModel.ISupportInitialize).EndInit()
-        CType(dgvSubjects, ComponentModel.ISupportInitialize).EndInit()
+        pnlEditSubject.ResumeLayout(False)
+        pnlEditSubject.PerformLayout()
+        CType(picSubjectEdit, ComponentModel.ISupportInitialize).EndInit()
+        pnlAddSubject.ResumeLayout(False)
+        pnlAddSubject.PerformLayout()
+        CType(picSubjectAdd, ComponentModel.ISupportInitialize).EndInit()
+        RoundedPanel41.ResumeLayout(False)
+        RoundedPanel41.PerformLayout()
+        CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
         pnlContentSubjects.ResumeLayout(False)
         pnlContentSubjects.PerformLayout()
         ResumeLayout(False)
@@ -341,9 +341,6 @@ Partial Class ucSubjects
     Friend WithEvents RoundedPanel6 As RoundedPanel
     Friend WithEvents RoundedPanel5 As RoundedPanel
     Friend WithEvents dgvSubjects As DataGridView
-    Friend WithEvents pnlRefreshSubject As RoundedPanel4
-    Friend WithEvents lblRefreshSubject As Label
-    Friend WithEvents picSubjectRefresh As PictureBox
     Friend WithEvents pnlDeleteSubject As RoundedPanel4
     Friend WithEvents lblDeleteSubject As Label
     Friend WithEvents picSubjectDelete As PictureBox
@@ -360,5 +357,8 @@ Partial Class ucSubjects
     Friend WithEvents pnlContentSubjects As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents lblBatches As Label
+    Friend WithEvents pnlPrint As RoundedPanel4
+    Friend WithEvents lblPrint As Label
+    Friend WithEvents picPrint As PictureBox
 
 End Class

@@ -143,4 +143,8 @@
     Private Sub cboBatchFilter_SelectedIndexChanged_1(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub pnlAddBatches_MouseClick(sender As Object, e As MouseEventArgs) Handles pnlAddBatches.MouseClick
+
+    End Sub
 End Class
