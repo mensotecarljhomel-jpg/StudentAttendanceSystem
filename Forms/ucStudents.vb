@@ -29,13 +29,28 @@ Public Class ucStudents
         cboBatchFilter.Items.Clear()
 
         cboBatchFilter.Items.Add("All Sections")
-        cboBatchFilter.Items.Add("Grade 11 - 1")
-        cboBatchFilter.Items.Add("Grade 11 - 2")
-        cboBatchFilter.Items.Add("Grade 11 - 3")
-        cboBatchFilter.Items.Add("Grade 12 - 1")
-        cboBatchFilter.Items.Add("Grade 12 - 2")
-        cboBatchFilter.Items.Add("Grade 12 - 3")
 
+        Try
+            OpenConnection()
+
+            Dim cmd As New MySqlCommand(
+        "SELECT batch_name FROM batches ORDER BY batch_name",
+        Connection)
+
+            Dim dr As MySqlDataReader = cmd.ExecuteReader()
+
+            While dr.Read()
+                cboBatchFilter.Items.Add(dr("batch_name").ToString())
+            End While
+
+            dr.Close()
+            CloseConnection()
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading sections: " & ex.Message)
+        End Try
+
+        cboBatchFilter.SelectedIndex = 0
         ' NOTE: this line fires cboBatchFilter_SelectedIndexChanged
         ' immediately, which calls LoadStudentsFromDatabase().
         ' That's fine now because SetupStudentGrid() already ran above,
@@ -279,6 +294,23 @@ Public Class ucStudents
     End Sub
 
     Private Sub pnlAddStudent_Click(sender As Object, e As EventArgs) Handles pnlAddStudent.Click
+        ' Validate: require at least one Batch/Section before adding Students
+        Try
+            OpenConnection()
+            Dim batchCountCmd As New MySqlCommand("SELECT COUNT(*) FROM batches", Connection)
+            Dim batchCount As Integer = Convert.ToInt32(batchCountCmd.ExecuteScalar())
+            CloseConnection()
+
+            If batchCount = 0 Then
+                MessageBox.Show("Please create a Batch/Section before adding Students.", "Prerequisite Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+        Catch ex As Exception
+            CloseConnection()
+            MessageBox.Show(ex.Message)
+            Return
+        End Try
+
         Dim frm As New frmAddStudent()
         frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
         Dim owner = Me.FindForm()

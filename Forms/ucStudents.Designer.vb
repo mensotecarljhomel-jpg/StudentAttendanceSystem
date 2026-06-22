@@ -226,7 +226,7 @@ Partial Class ucStudents
         pnlAddStudent.Controls.Add(lblAddStudent)
         pnlAddStudent.Controls.Add(picAddStudent)
         pnlAddStudent.Cursor = Cursors.Hand
-        pnlAddStudent.Location = New Point(1178, 18)
+        pnlAddStudent.Location = New Point(1177, 18)
         pnlAddStudent.Name = "pnlAddStudent"
         pnlAddStudent.Size = New Size(123, 42)
         pnlAddStudent.TabIndex = 7

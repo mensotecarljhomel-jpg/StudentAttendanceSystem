@@ -369,6 +369,23 @@ Public Class ucSubjects
 
     '------------------------------------------------------------------------------------------------'
     Private Sub pnlAddSubject_Click(sender As Object, e As EventArgs) Handles pnlAddSubject.Click
+        ' Validate: require at least one Batch to exist before adding Subjects
+        Try
+            OpenConnection()
+            Dim batchCountCmd As New MySqlCommand("SELECT COUNT(*) FROM batches", Connection)
+            Dim batchCount As Integer = Convert.ToInt32(batchCountCmd.ExecuteScalar())
+            CloseConnection()
+
+            If batchCount = 0 Then
+                MessageBox.Show("Please create a Batch/Section before adding Subjects.", "Prerequisite Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+        Catch ex As Exception
+            CloseConnection()
+            MessageBox.Show(ex.Message)
+            Return
+        End Try
+
         Dim frm As New frmAddSubject
         frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
         frm.ShowDialog()

@@ -54,6 +54,16 @@ Public Class Dashboard
 
     End Sub
 
+    ' Public method to refresh dashboard data when school year changes
+    Public Sub RefreshDashboard()
+        If CurrentPage <> "Dashboard" Then Return
+        Try
+            BuildDashboard()
+        Catch ex As Exception
+            ' non-fatal
+        End Try
+    End Sub
+
     ' helper to draw rounded rectangles
     Private Sub FillRoundedRect(g As Graphics, brush As Brush, rect As Rectangle, radius As Integer)
         Using path As New GraphicsPath()
@@ -101,7 +111,11 @@ Public Class Dashboard
         ' Clear existing controls
         pnlContent.Controls.Clear()
 
+        pnlContent.AutoScroll = True
+
         Dim margin As Integer = 24
+        ' extra vertical space reserved for showing selected School Year
+        Dim topOffset As Integer = 28
         Dim cardH As Integer = 96
         Dim spacing As Integer = 12
 
@@ -110,21 +124,77 @@ Public Class Dashboard
         Dim totalBatches As Integer = 0
         Dim totalSubjects As Integer = 0
         Dim totalAtRisk As Integer = 0
+        Dim activeSchoolYearId As Integer = 0
+        Dim activeSchoolYearLabel As String = "(none)"
 
         Try
             OpenConnection()
 
-            Dim cmd1 As New MySqlCommand("SELECT COUNT(*) FROM students", Connection)
-            Dim obj1 = cmd1.ExecuteScalar()
-            If obj1 IsNot Nothing Then Integer.TryParse(obj1.ToString(), totalStudents)
+            ' determine active school year (if any)
+            Try
+                Dim syCmd As New MySqlCommand("SELECT schoolyear_id, school_year FROM school_years WHERE IFNULL(is_active,0)=1 LIMIT 1", Connection)
+                Using syR = syCmd.ExecuteReader()
+                    If syR.Read() Then
+                        activeSchoolYearId = Convert.ToInt32(syR("schoolyear_id"))
+                        activeSchoolYearLabel = syR("school_year").ToString()
+                    End If
+                End Using
+            Catch
+                activeSchoolYearId = 0
+            End Try
 
-            Dim cmd2 As New MySqlCommand("SELECT COUNT(*) FROM batches", Connection)
-            Dim obj2 = cmd2.ExecuteScalar()
-            If obj2 IsNot Nothing Then Integer.TryParse(obj2.ToString(), totalBatches)
+            If activeSchoolYearId > 0 Then
+                Dim s1 As New MySqlCommand("SELECT COUNT(*) FROM students s INNER JOIN batches b ON s.batch_id = b.batch_id WHERE b.schoolyear_id = @sy", Connection)
+                s1.Parameters.AddWithValue("@sy", activeSchoolYearId)
+                Dim obj1 = s1.ExecuteScalar()
+                If obj1 IsNot Nothing Then Integer.TryParse(obj1.ToString(), totalStudents)
+            Else
+                Dim cmd1 As New MySqlCommand("SELECT COUNT(*) FROM students", Connection)
+                Dim obj1 = cmd1.ExecuteScalar()
+                If obj1 IsNot Nothing Then Integer.TryParse(obj1.ToString(), totalStudents)
+            End If
 
-            Dim cmd3 As New MySqlCommand("SELECT COUNT(*) FROM subjects", Connection)
-            Dim obj3 = cmd3.ExecuteScalar()
-            If obj3 IsNot Nothing Then Integer.TryParse(obj3.ToString(), totalSubjects)
+            If activeSchoolYearId > 0 Then
+                Dim cmd2 As New MySqlCommand("SELECT COUNT(*) FROM batches WHERE schoolyear_id = @sy", Connection)
+                cmd2.Parameters.AddWithValue("@sy", activeSchoolYearId)
+                Dim obj2 = cmd2.ExecuteScalar()
+                If obj2 IsNot Nothing Then Integer.TryParse(obj2.ToString(), totalBatches)
+            Else
+                Dim cmd2 As New MySqlCommand("SELECT COUNT(*) FROM batches", Connection)
+                Dim obj2 = cmd2.ExecuteScalar()
+                If obj2 IsNot Nothing Then Integer.TryParse(obj2.ToString(), totalBatches)
+            End If
+
+            ' Count subjects relevant to the selected school year by looking at attendance sessions
+            If activeSchoolYearId > 0 Then
+
+                Dim cmd3 As New MySqlCommand(
+        "SELECT COUNT(*)
+         FROM subjects s
+         INNER JOIN batches b
+            ON s.batch_id = b.batch_id
+         WHERE b.schoolyear_id = @sy",
+         Connection)
+
+                cmd3.Parameters.AddWithValue("@sy", activeSchoolYearId)
+
+                Dim obj3 = cmd3.ExecuteScalar()
+
+                If obj3 IsNot Nothing Then
+                    Integer.TryParse(obj3.ToString(), totalSubjects)
+                End If
+
+            Else
+
+                Dim cmd3 As New MySqlCommand("SELECT COUNT(*) FROM subjects", Connection)
+
+                Dim obj3 = cmd3.ExecuteScalar()
+
+                If obj3 IsNot Nothing Then
+                    Integer.TryParse(obj3.ToString(), totalSubjects)
+                End If
+
+            End If
 
             ' students at risk: students who have <75% attendance in any subject
             Dim atRiskSql As String =
@@ -133,11 +203,17 @@ Public Class Dashboard
                 "SUM(CASE WHEN ar.status IN ('Present','Excused') THEN 1 ELSE 0 END) AS presents, " &
                 "COUNT(ar.record_id) AS total " &
                 "FROM attendance_records ar " &
-                "INNER JOIN attendance_sessions ses ON ar.session_id = ses.session_id " &
-                "GROUP BY ar.student_number, ses.subject_id " &
+                "INNER JOIN attendance_sessions ses ON ar.session_id = ses.session_id "
+
+            If activeSchoolYearId > 0 Then
+                atRiskSql &= " WHERE ses.schoolyear_id = @sy "
+            End If
+
+            atRiskSql &= " GROUP BY ar.student_number, ses.subject_id " &
                 "HAVING total > 0 AND (presents/total) < 0.75) t"
 
             Dim cmd4 As New MySqlCommand(atRiskSql, Connection)
+            If activeSchoolYearId > 0 Then cmd4.Parameters.AddWithValue("@sy", activeSchoolYearId)
             Dim obj4 = cmd4.ExecuteScalar()
             If obj4 IsNot Nothing Then Integer.TryParse(obj4.ToString(), totalAtRisk)
 
@@ -155,6 +231,19 @@ Public Class Dashboard
             ("Students at risk", totalAtRisk.ToString(), Color.FromArgb(220, 38, 38))
         }
 
+        ' Display currently selected School Year at the top of the Dashboard
+        Dim syLabel As New Label()
+        syLabel.Font = New Font("Poppins", 10, FontStyle.Bold)
+        syLabel.ForeColor = Color.FromArgb(31, 41, 55)
+        If activeSchoolYearId > 0 Then
+            syLabel.Text = "School Year: " & activeSchoolYearLabel
+        Else
+            syLabel.Text = "School Year: (none active)"
+        End If
+        syLabel.AutoSize = True
+        syLabel.Location = New Point(margin, 6)
+        pnlContent.Controls.Add(syLabel)
+
         ' layout: four equal-width cards filling available width
         Dim cardsContainerWidth = pnlContent.ClientSize.Width - margin * 2
         Dim cardWDynamic = CInt((cardsContainerWidth - (spacing * 3)) / 4)
@@ -163,7 +252,7 @@ Public Class Dashboard
             Dim s = stats(i)
             Dim p As New RoundedPanel2()
             p.Size = New Size(cardWDynamic, cardH)
-            p.Location = New Point(x, margin)
+            p.Location = New Point(x, margin + topOffset)
             p.BackColor = Color.White
             p.Margin = New Padding(6)
             p.Padding = New Padding(12)
@@ -190,8 +279,12 @@ Public Class Dashboard
             x += p.Width + spacing
         Next
 
+        ' The Setup Guide will be added by AddSetupGuideCard called from OpenDashboard
+
         ' Section header
-        Dim headerY = margin + cardH + 20
+        ' No extra top gap reserved (setup guide shown as dialog) - place content higher
+        Dim extraTop As Integer = 0
+        Dim headerY = margin + topOffset + cardH + 20 + extraTop
         Dim header As New Label()
         header.Text = "Attendance per subject - by section"
         header.Font = New Font("Poppins", 11, FontStyle.Bold)
@@ -200,6 +293,7 @@ Public Class Dashboard
         header.AutoSize = True
         pnlContent.Controls.Add(header)
 
+
         ' Add subject cards grid (2 columns) - load from DB
         Dim subjectsStartY = headerY + 36
         Dim cardW As Integer = (pnlContent.ClientSize.Width - margin * 2 - spacing) \ 2
@@ -207,7 +301,27 @@ Public Class Dashboard
         Dim subjects As New List(Of (Integer, String))
         Try
             OpenConnection()
-            Dim subjCmd As New MySqlCommand("SELECT subject_id, subject_name FROM subjects ORDER BY subject_name", Connection)
+            Dim subjCmd As MySqlCommand
+            If activeSchoolYearId > 0 Then
+                subjCmd = New MySqlCommand(
+"SELECT s.subject_id,
+        s.subject_name
+ FROM subjects s
+ INNER JOIN batches b
+     ON s.batch_id = b.batch_id
+ WHERE b.schoolyear_id = @sy
+ ORDER BY s.subject_name",
+ Connection)
+
+                subjCmd.Parameters.AddWithValue("@sy", activeSchoolYearId)
+            Else
+                subjCmd = New MySqlCommand(
+"SELECT subject_id, subject_name
+ FROM subjects
+ ORDER BY subject_name",
+ Connection)
+            End If
+
             Using rdr As MySqlDataReader = subjCmd.ExecuteReader()
                 While rdr.Read()
                     subjects.Add((Convert.ToInt32(rdr("subject_id")), rdr("subject_name").ToString()))
@@ -234,8 +348,15 @@ Public Class Dashboard
 
             Try
                 OpenConnection()
-                Dim scmd As New MySqlCommand("SELECT COUNT(DISTINCT session_id) FROM attendance_sessions WHERE subject_id=@sid", Connection)
-                scmd.Parameters.AddWithValue("@sid", sid)
+                Dim scmd As MySqlCommand
+                If activeSchoolYearId > 0 Then
+                    scmd = New MySqlCommand("SELECT COUNT(DISTINCT session_id) FROM attendance_sessions WHERE subject_id=@sid AND schoolyear_id = @sy", Connection)
+                    scmd.Parameters.AddWithValue("@sid", sid)
+                    scmd.Parameters.AddWithValue("@sy", activeSchoolYearId)
+                Else
+                    scmd = New MySqlCommand("SELECT COUNT(DISTINCT session_id) FROM attendance_sessions WHERE subject_id=@sid", Connection)
+                    scmd.Parameters.AddWithValue("@sid", sid)
+                End If
                 Dim sObj = scmd.ExecuteScalar()
                 If sObj IsNot Nothing Then Integer.TryParse(sObj.ToString(), sessionsHeld)
 
@@ -245,11 +366,17 @@ Public Class Dashboard
                                        "FROM attendance_sessions ses " &
                                        "LEFT JOIN attendance_records ar ON ses.session_id = ar.session_id " &
                                        "LEFT JOIN batches b ON ses.batch_id = b.batch_id " &
-                                       "WHERE ses.subject_id = @sid " &
-                                       "GROUP BY b.batch_id, b.batch_name"
+                                       "WHERE ses.subject_id = @sid "
+
+                If activeSchoolYearId > 0 Then
+                    perSql &= " AND ses.schoolyear_id = @sy "
+                End If
+
+                perSql &= " GROUP BY b.batch_id, b.batch_name"
 
                 Dim pCmd As New MySqlCommand(perSql, Connection)
                 pCmd.Parameters.AddWithValue("@sid", sid)
+                If activeSchoolYearId > 0 Then pCmd.Parameters.AddWithValue("@sy", activeSchoolYearId)
                 Using pr As MySqlDataReader = pCmd.ExecuteReader()
                     While pr.Read()
                         Dim batchName = If(pr("batch_name") IsNot DBNull.Value, pr("batch_name").ToString(), "")
@@ -268,7 +395,7 @@ Public Class Dashboard
             End Try
 
             Dim card As New RoundedPanel2()
-            card.Size = New Size(colW, 180)
+            card.Size = New Size(colW, 120)
             card.Location = New Point(left + col * (colW + spacing), top)
             card.BackColor = Color.White
             card.Margin = New Padding(6)
@@ -376,7 +503,23 @@ Public Class Dashboard
         Next
 
         ' Students at risk container
-        Dim riskY = top + 30 + 180 ' ensure some spacing after attendance cards
+        ' Find the bottom of the last subject card
+        Dim lastSubjectBottom As Integer = subjectsStartY
+
+        For Each ctrl As Control In pnlContent.Controls
+            If TypeOf ctrl Is RoundedPanel2 Then
+
+                ' Ignore the top statistics cards
+                If ctrl.Top >= subjectsStartY Then
+                    If ctrl.Bottom > lastSubjectBottom Then
+                        lastSubjectBottom = ctrl.Bottom
+                    End If
+                End If
+
+            End If
+        Next
+
+        Dim riskY As Integer = lastSubjectBottom + 20 ' ensure some spacing after attendance cards
         Dim riskContainer As New RoundedPanel2()
         riskContainer.Location = New Point(margin, riskY)
         riskContainer.Size = New Size(pnlContent.ClientSize.Width - margin * 2, 420)
@@ -492,12 +635,18 @@ Public Class Dashboard
                 "INNER JOIN attendance_sessions ses ON ar.session_id = ses.session_id " &
                 "INNER JOIN students s ON ar.student_number = s.student_number " &
                 "INNER JOIN batches b ON s.batch_id = b.batch_id " &
-                "INNER JOIN subjects su ON ses.subject_id = su.subject_id " &
-                "GROUP BY ar.student_number, su.subject_id " &
+                "INNER JOIN subjects su ON ses.subject_id = su.subject_id "
+
+            If activeSchoolYearId > 0 Then
+                sql &= "WHERE ses.schoolyear_id = @sy "
+            End If
+
+            sql &= "GROUP BY ar.student_number, su.subject_id " &
                 "HAVING total_sessions > 0 AND pct < 0.75 " &
                 "ORDER BY pct ASC"
 
             Dim cmdRisk As New MySqlCommand(sql, Connection)
+            If activeSchoolYearId > 0 Then cmdRisk.Parameters.AddWithValue("@sy", activeSchoolYearId)
             Using rdr As MySqlDataReader = cmdRisk.ExecuteReader()
                 While rdr.Read()
                     Dim name = If(rdr("name") IsNot DBNull.Value, rdr("name").ToString(), "")
@@ -531,6 +680,173 @@ Public Class Dashboard
         riskContainer.Controls.Add(dgvRisk)
         pnlContent.Controls.Add(riskContainer)
 
+        pnlContent.AutoScrollMinSize =
+    New Size(0, riskContainer.Bottom + 50)
+
+    End Sub
+
+    Private Sub AddSetupGuideCard()
+        ' Check progress: SchoolYear, Batches, Subjects, Students, Attendance
+        Dim hasSchoolYear As Boolean = False
+        Dim hasBatches As Boolean = False
+        Dim hasSubjects As Boolean = False
+        Dim hasStudents As Boolean = False
+        Dim hasAttendance As Boolean = False
+
+        Try
+            OpenConnection()
+
+            Dim cmd As New MySqlCommand("SELECT COUNT(*) FROM school_years WHERE IFNULL(is_active,0)=1", Connection)
+            Dim o1 = cmd.ExecuteScalar()
+            If o1 IsNot Nothing Then hasSchoolYear = Convert.ToInt32(o1) > 0
+
+            Dim cmd2 As New MySqlCommand("SELECT COUNT(*) FROM batches", Connection)
+            Dim o2 = cmd2.ExecuteScalar()
+            If o2 IsNot Nothing Then hasBatches = Convert.ToInt32(o2) > 0
+
+            Dim cmd3 As New MySqlCommand("SELECT COUNT(*) FROM subjects", Connection)
+            Dim o3 = cmd3.ExecuteScalar()
+            If o3 IsNot Nothing Then hasSubjects = Convert.ToInt32(o3) > 0
+
+            Dim cmd4 As New MySqlCommand("SELECT COUNT(*) FROM students", Connection)
+            Dim o4 = cmd4.ExecuteScalar()
+            If o4 IsNot Nothing Then hasStudents = Convert.ToInt32(o4) > 0
+
+            Dim cmd5 As New MySqlCommand("SELECT COUNT(*) FROM attendance_sessions", Connection)
+            Dim o5 = cmd5.ExecuteScalar()
+            If o5 IsNot Nothing Then hasAttendance = Convert.ToInt32(o5) > 0
+
+        Catch
+            ' silent fallback - assume false on error
+        Finally
+            CloseConnection()
+        End Try
+        ' Create a guide card inside pnlContent named "setupGuideCard"
+        ' Remove existing guide if present
+        For Each c In pnlContent.Controls.OfType(Of Control)().ToList()
+            If c.Name = "setupGuideCard" Then pnlContent.Controls.Remove(c)
+        Next
+
+        Dim guide As New RoundedPanel2()
+        guide.Name = "setupGuideCard"
+        guide.Size = New Size(320, 140)
+        guide.BackColor = Color.White
+
+        ' Position to the right of the section header (avoid overlapping cards)
+        Dim margin As Integer = 24
+        Dim cardH As Integer = 96
+        Dim headerY As Integer = margin + cardH + 20
+        Dim xPos As Integer = Math.Max(margin, pnlContent.ClientSize.Width - guide.Width - margin)
+        Dim yPos As Integer = headerY
+        guide.Location = New Point(xPos, yPos)
+        guide.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        guide.Padding = New Padding(12)
+
+        ' Try to load guide icon from common asset paths
+        Dim iconImage As Image = Nothing
+        Try
+            Dim possiblePaths As String() = {
+                "assets\icons\guide.png",
+                "assets/icons/guide.png",
+                "Assets\\icons\\guide.png",
+                "icons\\guide.png",
+                "images\\guide.png",
+                "Resources\\guide.png",
+                "resources\\guide.png"
+            }
+            For Each rel In possiblePaths
+                Dim p As String = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, rel)
+                If System.IO.File.Exists(p) Then
+                    iconImage = Image.FromFile(p)
+                    Exit For
+                End If
+            Next
+        Catch
+            iconImage = Nothing
+        End Try
+
+        If iconImage IsNot Nothing Then
+            Dim pb As New PictureBox()
+            pb.Size = New Size(36, 36)
+            pb.SizeMode = PictureBoxSizeMode.Zoom
+            pb.Location = New Point(12, 12)
+            pb.Image = iconImage
+            guide.Controls.Add(pb)
+
+            Dim title As New Label()
+            title.Text = "System Setup Guide"
+            title.Font = New Font("Poppins", 12, FontStyle.Bold)
+            title.ForeColor = Color.FromArgb(51, 65, 85)
+            title.Location = New Point(56, 12)
+            title.AutoSize = True
+            guide.Controls.Add(title)
+        Else
+            Dim title As New Label()
+            title.Text = "System Setup Guide"
+            title.Font = New Font("Poppins", 12, FontStyle.Bold)
+            title.ForeColor = Color.FromArgb(51, 65, 85)
+            title.Location = New Point(16, 12)
+            title.AutoSize = True
+            guide.Controls.Add(title)
+        End If
+
+        Dim items = New List(Of (String, Boolean)) From {
+            ("School Year", hasSchoolYear),
+            ("Batches", hasBatches),
+            ("Subjects", hasSubjects),
+            ("Students", hasStudents),
+            ("Attendance", hasAttendance)
+        }
+
+        Dim y As Integer = 44
+        For Each it In items
+            Dim lbl As New Label()
+            lbl.Font = New Font("Poppins", 10)
+            lbl.ForeColor = If(it.Item2, Color.FromArgb(34, 197, 94), Color.FromArgb(107, 114, 128))
+            lbl.Text = If(it.Item2, "✓ " & it.Item1, "○ " & it.Item1)
+            lbl.Location = New Point(18, y)
+            lbl.AutoSize = True
+            guide.Controls.Add(lbl)
+            y += 28
+        Next
+
+        ' Highlight the next step
+        Dim nextStep As String = ""
+        If Not hasSchoolYear Then
+            nextStep = "School Year"
+        ElseIf Not hasBatches Then
+            nextStep = "Batches"
+        ElseIf Not hasSubjects Then
+            nextStep = "Subjects"
+        ElseIf Not hasStudents Then
+            nextStep = "Students"
+        ElseIf Not hasAttendance Then
+            nextStep = "Attendance"
+        End If
+
+        If nextStep <> "" Then
+            Dim hint As New Label()
+            hint.Font = New Font("Poppins", 9, FontStyle.Italic)
+            hint.ForeColor = Color.FromArgb(107, 114, 128)
+            hint.Text = "Next: " & nextStep
+            hint.Location = New Point(18, y + 6)
+            hint.AutoSize = True
+            guide.Controls.Add(hint)
+        End If
+
+        pnlContent.Controls.Add(guide)
+    End Sub
+
+    Private Sub ToggleSetupGuide()
+        ' Open the modal setup guide form
+        Try
+            Using f As New frmSetupGuide()
+                f.StartPosition = FormStartPosition.CenterParent
+                f.ShowDialog(Me)
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Failed to open Setup Guide: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     '==========================
@@ -577,6 +893,8 @@ Public Class Dashboard
         Catch ex As Exception
             MessageBox.Show("BuildDashboard error: " & ex.Message, "Dashboard Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+        ' Note: Setup guide panel is shown when user clicks the top "Set Up Guide" button
 
     End Sub
 
@@ -706,6 +1024,19 @@ Public Class Dashboard
         OpenDashboard()
     End Sub
 
+    ' Top Set Up Guide click handlers - toggle the guide panel in the dashboard
+    Private Sub pnlGuide_Click(sender As Object, e As EventArgs)
+        ToggleSetupGuide()
+    End Sub
+
+    Private Sub lblGuide_Click(sender As Object, e As EventArgs)
+        ToggleSetupGuide()
+    End Sub
+
+    Private Sub picGuide_Click(sender As Object, e As EventArgs)
+        ToggleSetupGuide()
+    End Sub
+
     '==========================
     ' Students Clicks
     '==========================
@@ -833,11 +1164,60 @@ Public Class Dashboard
             pnlSidebar.Controls.Add(lblUser)
             pnlSidebar.Controls.Add(lblRole)
 
+            ' Try to load the profile icon from the project assets and place it to the right of the username
+            Try
+                Dim targetRel As String = System.IO.Path.Combine("assets", "icons", "profile.png")
+                Dim userImg As Image = Nothing
+
+                ' Start from the app base directory and walk up a few levels to find the project root
+                Dim dir = New System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory)
+                For i As Integer = 0 To 6
+                    If dir Is Nothing Then Exit For
+                    Dim candidate = System.IO.Path.Combine(dir.FullName, targetRel)
+                    If System.IO.File.Exists(candidate) Then
+                        userImg = Image.FromFile(candidate)
+                        Exit For
+                    End If
+                    dir = dir.Parent
+                Next
+
+                If userImg Is Nothing Then
+                    ' fallback: try base dir directly for a loose profile.png
+                    Dim candidate2 = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "profile.png")
+                    If System.IO.File.Exists(candidate2) Then userImg = Image.FromFile(candidate2)
+                End If
+
+                If userImg IsNot Nothing Then
+                    Dim picUser As New PictureBox()
+                    picUser.Name = "picLoggedUser"
+                    picUser.SizeMode = PictureBoxSizeMode.Zoom
+                    picUser.Size = New Size(48, 48)
+                    ' ensure labels have their measured size by performing layout
+                    lblUser.PerformLayout()
+                    ' place to the right of the username label, but keep inside sidebar
+                    Dim px = lblUser.Left + lblUser.Width + 40
+                    If px + picUser.Width > pnlSidebar.ClientSize.Width - 8 Then
+                        px = pnlSidebar.ClientSize.Width - picUser.Width - 8
+                    End If
+                    picUser.Location = New Point(px, lblUser.Top - 2)
+                    picUser.Image = userImg
+                    pnlSidebar.Controls.Add(picUser)
+                    picUser.BringToFront()
+                End If
+            Catch ex As Exception
+                ' ignore image load errors, but keep a trace in debug
+                System.Diagnostics.Debug.WriteLine("Profile icon load failed: " & ex.Message)
+            End Try
+
             ' Ensure the existing designer Log Out label remains inside pnlLogout and wire its click
             AddHandler pnlLogout.Click, AddressOf pnlLogout_Click
             AddHandler Label1.Click, AddressOf pnlLogout_Click
             AddHandler lblUser.Click, AddressOf pnlNoop_Click
             AddHandler lblRole.Click, AddressOf pnlNoop_Click
+            ' wire top guide click handlers
+            AddHandler pnlGuide.Click, AddressOf pnlGuide_Click
+            AddHandler lblGuide.Click, AddressOf lblGuide_Click
+            AddHandler picGuide.Click, AddressOf picGuide_Click
         Catch
             ' silent fallback
         End Try

@@ -218,8 +218,8 @@ Public Class ucBatches
 
     '----------------------------------------------------------------------------------------------------------------'
     ' Refresh button
-    Private Sub pnlRefreshBatches_Click(sender As Object, e As EventArgs) Handles pnlRefreshBatches.Click
-        LoadBatches()
+    Private Sub pnlRefreshBatches_Click(sender As Object, e As EventArgs)
+        LoadBatches
 
     End Sub
     '----------------------------------------------------------------------------------------------------------------'
@@ -372,6 +372,23 @@ Public Class ucBatches
     '----------------------------------------------------------------------------------------------------------------'
     ' Add Button
     Private Sub pnlAddBatches_Click(sender As Object, e As EventArgs) Handles pnlAddBatches.Click
+        ' Validate: require an active school year before allowing Batch creation
+        Try
+            OpenConnection()
+            Dim activeCountCmd As New MySqlCommand("SELECT COUNT(*) FROM school_years WHERE IFNULL(is_active,0)=1", Connection)
+            Dim activeCount As Integer = Convert.ToInt32(activeCountCmd.ExecuteScalar())
+            CloseConnection()
+
+            If activeCount = 0 Then
+                MessageBox.Show("Please create and activate a School Year before adding Batches.", "Prerequisite Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+        Catch ex As Exception
+            CloseConnection()
+            MessageBox.Show(ex.Message)
+            Return
+        End Try
+
         Dim frm As New frmAddBatch()
         frm.StartPosition = If(FindForm() IsNot Nothing, FormStartPosition.CenterParent, FormStartPosition.CenterScreen)
         Dim owner = Me.FindForm()

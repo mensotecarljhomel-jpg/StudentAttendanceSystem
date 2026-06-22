@@ -332,6 +332,51 @@
         LoadSchoolYears()
     End Sub
 
+    Private Sub pnlSwitchSchoolYear_Click(sender As Object, e As EventArgs)
+        If dgvSchoolYear.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a school year to activate.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim id As Integer = Convert.ToInt32(dgvSchoolYear.SelectedRows(0).Cells("SchoolYearID").Value)
+
+        Dim confirm = MessageBox.Show("Activate selected School Year? This will switch the active School Year.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If confirm = DialogResult.No Then Return
+
+        Try
+            OpenConnection()
+
+            ' Set all to inactive
+            Dim resetCmd As New MySql.Data.MySqlClient.MySqlCommand("UPDATE school_years SET is_active=0", Connection)
+            resetCmd.ExecuteNonQuery()
+
+            Dim cmd As New MySql.Data.MySqlClient.MySqlCommand("UPDATE school_years SET is_active=1 WHERE schoolyear_id=@id", Connection)
+            cmd.Parameters.AddWithValue("@id", id)
+            cmd.ExecuteNonQuery()
+
+            CloseConnection()
+
+            MessageBox.Show("School year activated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            CloseConnection()
+            MessageBox.Show(ex.Message)
+            Return
+        End Try
+
+        LoadSchoolYears()
+
+        ' If Dashboard is open, refresh it
+        Dim parentForm = Me.FindForm()
+        If parentForm IsNot Nothing AndAlso TypeOf parentForm Is Dashboard Then
+            Try
+                CType(parentForm, Dashboard).RefreshDashboard()
+            Catch
+                ' ignore refresh errors
+            End Try
+        End If
+
+    End Sub
+
     Private Sub lblSearch_TextChanged(sender As Object, e As EventArgs)
         ' Use TextBox1 (designer) as search input if present
         Dim searchText As String = ""
@@ -349,5 +394,6 @@
         Next
     End Sub
 
+    ' pnlSwitchSchoolYear paint handler removed (no-op)
 End Class
 

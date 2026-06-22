@@ -24,7 +24,12 @@ Partial Class ucSchoolYear
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucSchoolYear))
         pnlContentSchoolYear = New Panel()
+        pnlSwitchSchoolYear = New RoundedPanel4()
+        picSwitch = New PictureBox()
+        lblSwitchSchoolYear = New Label()
         RoundedPanel1 = New RoundedPanel()
+        imgSearch = New PictureBox()
+        TextBox1 = New TextBox()
         cboSchoolYearFilter = New ComboBox()
         pnlDeleteSchoolYear = New RoundedPanel4()
         lblDeleteSchoolYear = New Label()
@@ -39,9 +44,11 @@ Partial Class ucSchoolYear
         RoundedPanel2 = New RoundedPanel()
         Label2 = New Label()
         Label1 = New Label()
-        imgSearch = New PictureBox()
-        TextBox1 = New TextBox()
+        pnlContentSchoolYear.SuspendLayout()
+        pnlSwitchSchoolYear.SuspendLayout()
+        CType(picSwitch, ComponentModel.ISupportInitialize).BeginInit()
         RoundedPanel1.SuspendLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         pnlDeleteSchoolYear.SuspendLayout()
         CType(picDeleteSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
         pnlEditSchoolYear.SuspendLayout()
@@ -49,16 +56,48 @@ Partial Class ucSchoolYear
         pnlAddSchoolYear.SuspendLayout()
         CType(picAddSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvSchoolYear, ComponentModel.ISupportInitialize).BeginInit()
-        CType(imgSearch, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' pnlContentSchoolYear
         ' 
+        pnlContentSchoolYear.Controls.Add(pnlSwitchSchoolYear)
         pnlContentSchoolYear.Dock = DockStyle.Fill
         pnlContentSchoolYear.Location = New Point(0, 0)
         pnlContentSchoolYear.Name = "pnlContentSchoolYear"
         pnlContentSchoolYear.Size = New Size(1396, 788)
         pnlContentSchoolYear.TabIndex = 0
+        ' 
+        ' pnlSwitchSchoolYear
+        ' 
+        pnlSwitchSchoolYear.BackColor = Color.FromArgb(CByte(34), CByte(197), CByte(94))
+        pnlSwitchSchoolYear.Controls.Add(picSwitch)
+        pnlSwitchSchoolYear.Controls.Add(lblSwitchSchoolYear)
+        pnlSwitchSchoolYear.Cursor = Cursors.Hand
+        pnlSwitchSchoolYear.Location = New Point(1195, 70)
+        pnlSwitchSchoolYear.Name = "pnlSwitchSchoolYear"
+        pnlSwitchSchoolYear.Size = New Size(148, 42)
+        pnlSwitchSchoolYear.TabIndex = 15
+        ' 
+        ' picSwitch
+        ' 
+        picSwitch.Image = CType(resources.GetObject("picSwitch.Image"), Image)
+        picSwitch.Location = New Point(16, 13)
+        picSwitch.Name = "picSwitch"
+        picSwitch.Size = New Size(23, 19)
+        picSwitch.SizeMode = PictureBoxSizeMode.StretchImage
+        picSwitch.TabIndex = 7
+        picSwitch.TabStop = False
+        ' 
+        ' lblSwitchSchoolYear
+        ' 
+        lblSwitchSchoolYear.AutoSize = True
+        lblSwitchSchoolYear.Font = New Font("Poppins", 9.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblSwitchSchoolYear.ForeColor = Color.White
+        lblSwitchSchoolYear.Location = New Point(45, 12)
+        lblSwitchSchoolYear.Name = "lblSwitchSchoolYear"
+        lblSwitchSchoolYear.Size = New Size(90, 23)
+        lblSwitchSchoolYear.TabIndex = 5
+        lblSwitchSchoolYear.Text = "Switch Year"
         ' 
         ' RoundedPanel1
         ' 
@@ -75,6 +114,26 @@ Partial Class ucSchoolYear
         RoundedPanel1.Name = "RoundedPanel1"
         RoundedPanel1.Size = New Size(1320, 618)
         RoundedPanel1.TabIndex = 7
+        ' 
+        ' imgSearch
+        ' 
+        imgSearch.BackColor = Color.Transparent
+        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
+        imgSearch.Location = New Point(29, 19)
+        imgSearch.Name = "imgSearch"
+        imgSearch.Size = New Size(21, 26)
+        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
+        imgSearch.TabIndex = 19
+        imgSearch.TabStop = False
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
+        TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(56, 20)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(192, 30)
+        TextBox1.TabIndex = 20
         ' 
         ' cboSchoolYearFilter
         ' 
@@ -94,7 +153,7 @@ Partial Class ucSchoolYear
         pnlDeleteSchoolYear.Controls.Add(lblDeleteSchoolYear)
         pnlDeleteSchoolYear.Controls.Add(picDeleteSchoolYear)
         pnlDeleteSchoolYear.Cursor = Cursors.Hand
-        pnlDeleteSchoolYear.Location = New Point(1020, 18)
+        pnlDeleteSchoolYear.Location = New Point(1004, 18)
         pnlDeleteSchoolYear.Name = "pnlDeleteSchoolYear"
         pnlDeleteSchoolYear.Size = New Size(81, 42)
         pnlDeleteSchoolYear.TabIndex = 16
@@ -126,7 +185,7 @@ Partial Class ucSchoolYear
         pnlEditSchoolYear.Controls.Add(lblEditSchoolYear)
         pnlEditSchoolYear.Controls.Add(picEditSchoolYear)
         pnlEditSchoolYear.Cursor = Cursors.Hand
-        pnlEditSchoolYear.Location = New Point(1107, 18)
+        pnlEditSchoolYear.Location = New Point(1091, 18)
         pnlEditSchoolYear.Name = "pnlEditSchoolYear"
         pnlEditSchoolYear.Size = New Size(64, 42)
         pnlEditSchoolYear.TabIndex = 15
@@ -158,10 +217,10 @@ Partial Class ucSchoolYear
         pnlAddSchoolYear.Controls.Add(lblAddSchoolYear)
         pnlAddSchoolYear.Controls.Add(picAddSchoolYear)
         pnlAddSchoolYear.Cursor = Cursors.Hand
-        pnlAddSchoolYear.Location = New Point(1178, 18)
+        pnlAddSchoolYear.Location = New Point(1161, 18)
         pnlAddSchoolYear.Name = "pnlAddSchoolYear"
-        pnlAddSchoolYear.Size = New Size(123, 42)
-        pnlAddSchoolYear.TabIndex = 14
+        pnlAddSchoolYear.Size = New Size(144, 42)
+        pnlAddSchoolYear.TabIndex = 16
         ' 
         ' lblAddSchoolYear
         ' 
@@ -170,9 +229,9 @@ Partial Class ucSchoolYear
         lblAddSchoolYear.ForeColor = Color.White
         lblAddSchoolYear.Location = New Point(26, 10)
         lblAddSchoolYear.Name = "lblAddSchoolYear"
-        lblAddSchoolYear.Size = New Size(94, 23)
+        lblAddSchoolYear.Size = New Size(121, 23)
         lblAddSchoolYear.TabIndex = 5
-        lblAddSchoolYear.Text = "Add Student"
+        lblAddSchoolYear.Text = "Add School Year"
         ' 
         ' picAddSchoolYear
         ' 
@@ -232,26 +291,6 @@ Partial Class ucSchoolYear
         Label1.TabIndex = 5
         Label1.Text = "School Year"
         ' 
-        ' imgSearch
-        ' 
-        imgSearch.BackColor = Color.Transparent
-        imgSearch.Image = CType(resources.GetObject("imgSearch.Image"), Image)
-        imgSearch.Location = New Point(29, 19)
-        imgSearch.Name = "imgSearch"
-        imgSearch.Size = New Size(21, 26)
-        imgSearch.SizeMode = PictureBoxSizeMode.Zoom
-        imgSearch.TabIndex = 19
-        imgSearch.TabStop = False
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.BackColor = Color.FromArgb(CByte(244), CByte(242), CByte(252))
-        TextBox1.Font = New Font("Poppins", 11.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(56, 20)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(192, 30)
-        TextBox1.TabIndex = 20
-        ' 
         ' ucSchoolYear
         ' 
         AutoScaleMode = AutoScaleMode.None
@@ -263,8 +302,13 @@ Partial Class ucSchoolYear
         Controls.Add(pnlContentSchoolYear)
         Name = "ucSchoolYear"
         Size = New Size(1396, 788)
+        pnlContentSchoolYear.ResumeLayout(False)
+        pnlSwitchSchoolYear.ResumeLayout(False)
+        pnlSwitchSchoolYear.PerformLayout()
+        CType(picSwitch, ComponentModel.ISupportInitialize).EndInit()
         RoundedPanel1.ResumeLayout(False)
         RoundedPanel1.PerformLayout()
+        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         pnlDeleteSchoolYear.ResumeLayout(False)
         pnlDeleteSchoolYear.PerformLayout()
         CType(picDeleteSchoolYear, ComponentModel.ISupportInitialize).EndInit()
@@ -275,7 +319,6 @@ Partial Class ucSchoolYear
         pnlAddSchoolYear.PerformLayout()
         CType(picAddSchoolYear, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvSchoolYear, ComponentModel.ISupportInitialize).EndInit()
-        CType(imgSearch, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -283,6 +326,8 @@ Partial Class ucSchoolYear
     Friend WithEvents pnlContentSchoolYear As Panel
     Friend WithEvents RoundedPanel1 As RoundedPanel
     Friend WithEvents cboSchoolYearFilter As ComboBox
+    Friend pnlSwitchSchoolYear As RoundedPanel4
+    Friend lblSwitchSchoolYear As Label
     Friend WithEvents pnlRefreshSchoolYear As RoundedPanel4
     Friend WithEvents lblRefreshSchoolYear As Label
     Friend WithEvents picRefreshSchoolYear As PictureBox
@@ -301,5 +346,6 @@ Partial Class ucSchoolYear
     Friend WithEvents Label1 As Label
     Friend WithEvents imgSearch As PictureBox
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents picSwitch As PictureBox
 
 End Class
