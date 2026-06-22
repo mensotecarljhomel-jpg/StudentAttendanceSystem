@@ -96,12 +96,77 @@
             reader.Close()
 
             CloseConnection()
+            ' Apply consistent Students-style DataGridView styling after data load
+            StyleSchoolYearGrid(dgvSchoolYear)
+
+            ' Re-apply selection colors in case data binding overwrote them
+            dgvSchoolYear.DefaultCellStyle.SelectionBackColor = Color.FromArgb(234, 234, 234)
+            dgvSchoolYear.DefaultCellStyle.SelectionForeColor = Color.Black
+            dgvSchoolYear.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(234, 234, 234)
+            dgvSchoolYear.RowsDefaultCellStyle.SelectionForeColor = Color.Black
 
         Catch ex As Exception
             CloseConnection()
             MessageBox.Show(ex.Message)
         End Try
 
+    End Sub
+
+    ' Ensure styling is applied after columns and data are loaded
+    Private Sub StyleSchoolYearGrid(dgv As DataGridView)
+        dgv.SuspendLayout()
+        Try
+            dgv.EnableHeadersVisualStyles = False
+            dgv.BorderStyle = BorderStyle.None
+            dgv.BackgroundColor = Color.White
+            dgv.GridColor = Color.FromArgb(230, 230, 230)
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
+            dgv.RowHeadersVisible = False
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            dgv.AllowUserToResizeRows = False
+            dgv.AllowUserToAddRows = False
+
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(233, 227, 247) ' #E9E3F7
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(91, 97, 120)   ' #5B6178
+            dgv.ColumnHeadersDefaultCellStyle.Font = New Font("Poppins", 10.0F, FontStyle.Bold)
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            dgv.ColumnHeadersDefaultCellStyle.Padding = New Padding(10, 0, 10, 0)
+            dgv.ColumnHeadersHeight = 40
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
+
+            dgv.RowsDefaultCellStyle.BackColor = Color.White
+            dgv.RowsDefaultCellStyle.ForeColor = Color.FromArgb(34, 34, 34)
+            dgv.RowsDefaultCellStyle.Font = New Font("Poppins", 9.0F, FontStyle.Regular)
+            ' Use the same selection styling as Batches page (light lavender selection)
+            dgv.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
+            dgv.RowsDefaultCellStyle.SelectionForeColor = Color.Black
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 246, 253) ' #F8F6FD
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.False
+
+            dgv.RowTemplate.Height = 38
+            dgv.AllowUserToResizeColumns = True
+
+            dgv.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None
+            dgv.AdvancedCellBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Single
+            dgv.AdvancedCellBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None
+
+            For Each col As DataGridViewColumn In dgv.Columns
+                col.SortMode = DataGridViewColumnSortMode.Programmatic
+                col.MinimumWidth = 70
+                col.HeaderCell.Style.Padding = New Padding(12, 0, 12, 0)
+                If col.ValueType IsNot Nothing AndAlso (col.ValueType.IsAssignableFrom(GetType(Integer)) OrElse col.ValueType.IsAssignableFrom(GetType(Decimal))) Then
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                Else
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                End If
+            Next
+        Finally
+            dgv.ResumeLayout()
+        End Try
     End Sub
 
     Private Sub pnlAddSchoolYear_Click(sender As Object, e As EventArgs) Handles pnlAddSchoolYear.Click
