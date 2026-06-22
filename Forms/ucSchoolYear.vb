@@ -100,9 +100,9 @@
             StyleSchoolYearGrid(dgvSchoolYear)
 
             ' Re-apply selection colors in case data binding overwrote them
-            dgvSchoolYear.DefaultCellStyle.SelectionBackColor = Color.FromArgb(234, 234, 234)
+            dgvSchoolYear.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
             dgvSchoolYear.DefaultCellStyle.SelectionForeColor = Color.Black
-            dgvSchoolYear.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(234, 234, 234)
+            dgvSchoolYear.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
             dgvSchoolYear.RowsDefaultCellStyle.SelectionForeColor = Color.Black
 
         Catch ex As Exception
@@ -116,10 +116,11 @@
     Private Sub StyleSchoolYearGrid(dgv As DataGridView)
         dgv.SuspendLayout()
         Try
+            ' Match DataGridView styling used on the Batches page for visual consistency
             dgv.EnableHeadersVisualStyles = False
             dgv.BorderStyle = BorderStyle.None
             dgv.BackgroundColor = Color.White
-            dgv.GridColor = Color.FromArgb(230, 230, 230)
+            dgv.GridColor = Color.FromArgb(235, 235, 235)
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
             dgv.RowHeadersVisible = False
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -127,27 +128,38 @@
             dgv.AllowUserToResizeRows = False
             dgv.AllowUserToAddRows = False
 
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(233, 227, 247) ' #E9E3F7
-            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(91, 97, 120)   ' #5B6178
-            dgv.ColumnHeadersDefaultCellStyle.Font = New Font("Poppins", 10.0F, FontStyle.Bold)
-            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-            dgv.ColumnHeadersDefaultCellStyle.Padding = New Padding(10, 0, 10, 0)
-            dgv.ColumnHeadersHeight = 40
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(244, 242, 252) ' #F4F2FC (matches Batches)
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(107, 114, 128) ' #6B7280
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(244, 242, 252)
+            dgv.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(107, 114, 128)
+            dgv.ColumnHeadersDefaultCellStyle.Font = New Font("Poppins", 9.0F, FontStyle.Bold)
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            ' Add a bit more vertical padding to header to match Batches proportions
+            dgv.ColumnHeadersDefaultCellStyle.Padding = New Padding(12, 6, 12, 6)
+            dgv.ColumnHeadersHeight = 45
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
 
             dgv.RowsDefaultCellStyle.BackColor = Color.White
             dgv.RowsDefaultCellStyle.ForeColor = Color.FromArgb(34, 34, 34)
             dgv.RowsDefaultCellStyle.Font = New Font("Poppins", 9.0F, FontStyle.Regular)
-            ' Use the same selection styling as Batches page (light lavender selection)
-            dgv.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
-            dgv.RowsDefaultCellStyle.SelectionForeColor = Color.Black
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 246, 253) ' #F8F6FD
+            dgv.DefaultCellStyle.Font = New Font("Poppins", 9.0F, FontStyle.Regular)
+            dgv.DefaultCellStyle.ForeColor = Color.Black
+
             dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black
-            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.False
+            dgv.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 230, 255)
+            dgv.RowsDefaultCellStyle.SelectionForeColor = Color.Black
 
-            dgv.RowTemplate.Height = 38
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(248, 246, 253) ' #F8F6FD
+
+            dgv.RowTemplate.Height = 75
+            dgv.DefaultCellStyle.Padding = New Padding(10, 12, 10, 12)
+
+            For Each row As DataGridViewRow In dgv.Rows
+                row.Height = 75
+            Next
+
             dgv.AllowUserToResizeColumns = True
 
             dgv.AdvancedColumnHeadersBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None
@@ -155,7 +167,7 @@
             dgv.AdvancedCellBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None
 
             For Each col As DataGridViewColumn In dgv.Columns
-                col.SortMode = DataGridViewColumnSortMode.Programmatic
+                col.SortMode = DataGridViewColumnSortMode.NotSortable
                 col.MinimumWidth = 70
                 col.HeaderCell.Style.Padding = New Padding(12, 0, 12, 0)
                 If col.ValueType IsNot Nothing AndAlso (col.ValueType.IsAssignableFrom(GetType(Integer)) OrElse col.ValueType.IsAssignableFrom(GetType(Decimal))) Then
@@ -309,7 +321,7 @@
             cmd.ExecuteNonQuery()
 
             CloseConnection()
-
+            dgvSchoolYear.RowTemplate.Height = 75
             MessageBox.Show("School year activated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Catch ex As Exception

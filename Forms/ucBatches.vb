@@ -109,6 +109,7 @@ Public Class ucBatches
             .Columns.Add("BatchID", "BATCH ID")
             .Columns.Add("BatchName", "BATCH NAME")
             .Columns.Add("Adviser", "ADVISER")
+            .Columns.Add("StudentCount", "COUNT")
             .Columns.Add("SchoolYear", "SCHOOL YEAR")
 
             For Each col As DataGridViewColumn In .Columns
@@ -131,28 +132,33 @@ Public Class ucBatches
 
             Dim query As String
             If activeCount > 0 Then
+                ' Use LEFT JOIN to include batches with zero students and COUNT() to compute student count
                 query =
                     "SELECT b.batch_id,
                             b.batch_name,
                             b.adviser,
+                            COUNT(s.student_id) AS student_count,
                             sy.school_year
                      FROM batches b
-                     INNER JOIN school_years sy
-                     ON b.schoolyear_id = sy.schoolyear_id
+                     LEFT JOIN students s ON s.batch_id = b.batch_id
+                     INNER JOIN school_years sy ON b.schoolyear_id = sy.schoolyear_id
                      WHERE IFNULL(sy.is_active,0)=1
                        AND (@filter = 'All Batches' OR b.batch_name = @filter)
-                       AND (@search = '' OR b.batch_name LIKE CONCAT('%', @search, '%') OR b.adviser LIKE CONCAT('%', @search, '%'))"
+                       AND (@search = '' OR b.batch_name LIKE CONCAT('%', @search, '%') OR b.adviser LIKE CONCAT('%', @search, '%'))
+                     GROUP BY b.batch_id, b.batch_name, b.adviser, sy.school_year"
             Else
                 query =
                     "SELECT b.batch_id,
                             b.batch_name,
                             b.adviser,
+                            COUNT(s.student_id) AS student_count,
                             sy.school_year
                      FROM batches b
-                     INNER JOIN school_years sy
-                     ON b.schoolyear_id = sy.schoolyear_id
+                     LEFT JOIN students s ON s.batch_id = b.batch_id
+                     INNER JOIN school_years sy ON b.schoolyear_id = sy.schoolyear_id
                      WHERE (@filter = 'All Batches' OR b.batch_name = @filter)
-                       AND (@search = '' OR b.batch_name LIKE CONCAT('%', @search, '%') OR b.adviser LIKE CONCAT('%', @search, '%'))"
+                       AND (@search = '' OR b.batch_name LIKE CONCAT('%', @search, '%') OR b.adviser LIKE CONCAT('%', @search, '%'))
+                     GROUP BY b.batch_id, b.batch_name, b.adviser, sy.school_year"
             End If
 
             Dim cmd As New MySqlCommand(query, Connection)
@@ -167,6 +173,7 @@ Public Class ucBatches
                     reader("batch_id").ToString(),
                     reader("batch_name").ToString(),
                     reader("adviser").ToString(),
+                    reader("student_count").ToString(),
                     reader("school_year").ToString()
                 )
 
